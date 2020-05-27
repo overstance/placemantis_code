@@ -1,2 +1,106 @@
-$primary-color: #282c34;
-$secondary-color: #61dafb;
+// colors
+$light-purple: #8032ff;
+$purple: #5923b2;
+$dark-purple: #391671;
+
+$light-green: #d2ff77;
+$green: #abff00;
+$dark-green: #77b200;
+
+$light-blue: #252cff;
+$blue1: #090fbe;
+$blue2: #050a7f;
+$dark-blue: #060725;
+
+$red: #ff1a00;
+
+// fonts by mixin at the reference screensize of 1920px
+
+// regular
+@mixin font-r24 {
+    font-size: calc(1.25vw);
+    font-weight: 400;
+}
+
+@mixin font-r30 {
+    font-size: calc(1.5625vw);
+    font-weight: 400;
+}
+
+@mixin font-r36 {
+    font-size: calc(1.875vw);
+    font-weight: 400;
+}
+
+// medium
+
+@mixin font-m30 {
+    font-size: calc(1.5625vw);
+    font-weight: 500;
+}
+
+@mixin font-m36 {
+    font-size: calc(1.875vw);
+    font-weight: 500;
+}
+
+@mixin font-m48 {
+    font-size: calc(2.5vw);
+    font-weight: 500;
+}
+
+@mixin font-m60 {
+    font-size: calc(3.125vw);
+    font-weight: 500;
+}
+
+@mixin font-m90 {
+    font-size: calc(4.6875vw);
+    font-weight: 500;
+}
+
+// bold
+
+@mixin font-b24 {
+    font-size: calc(11.25vw);
+    font-weight: 700;
+}
+
+@mixin font-b36 {
+    font-size: calc(1.875vw);
+    font-weight: 700;
+}
+
+@mixin font-b48 {
+    font-size: calc(2.5vw);
+    font-weight: 700;
+}
+
+@mixin font-b60 {
+    font-size: calc(3.125vw);
+    font-weight: 700;
+}
+
+@mixin font-b90 {
+    font-size: calc(4.6875vw);
+    font-weight: 700;
+}
+
+// paddings and margins
+
+// smallest 6/1920% of screensize
+$frame-6: calc(0.3125vw);
+
+// small 12/1920% of screensize
+$frame-12: calc(0.625vw); 
+
+// medium 24/1920% of screensize
+$frame-24: calc(1.25vw);
+
+// large 30/1920% 0f screensize
+$frame-30: calc(1.5625vw);
+
+// largest 48/1920% of screensize
+$frame-48: calc(2.5vw);
+
+
