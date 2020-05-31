@@ -103,4 +103,23 @@ $frame-30: calc(1.5625vw);
 // largest 48/1920% of screensize
 $frame-48: calc(2.5vw);
 
+// size presets
+
+@mixin by-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+@mixin by-parent {
+    width: 100%;
+    height: 100%;
+}
+
+// Z-index presets
+
+$z1: 100;
+$z2: 200;
+$z3: 300;
+$z4: 400;
+$z5: 500;
 

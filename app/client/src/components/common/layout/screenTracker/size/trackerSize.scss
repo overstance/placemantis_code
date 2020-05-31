@@ -1,0 +1,11 @@
+@import '../../../../../variables.scss';
+
+.trackerSizeSVG {
+    width: 100%;
+    height: auto;
+    background: $dark-blue;
+}
+
+.trackerSizeText {
+    fill: $green;
+}

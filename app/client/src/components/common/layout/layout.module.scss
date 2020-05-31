@@ -2,4 +2,10 @@
 
 .layoutContainer {
     @include font-b36;
+    @include by-screen;
+    position: relative;
+}
+
+.pageContainer {
+    color: $purple;
 }

@@ -1,10 +1,15 @@
 import React from 'react';
 import styles from './layout.module.scss';
+import ScreenTracker from './screenTracker/ScreenTracker';
+
 
 const Layout = props => {
     return (
         <div className={styles.layoutContainer}>
-            Layout Component Shows Here
+            <ScreenTracker />
+            <div className={styles.pageContainer}>
+                Page Component shows here
+            </div>
         </div>
     )
 }
