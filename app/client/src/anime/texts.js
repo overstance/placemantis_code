@@ -1,9 +1,9 @@
 import anime from 'animejs';
 
-export const textRotateIn = (animatedClass, spannedAnimatedClass, svgTextsClass, direction, loop) => {
-    if (animatedClass) {
+export const textRotateIn = (properties) => {
+    if (properties.animatedClass) {
 
-        const texts = document.querySelector(animatedClass);
+        const texts = document.querySelector(properties.animatedClass);
 
         let text = texts.innerHTML.split(' ').map(function(el) {
             return '<span>' + el + '</span>';
@@ -12,84 +12,128 @@ export const textRotateIn = (animatedClass, spannedAnimatedClass, svgTextsClass,
         texts.innerHTML = text;
 
         let textsArray = texts.querySelectorAll('span');
-        let loopBool = false;
-        let animateDirection = 'normal';
 
-        if (direction && (direction === 'alternate' || direction === 'reverse')) {
-            animateDirection = direction
+        let loop = false;
+        if (properties.loop) {
+            loop = properties.loop
         }
 
-        if (loop === 'loop') {
-            loopBool = true
+        let animateDirection = 'normal';
+        if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+            animateDirection = properties.direction
+        }
+
+        let duration = 1000;
+        if (properties.duration) {
+            duration = properties.duration;
+        }
+
+        let endDelay = 0;
+        if (properties.endDelay) {
+            endDelay = properties.endDelay
+        }
+        
+        let delayPerText = 50;
+        if (properties.delayPerText) {
+            delayPerText = properties.delayPerText;
         }
 
         anime({
             targets: textsArray,
             rotateY: [-90, 0],
-            duration: 1000,
-            delay: (el, i) => 45 * i,
-            endDelay: 4500,
-            loop: loopBool,
+            duration: duration,
+            delay: (el, i) => delayPerText * i,
+            endDelay: endDelay,
+            loop: loop,
             direction: animateDirection
         });
         
-    } else if (spannedAnimatedClass) {
+    } else if (properties.spannedAnimatedClass) {
         // console.log('spanned animated class');
 
-        let elem = document.querySelector(spannedAnimatedClass);
+        let elem = document.querySelector(properties.spannedAnimatedClass);
         let elemArray = elem.querySelectorAll('span');
-        let loopBool = false;
 
-        let animateDirection = 'normal';
-
-        if (direction && (direction === 'alternate' || direction === 'reverse')) {
-            animateDirection = direction
+        let loop = false;
+        if (properties.loop) {
+            loop = properties.loop
         }
 
-        if (loop === 'loop') {
-            loopBool = true
+        let animateDirection = 'normal';
+        if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+            animateDirection = properties.direction
+        }
+
+        let duration = 1000;
+        if (properties.duration) {
+            duration = properties.duration;
+        }
+
+        let endDelay = 0;
+        if (properties.endDelay) {
+            endDelay = properties.endDelay
+        }
+        
+        let delayPerText = 50;
+        if (properties.delayPerText) {
+            delayPerText = properties.delayPerText;
         }
 
         anime({
             targets: elemArray,
             rotateY: [-90, 0],
-            duration: 1500,
-            delay: (el, i) => 45 * i,
-            endDelay: 4500,
-            loop: loopBool,
+            duration: duration,
+            delay: (el, i) => delayPerText * i,
+            endDelay: endDelay,
+            loop: loop,
             direction: animateDirection
         });
-    } else if (svgTextsClass) {
+
+    } else if (properties.svgTextsClass) {
         
-        let elemsArray = document.querySelectorAll(svgTextsClass);
-        let loopBool = false;
-
-        let animateDirection = 'normal';
-
-        if (direction && (direction === 'alternate' || direction === 'reverse')) {
-            animateDirection = direction
+        let elemsArray = document.querySelectorAll(properties.svgTextsClass);
+        
+        let loop = false;
+        if (properties.loop) {
+            loop = properties.loop
         }
 
-        if (loop === 'loop') {
-            loopBool = true
+        let animateDirection = 'normal';
+        if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+            animateDirection = properties.direction
+        }
+
+        let duration = 1000;
+        if (properties.duration) {
+            duration = properties.duration;
+        }
+
+        let endDelay = 0;
+        if (properties.endDelay) {
+            endDelay = properties.endDelay
+        }
+        
+        let delayPerText = 50;
+        if (properties.delayPerText) {
+            delayPerText = properties.delayPerText;
         }
 
         anime({
             targets: elemsArray,
             rotateY: [-90, 0],
-            duration: 1500,
-            delay: (el, i) => 45 * i,
-            endDelay: 4500,
-            loop: loopBool,
+            duration: duration,
+            delay: (el, i) => delayPerText * i,
+            endDelay: endDelay,
+            loop: loop,
             direction: animateDirection
         });
     }
 }
 
-export const textRotateInAndFade = (animatedClass, spannedAnimatedClass, svgTextsClass, direction, loop) => {
-    if (animatedClass) {
+export const textRotateInAndFade = (properties) => {
+    if (properties.animatedClass) {
 
-        const texts = document.querySelector(animatedClass);
+        const texts = document.querySelector(properties.animatedClass);
 
         let text = texts.innerHTML.split(' ').map(function(el) {
             return '<span>' + el + '</span>';
@@ -98,99 +142,140 @@ export const textRotateInAndFade = (animatedClass, spannedAnimatedClass, svgText
         texts.innerHTML = text;
 
         let textsArray = texts.querySelectorAll('span');
+        
+        let loop = false;
+        if (properties.loop) {
+            loop = properties.loop
+        }
+
         let animateDirection = 'normal';
-
-        if (direction && (direction === 'alternate' || direction === 'reverse')) {
-            animateDirection = direction
+        if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+            animateDirection = properties.direction
         }
 
-        let loopBool = false;
-
-        if (loop === 'loop') {
-            loopBool = true
+        let duration = 1000;
+        if (properties.duration) {
+            duration = properties.duration;
         }
 
-        anime.timeline({loop: loopBool})
+        let endDelay = 0;
+        if (properties.endDelay) {
+            endDelay = properties.endDelay
+        }
+        
+        let delayPerText = 50;
+        if (properties.delayPerText) {
+            delayPerText = properties.delayPerText;
+        }
+
+        anime.timeline({loop: loop})
         .add({
             targets: textsArray,
             rotateY: [-90, 0],
-            duration: 1000,
-            delay: (el, i) => 10 * i,
-            endDelay: 4500,
+            duration: duration,
+            delay: (el, i) => delayPerText * i,
             direction: animateDirection
         }).add({
             targets: textsArray,
             opacity: 0,
-            duration: 1000,
+            duration: duration,
             easing: "easeOutExpo",
-            delay: 1000,
+            delay: (el, i) => delayPerText * i,
+            endDelay: endDelay,
             direction: animateDirection
         }); 
 
-    } else if (spannedAnimatedClass) {
+    } else if (properties.spannedAnimatedClass) {
 
         // console.log('text array', textsArray);
-        let elem = document.querySelector(spannedAnimatedClass);
+        let elem = document.querySelector(properties.spannedAnimatedClass);
         let elemArray = elem.querySelectorAll('span');
+
+        let loop = false;
+        if (properties.loop) {
+            loop = properties.loop
+        }
+
         let animateDirection = 'normal';
-
-        if (direction && (direction === 'alternate' || direction === 'reverse')) {
-            animateDirection = direction
+        if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+            animateDirection = properties.direction
         }
 
-        let loopBool = false;
-
-        if (loop === 'loop') {
-            loopBool = true
+        let duration = 1000;
+        if (properties.duration) {
+            duration = properties.duration;
         }
 
-        anime.timeline({loop: loopBool})
+        let endDelay = 0;
+        if (properties.endDelay) {
+            endDelay = properties.endDelay
+        }
+        
+        let delayPerText = 50;
+        if (properties.delayPerText) {
+            delayPerText = properties.delayPerText;
+        }
+
+        anime.timeline({loop: loop})
         .add({
             targets: elemArray,
             rotateY: [-90, 0],
-            duration: 1000,
-            delay: (el, i) => 10 * i,
-            endDelay: 4500,
+            duration: duration,
+            delay: (el, i) => delayPerText * i,
+            // endDelay: 4500,
             direction: animateDirection
         }).add({
             targets: elemArray,
             opacity: 0,
-            duration: 1000,
+            duration: duration,
             easing: "easeOutExpo",
-            delay: 1000,
+            delay: (el, i) => delayPerText * i,
+            endDelay: endDelay,
             direction: animateDirection
-        }); 
+        }) 
 
-    } else if (svgTextsClass) {
+    } else if (properties.svgTextsClass) {
 
-        let elemsArray = document.querySelectorAll('span');
+        let elemsArray = document.querySelectorAll(properties.svgTextsClass);
+        let loop = false;
+        if (properties.loop) {
+            loop = properties.loop
+        }
+
         let animateDirection = 'normal';
-
-        if (direction && (direction === 'alternate' || direction === 'reverse')) {
-            animateDirection = direction
+        if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+            animateDirection = properties.direction
         }
 
-        let loopBool = false;
-
-
-        if (loop === 'loop') {
-            loopBool = true
+        let duration = 1000;
+        if (properties.duration) {
+            duration = properties.duration;
         }
 
-        anime.timeline({loop: loopBool})
+        let endDelay = 0;
+        if (properties.endDelay) {
+            endDelay = properties.endDelay
+        }
+        
+        let delayPerText = 50;
+        if (properties.delayPerText) {
+            delayPerText = properties.delayPerText;
+        }
+
+        anime.timeline({loop: loop})
         .add({
             targets: elemsArray,
             rotateY: [-90, 0],
-            duration: 1000,
-            delay: (el, i) => 10 * i,
-            endDelay: 4500,
+            duration: duration,
+            delay: (el, i) => delayPerText * i,
             direction: animateDirection
         }).add({
             targets: elemsArray,
             opacity: 0,
-            duration: 1000,
+            duration: duration,
             easing: "easeOutExpo",
-            delay: 1000,
+            delay: (el, i) => delayPerText * i,
+            endDelay: endDelay,
             direction: animateDirection
         }); 
     }

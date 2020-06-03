@@ -1,8 +1,0 @@
-@import '../../../../variables.scss';
-
-.screenTracker {
-    @include by-parent;
-    display: flex;
-    position: absolute;
-    z-index: $z5;
-}

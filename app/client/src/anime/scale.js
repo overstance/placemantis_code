@@ -1,8 +1,8 @@
 import anime from 'animejs';
 
-export const scaleSvgPart = (animatedClass, scaleFactor, scaleOrigin, delay, endDelay, direction, loop) => {
+export const scaleSvgPart = (properties) => {
     
-    let elem = document.querySelector(animatedClass);
+    let elem = document.querySelector(properties.animatedClass);
     let elemDimensions = elem.getBBox();
     let cx = elemDimensions.x;
     let cy = elemDimensions.y;
@@ -17,54 +17,69 @@ export const scaleSvgPart = (animatedClass, scaleFactor, scaleOrigin, delay, end
     let EndDelay = 0;
     let Loop = false;
     let animateDirection = 'normal';
+    let Duration = 1000;
+    let Easing = 'easeOutElastic';
+    let Rotate = 0;
 
-    if (scaleFactor) {
-        factor = scaleFactor;
+    if (properties.scaleFactor) {
+        factor = properties.scaleFactor;
     }
 
-    if (delay) {
-        Delay = delay;
+    if (properties.delay) {
+        Delay = properties.delay;
     }
 
-    if (endDelay) {
-        EndDelay = endDelay;
+    if (properties.endDelay) {
+        EndDelay = properties.endDelay;
     }
 
-    if (loop === 'loop') {
-        Loop = true;
+    if (properties.loop) {
+        Loop = properties.loop;
     }
 
-    if (direction && (direction === 'alternate' || direction === 'reverse')) {
-        animateDirection = direction
+    if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+        animateDirection = properties.direction
+    }
+
+    if (properties.duration) {
+        Duration = properties.duration
+    }
+
+    if (properties.easing) {
+        Easing = properties.easing;
+    }
+
+    if (properties.rotate) {
+        Rotate = properties.rotate;
     }
 
 
 
-    if (scaleOrigin && scaleOrigin === 'center') {
+    if (properties.scaleOrigin && properties.scaleOrigin === 'center') {
         xTranslate = ((1 - factor) * ((width / 2) + cx)) / factor;
         yTranslate = ((1 - factor) * ((height / 2) + cy)) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'top-left') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'top-left') {
         xTranslate = ((1 - factor) * (width + cx)) / factor;
         yTranslate = ((1 - factor) * cy) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'top-center') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'top-center') {
         xTranslate = ((1 - factor) * ((width / 2) + cx)) / factor;
         yTranslate = ((1 - factor) * cy) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'top-right') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'top-right') {
         xTranslate = ((1 - factor) * (width + cx)) / factor;
         yTranslate = ((1 - factor) * cy) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'center-left') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'center-left') {
         xTranslate = ((1 - factor) * cx) / factor;
         yTranslate = ((1 - factor) * ((height / 2) + cy)) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'center-right') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'center-right') {
         xTranslate = ((1 - factor) * (width + cx)) / factor;
         yTranslate = ((1 - factor) * ((height / 2) + cy)) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'bottom-left') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'bottom-left') {
         xTranslate = ((1 - factor) * cx) / factor;
         yTranslate = ((1 - factor) * (height + cy)) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'bottom-center') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'bottom-center') {
         xTranslate = ((1 - factor) * ((width / 2) + cx)) / factor;
         yTranslate = ((1 - factor) * (height + cy)) / factor;
-    } else if (scaleOrigin && scaleOrigin === 'bottom-right') {
+    } else if (properties.scaleOrigin && properties.scaleOrigin === 'bottom-right') {
         xTranslate = ((1 - factor) * (width + cx)) / factor;
         yTranslate = ((1 - factor) * (height + cy)) / factor;
     } 
@@ -72,48 +87,68 @@ export const scaleSvgPart = (animatedClass, scaleFactor, scaleOrigin, delay, end
     console.log(cx, cy, width, height, xTranslate, yTranslate);
 
     anime({
-        targets: animatedClass,
+        targets: properties.animatedClass,
         scale: factor,
         translateX: xTranslate,
         translateY: xTranslate,
-        rotate: [90, 90],
+        duration: Duration,
+        rotate: [Rotate, Rotate],
         delay: Delay,
         endDelay: EndDelay,
         loop: Loop,
-        direction: animateDirection
+        direction: animateDirection,
+        easing: Easing
     });
 }
 
-export const scaleElement = (animatedClass, scaleFactor, delay, endDelay, direction, loop) => {
+export const scaleElement = (properties) => {
 
     let factor = 1;
     let Delay = 0;
     let EndDelay = 0;
     let Loop = false;
     let animateDirection = 'normal';
+    let Duration = 1000;
+    let Easing = 'easeOutElastic';
+    let Rotate = 0;
 
-    if (scaleFactor) {
-        factor = scaleFactor;
+    if (properties.scaleFactor) {
+        factor = properties.scaleFactor;
     }
 
-    if (delay) {
-        Delay = delay;
+    if (properties.delay) {
+        Delay = properties.delay;
     }
 
-    if (endDelay) {
-        EndDelay = endDelay;
+    if (properties.endDelay) {
+        EndDelay = properties.endDelay;
     }
 
-    if (loop === 'loop') {
-        Loop = true;
+    if (properties.loop) {
+        Loop = properties.loop;
     }
 
-    if (direction && (direction === 'alternate' || direction === 'reverse')) {
-        animateDirection = direction
+    if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
+        animateDirection = properties.direction
+    }
+
+    if (properties.duration) {
+        Duration = properties.duration
+    }
+
+    if (properties.easing) {
+        Easing = properties.easing;
+    }
+
+    if (properties.rotate) {
+        Rotate = properties.rotate;
     }
 
     anime({
-        targets: animatedClass,
+        targets: properties.animatedClass,
+        duration: Duration,
+        easing: Easing,
+        rotate: [Rotate, Rotate],
         scale: factor,
         delay: Delay,
         endDelay: EndDelay,

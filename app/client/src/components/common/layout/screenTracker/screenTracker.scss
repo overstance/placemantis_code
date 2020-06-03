@@ -1,4 +1,13 @@
-@import '../../../../../variables.scss';
+@import '../../../../variables.scss';
+
+.screenTracker {
+    @include by-parent;
+    display: flex;
+    position: absolute;
+    z-index: $z5;
+}
+
+// Orientation
 
 .trackerOrientation {
     @include by-parent;
@@ -53,10 +62,60 @@
 
 .trackerOrientationText {
     color: $green;
-    @include font-m90;
+    @include font-m75;
 }
 
 .trackerOrientationText span {
+    display: inline-block;
+    margin-right: $frame-12;
+    transform-origin: 0 0;
+}
+
+// size
+
+.trackerSize {
+    @include by-parent;
+    background: $dark-blue;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+}
+
+.trackerSizeTop {
+    flex: 0 0 55%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: $frame-30;
+    box-sizing: border-box;
+}
+
+.trackerSizeBottom {
+    flex: 0 0 45%;
+    padding: $frame-30;
+    padding-top: $frame-60;
+    box-sizing: border-box;
+}
+
+.trackerSizeSvg {
+    width: calc(28vw);
+    height: calc(28vw);
+    display: flex;
+}
+
+.trackerSizeLandscape {
+    transform: translateX(calc(7vw)) translateY(calc(9vw)) rotate(90deg);
+    position: absolute;
+    z-index: $z5-1;
+    height: 25vw;
+}
+
+.trackerSizeText {
+    color: $green;
+    @include font-m90;
+}
+
+.trackerSizeText span {
     display: inline-block;
     margin-right: $frame-12;
     transform-origin: 0 0;

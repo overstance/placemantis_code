@@ -1,13 +1,33 @@
 import React, {useEffect} from 'react';
-import './trackerSize.scss';
-import {textRotateIn} from '../../../../../anime/texts';
-import {scaleElement} from '../../../../../anime/scale';
+import './screenTracker.scss';
+import {textRotateIn} from '../../../../anime/texts';
+import {scaleElement} from '../../../../anime/scale';
 
 const Size = props => {
 
     useEffect(() => {
-        textRotateIn('.trackerSizeText', null, null, null, null);
-        scaleElement('.trackerSizeSvg', 0.5, 500, 1500, 'alternate', 'loop');
+        let textProp = {
+            animatedClass: '.trackerSizeText',
+            duration: 1500,
+            delayPerText: 50
+        }
+
+        let scaleProp = {
+            animatedClass: '.trackerSizeSvg',
+            scaleFactor: 0.5,
+            delay: 500,
+            endDelay: 1500,
+            direction: 'alternate',
+            loop: true,
+            // duration: 2000,
+            // rotate: -90,
+            // easing: 'easeInSine'
+            // easing: 'spring(1, 80, 10, 0)'
+            // easing: 'easeInOutSine'
+        }
+
+        textRotateIn(textProp);
+        scaleElement(scaleProp);
     }, []);
 
     return (

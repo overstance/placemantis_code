@@ -8,7 +8,7 @@ const Layout = props => {
         <div className={styles.layoutContainer}>
             <ScreenTracker />
             <div className={styles.pageContainer}>
-                Page Component shows here
+                {props.children}
             </div>
         </div>
     )

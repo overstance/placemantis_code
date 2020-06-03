@@ -1,56 +1,58 @@
 import React, {useEffect, useState} from 'react';
-import './trackerOrientation.scss';
-import anime from 'animejs';
-import {textRotateIn} from '../../../../../anime/texts';
-
-const rotateToLandscape = (animatedClass) => {
-    anime({
-        targets: animatedClass,
-        rotate: [0, 90],
-        duration: 1000,
-        delay: 500,
-        endDelay: 1500,
-        direction: 'alternate',
-        loop: true
-    });
-}
-
-const arrowDraw = (animatedClass) => {
-    anime({
-        targets: animatedClass,
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'easeInOutSine',
-        duration: 1000,
-        delay: 500,
-        endDelay: 1500,
-        direction: 'alternate',
-        loop: true,
-    });
-}
-
-const phonesMoveLeft = (animatedClass, xTranslate) => {
-    anime({
-        targets: animatedClass,
-        translateX: [xTranslate, 0],
-        duration: 1000,
-        delay: 500,
-        endDelay: 1500,
-        direction: 'alternate',
-        loop: true
-    });
-}
+import './screenTracker.scss';
+import {textRotateIn} from '../../../../anime/texts';
+import {simpleRotate} from '../../../../anime/rotate';
+import {positionX} from '../../../../anime/position';
+import {drawSinglePath} from '../../../../anime/svgDraw';
 
 const Orientation = props => {
 
     useEffect(() => {
-        
+
+        let drawProp = {
+            animatedClass: '.trackerOrientationArrow path',
+            easing: 'easeInOutSine',
+            duration: 1000,
+            delay: 500,
+            endDelay: 1500,
+            direction: 'alternate',
+            loop: true,
+        }
+
+        let textProp = {
+            spannedAnimatedClass: '.trackerOrientationText',
+            duration: 1500,
+            delayPerText: 50
+        }
+
         let width = props.containerWidth;
         let xTranslate = width * 0.07;
+        let positionProp = {
+            animatedClass: '.trackerOrientationSvgs',
+            translateX: xTranslate,
+            duration: 1000,
+            delay: 500,
+            endDelay: 1500,
+            direction: 'alternate',
+            loop: true,
+            // easing: 'easeInOutElastic'
+        }
 
-        rotateToLandscape('.trackerOrientationLandscape');
-        arrowDraw('.trackerOrientationArrow path');
-        phonesMoveLeft('.trackerOrientationSvgs', xTranslate);
-        textRotateIn(null, '.trackerOrientationText', null, null, null);   
+        let rotateProp = {
+            animatedClass: '.trackerOrientationLandscape',
+            rotate: [0, 90],
+            duration: 1000,
+            delay: 500,
+            endDelay: 1500,
+            direction: 'alternate',
+            loop: true,
+            // easing: 'easeInOutElastic'
+        }
+
+        simpleRotate(rotateProp);
+        drawSinglePath(drawProp);
+        positionX(positionProp);
+        textRotateIn(textProp);   
     });
     return (
         <>
@@ -291,12 +293,14 @@ const OrientationWrapper = props => {
         }
     }, [showComponent]);
 
-    return (
-        showComponent ?
-        <div className='trackerOrientation' >
-            <Orientation containerWidth={containerWidth}/>
+    return ( 
+        <div className='trackerOrientation'>
+            {
+                showComponent ?
+                <Orientation containerWidth={containerWidth}/>
+                : null
+            }
         </div>
-        : null
     );
 }
 

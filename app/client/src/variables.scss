@@ -54,6 +54,11 @@ $red: #ff1a00;
     font-weight: 500;
 }
 
+@mixin font-m75 {
+    font-size: calc(3.9vw);
+    font-weight: 500;
+}
+
 @mixin font-m90 {
     font-size: calc(4.6875vw);
     font-weight: 500;
@@ -78,6 +83,11 @@ $red: #ff1a00;
 
 @mixin font-b60 {
     font-size: calc(3.125vw);
+    font-weight: 700;
+}
+
+@mixin font-b75 {
+    font-size: calc(3.9vw);
     font-weight: 700;
 }
 

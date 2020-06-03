@@ -1,7 +1,7 @@
 import React, {useReducer, useEffect} from 'react';
-import styles from './screenTracker.module.scss';
-import Orientation from './orientation/Orientaion';
-import Size from './size/Size';
+import './screenTracker.scss';
+import Orientation from './Orientation';
+import Size from './Size';
 
 const initialState = { 
     showOrientation: false,
@@ -86,7 +86,7 @@ const ScreenTracker = props => {
     }, [state.windowWidth]);
     
     return (
-        <div className={styles.screenTracker}>
+        <div className="screenTracker">
             { state.showOrientation ?
                 <Orientation/>
                 :
