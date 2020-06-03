@@ -7,7 +7,7 @@ const initialState = {
     showOrientation: false,
     showSize: false,
     windowWidth: 0,
-    windowHeight: 0 
+    windowHeight: 0
 };
 
 function reducer(state, { type, width, height }) {
@@ -31,7 +31,7 @@ function reducer(state, { type, width, height }) {
                 showOrientation: true,
                 showSize: false,
                 windowWidth: width,
-                windowHeight: height
+                windowHeight: height,
             }
         case "SHOW_SCREEN_SIZE":
             return {
@@ -77,7 +77,6 @@ const ScreenTracker = props => {
         const height = window.innerHeight;
         const width = window.innerWidth;
 
-        // console.log(width, "dispatching set window dimensions");
         dispatch({ type: "SET_WINDOW_DIMENSIONS", width: width, height: height });
         
         return () => {
@@ -89,7 +88,7 @@ const ScreenTracker = props => {
     return (
         <div className={styles.screenTracker}>
             { state.showOrientation ?
-                <Orientation />
+                <Orientation/>
                 :
                 null
             }

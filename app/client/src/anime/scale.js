@@ -1,6 +1,6 @@
 import anime from 'animejs';
 
-export const scaleSVG = (animatedClass, scaleFactor, scaleOrigin, delay, endDelay, loop) => {
+export const scaleSvgPart = (animatedClass, scaleFactor, scaleOrigin, delay, endDelay, direction, loop) => {
     
     let elem = document.querySelector(animatedClass);
     let elemDimensions = elem.getBBox();
@@ -12,10 +12,11 @@ export const scaleSVG = (animatedClass, scaleFactor, scaleOrigin, delay, endDela
     
     let xTranslate = 0;
     let yTranslate = 0;
-    let factor = 0;
+    let factor = 1;
     let Delay = 0;
     let EndDelay = 0;
     let Loop = false;
+    let animateDirection = 'normal';
 
     if (scaleFactor) {
         factor = scaleFactor;
@@ -31,6 +32,10 @@ export const scaleSVG = (animatedClass, scaleFactor, scaleOrigin, delay, endDela
 
     if (loop === 'loop') {
         Loop = true;
+    }
+
+    if (direction && (direction === 'alternate' || direction === 'reverse')) {
+        animateDirection = direction
     }
 
 
@@ -68,12 +73,51 @@ export const scaleSVG = (animatedClass, scaleFactor, scaleOrigin, delay, endDela
 
     anime({
         targets: animatedClass,
-        scale: scaleFactor,
+        scale: factor,
         translateX: xTranslate,
-        translateY: yTranslate,
+        translateY: xTranslate,
+        rotate: [90, 90],
         delay: Delay,
         endDelay: EndDelay,
         loop: Loop,
-        direction: 'alternate'
+        direction: animateDirection
+    });
+}
+
+export const scaleElement = (animatedClass, scaleFactor, delay, endDelay, direction, loop) => {
+
+    let factor = 1;
+    let Delay = 0;
+    let EndDelay = 0;
+    let Loop = false;
+    let animateDirection = 'normal';
+
+    if (scaleFactor) {
+        factor = scaleFactor;
+    }
+
+    if (delay) {
+        Delay = delay;
+    }
+
+    if (endDelay) {
+        EndDelay = endDelay;
+    }
+
+    if (loop === 'loop') {
+        Loop = true;
+    }
+
+    if (direction && (direction === 'alternate' || direction === 'reverse')) {
+        animateDirection = direction
+    }
+
+    anime({
+        targets: animatedClass,
+        scale: factor,
+        delay: Delay,
+        endDelay: EndDelay,
+        loop: Loop,
+        direction: animateDirection
     });
 }

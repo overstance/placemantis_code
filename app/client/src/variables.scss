@@ -100,8 +100,11 @@ $frame-24: calc(1.25vw);
 // large 30/1920% 0f screensize
 $frame-30: calc(1.5625vw);
 
-// largest 48/1920% of screensize
+// larger 48/1920% of screensize
 $frame-48: calc(2.5vw);
+
+// largest 60/1920% of screensize
+$frame-60: calc(3.125vw);
 
 // size presets
 
@@ -122,4 +125,9 @@ $z2: 200;
 $z3: 300;
 $z4: 400;
 $z5: 500;
+$z5-1: 510;
+$z5-2: 520;
+$z5-3: 530;
+$z5-4: 540;
+$z5-5: 550;
 
