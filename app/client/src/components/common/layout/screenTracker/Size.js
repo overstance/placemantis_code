@@ -14,7 +14,7 @@ const Size = props => {
 
         let scaleProp = {
             animatedClass: '.trackerSizeSvg',
-            scaleFactor: 0.5,
+            scaleFactor: 2,
             delay: 500,
             endDelay: 1500,
             direction: 'alternate',

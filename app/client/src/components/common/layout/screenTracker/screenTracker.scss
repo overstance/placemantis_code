@@ -63,12 +63,12 @@
 .trackerOrientationText {
     color: $green;
     @include font-m75;
-}
 
-.trackerOrientationText span {
-    display: inline-block;
-    margin-right: $frame-12;
-    transform-origin: 0 0;
+    span {
+        display: inline-block;
+        margin-right: $frame-12;
+        transform-origin: 0 0;
+    }
 }
 
 // size
@@ -101,6 +101,7 @@
     width: calc(28vw);
     height: calc(28vw);
     display: flex;
+    transform-origin: 50% 100%;
 }
 
 .trackerSizeLandscape {
@@ -113,10 +114,10 @@
 .trackerSizeText {
     color: $green;
     @include font-m90;
-}
 
-.trackerSizeText span {
-    display: inline-block;
-    margin-right: $frame-12;
-    transform-origin: 0 0;
+    span {
+        display: inline-block;
+        margin-right: $frame-12;
+        transform-origin: 0 0;
+    }
 }

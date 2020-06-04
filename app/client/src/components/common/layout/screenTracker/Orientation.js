@@ -29,7 +29,7 @@ const Orientation = props => {
         let xTranslate = width * 0.07;
         let positionProp = {
             animatedClass: '.trackerOrientationSvgs',
-            translateX: xTranslate,
+            translateX: [xTranslate, 0],
             duration: 1000,
             delay: 500,
             endDelay: 1500,

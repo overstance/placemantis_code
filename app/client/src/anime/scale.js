@@ -8,52 +8,17 @@ export const scaleSvgPart = (properties) => {
     let cy = elemDimensions.y;
     let width = elemDimensions.width;
     let height = elemDimensions.height;
-
-    
     let xTranslate = 0;
     let yTranslate = 0;
-    let factor = 1;
-    let Delay = 0;
-    let EndDelay = 0;
-    let Loop = false;
-    let animateDirection = 'normal';
-    let Duration = 1000;
-    let Easing = 'easeOutElastic';
-    let Rotate = 0;
-
-    if (properties.scaleFactor) {
-        factor = properties.scaleFactor;
-    }
-
-    if (properties.delay) {
-        Delay = properties.delay;
-    }
-
-    if (properties.endDelay) {
-        EndDelay = properties.endDelay;
-    }
-
-    if (properties.loop) {
-        Loop = properties.loop;
-    }
-
-    if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
-        animateDirection = properties.direction
-    }
-
-    if (properties.duration) {
-        Duration = properties.duration
-    }
-
-    if (properties.easing) {
-        Easing = properties.easing;
-    }
-
-    if (properties.rotate) {
-        Rotate = properties.rotate;
-    }
-
-
+    
+    let factor = properties.scaleFactor || 0.5;
+    let Rotate = properties.rotate;
+    let Duration = properties.duration || 1000;
+    let Delay = properties.delay || 0;
+    let EndDelay = properties.endDelay || 0;
+    let Loop = properties.loop || false;
+    let Easing = properties.easing || 'easeOutElastic';
+    let Direction = properties.direction || 'normal';
 
     if (properties.scaleOrigin && properties.scaleOrigin === 'center') {
         xTranslate = ((1 - factor) * ((width / 2) + cx)) / factor;
@@ -90,59 +55,27 @@ export const scaleSvgPart = (properties) => {
         targets: properties.animatedClass,
         scale: factor,
         translateX: xTranslate,
-        translateY: xTranslate,
+        translateY: yTranslate,
         duration: Duration,
         rotate: [Rotate, Rotate],
         delay: Delay,
         endDelay: EndDelay,
         loop: Loop,
-        direction: animateDirection,
+        direction: Direction,
         easing: Easing
     });
 }
 
 export const scaleElement = (properties) => {
 
-    let factor = 1;
-    let Delay = 0;
-    let EndDelay = 0;
-    let Loop = false;
-    let animateDirection = 'normal';
-    let Duration = 1000;
-    let Easing = 'easeOutElastic';
-    let Rotate = 0;
-
-    if (properties.scaleFactor) {
-        factor = properties.scaleFactor;
-    }
-
-    if (properties.delay) {
-        Delay = properties.delay;
-    }
-
-    if (properties.endDelay) {
-        EndDelay = properties.endDelay;
-    }
-
-    if (properties.loop) {
-        Loop = properties.loop;
-    }
-
-    if (properties.direction && (properties.direction === 'alternate' || properties.direction === 'reverse')) {
-        animateDirection = properties.direction
-    }
-
-    if (properties.duration) {
-        Duration = properties.duration
-    }
-
-    if (properties.easing) {
-        Easing = properties.easing;
-    }
-
-    if (properties.rotate) {
-        Rotate = properties.rotate;
-    }
+    let factor = properties.scaleFactor || 0.5;
+    let Rotate = properties.rotate;
+    let Duration = properties.duration || 1000;
+    let Delay = properties.delay || 0;
+    let EndDelay = properties.endDelay || 0;
+    let Loop = properties.loop || false;
+    let Easing = properties.easing || 'easeOutElastic';
+    let Direction = properties.direction || 'normal';
 
     anime({
         targets: properties.animatedClass,
@@ -153,6 +86,6 @@ export const scaleElement = (properties) => {
         delay: Delay,
         endDelay: EndDelay,
         loop: Loop,
-        direction: animateDirection
+        direction: Direction
     });
 }
