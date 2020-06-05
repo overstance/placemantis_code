@@ -1,61 +1,63 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './screenTracker.scss';
 import {textRotateIn} from '../../../../anime/texts';
 import {simpleRotate} from '../../../../anime/rotate';
 import {positionX} from '../../../../anime/position';
 import {drawSinglePath} from '../../../../anime/svgDraw';
+import {usePreviousValue} from '../../../../utilities/utilities';
 
 const Orientation = props => {
+    const previousWidth = usePreviousValue(props.windowWidth);
 
     useEffect(() => {
-
-        let drawProp = {
-            animatedClass: '.trackerOrientationArrow path',
-            easing: 'easeInOutSine',
-            duration: 1000,
-            delay: 500,
-            endDelay: 1500,
-            direction: 'alternate',
-            loop: true,
+        if (previousWidth !== props.windowWidth) {
+            let drawProp = {
+                animatedClass: '.trackerOrientationArrow path',
+                easing: 'easeInOutSine',
+                duration: 1000,
+                delay: 500,
+                endDelay: 1500,
+                direction: 'alternate',
+                loop: true,
+            }
+    
+            let textProp = {
+                spannedAnimatedClass: '.trackerOrientationText',
+                duration: 1500,
+                delayPerText: 50
+            }
+    
+            let width = props.windowWidth;
+            let xTranslate = width * 0.07;
+            let positionProp = {
+                animatedClass: '.trackerOrientationSvgs',
+                translateX: [xTranslate, 0],
+                duration: 1000,
+                delay: 500,
+                endDelay: 1500,
+                direction: 'alternate',
+                loop: true
+            }
+    
+            let rotateProp = {
+                animatedClass: '.trackerOrientationLandscape',
+                rotate: [0, 90],
+                duration: 1000,
+                delay: 500,
+                endDelay: 1500,
+                direction: 'alternate',
+                loop: true
+            }
+            simpleRotate(rotateProp);
+            drawSinglePath(drawProp);
+            positionX(positionProp);
+            textRotateIn(textProp);
+            // console.log(`width changed from ${previousWidth} to ${props.windowWidth} new translateX equals ${xTranslate}`)
         }
-
-        let textProp = {
-            spannedAnimatedClass: '.trackerOrientationText',
-            duration: 1500,
-            delayPerText: 50
-        }
-
-        let width = props.containerWidth;
-        let xTranslate = width * 0.07;
-        let positionProp = {
-            animatedClass: '.trackerOrientationSvgs',
-            translateX: [xTranslate, 0],
-            duration: 1000,
-            delay: 500,
-            endDelay: 1500,
-            direction: 'alternate',
-            loop: true,
-            // easing: 'easeInOutElastic'
-        }
-
-        let rotateProp = {
-            animatedClass: '.trackerOrientationLandscape',
-            rotate: [0, 90],
-            duration: 1000,
-            delay: 500,
-            endDelay: 1500,
-            direction: 'alternate',
-            loop: true,
-            // easing: 'easeInOutElastic'
-        }
-
-        simpleRotate(rotateProp);
-        drawSinglePath(drawProp);
-        positionX(positionProp);
-        textRotateIn(textProp);   
     });
+
     return (
-        <>
+        <div className='trackerOrientation'>
             <div className='trackerOrientationTop'>
                 <div className='trackerOrientationSvgs'>
                     <svg className='trackerOrientationPortrait' xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 270 480">
@@ -261,47 +263,10 @@ const Orientation = props => {
                     <span>Orientation</span>
                     <span>to</span>
                     <span>Continue</span>
-                    {/* Change Device Orientation to Continue */}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
-const OrientationWrapper = props => {
-
-    const [containerWidth, setWindowWidth] = useState(0);
-    const [showComponent, setShowComponent] = useState(false)
-
-    const handleContainerResize = e => {
-        const width = window.innerWidth;
-        
-        setWindowWidth(width);
-        setShowComponent(false);
-        // console.log('handle resize runs', containerWidth, showComponent);
-    }
-    
-    useEffect(() => {
-        window.addEventListener('resize', handleContainerResize);
-        const width = window.innerWidth;
-        setWindowWidth(width);
-        setShowComponent(true);
-        // console.log('use effect runs', containerWidth, showComponent);
-
-        return() => {
-            window.removeEventListener('resize', handleContainerResize);
-        }
-    }, [showComponent]);
-
-    return ( 
-        <div className='trackerOrientation'>
-            {
-                showComponent ?
-                <Orientation containerWidth={containerWidth}/>
-                : null
-            }
-        </div>
-    );
-}
-
-export default OrientationWrapper;
+export default Orientation;

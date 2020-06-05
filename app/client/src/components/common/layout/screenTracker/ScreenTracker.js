@@ -88,7 +88,7 @@ const ScreenTracker = props => {
     return (
         <div className="screenTracker">
             { state.showOrientation ?
-                <Orientation/>
+                <Orientation windowWidth={state.windowWidth}/>
                 :
                 null
             }
