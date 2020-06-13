@@ -52,6 +52,7 @@ export const staggerPositionParts = (properties) => {
     let TranslateX = properties.translateX || [90, 0];
     let TranslateY = properties.translateY || [90, 0];
     let StaggerOrigin = properties.staggerOrigin || 'first';
+    let StaggerStart = properties.staggerStart || 0;
     let TransformOrigin = properties.transformOrigin || '0% 0%';
     let Duration = properties.duration || 1000;
     let Delay = properties.delayPerChild || 0;
@@ -68,7 +69,7 @@ export const staggerPositionParts = (properties) => {
         translateX: TranslateX,
         translateY: TranslateY,
         'transform-origin': TransformOrigin,
-        delay: anime.stagger(Delay, {from: StaggerOrigin}),
+        delay: anime.stagger(Delay, {from: StaggerOrigin, start: StaggerStart}),
         endDelay: EndDelay,
         loop: Loop,
         direction: Direction,

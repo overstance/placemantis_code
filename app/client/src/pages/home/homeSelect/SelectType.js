@@ -7,25 +7,13 @@ const SelectType = props => {
 
     useEffect(() => {
         let positionProp1 = {
-            animatedClass: '.homeSelectType button svg',
+            animatedClass: '.homeSelectType button',
             translateX: [-30, 0],
             translateY: [0, 0],
-            delayPerChild: 500
-        }
-
-        let positionProp2 = {
-            animatedClass: '.homeSelectType button',
-            translateY: [1, -1],
-            translateX: [0, 0],
-            delayPerChild: 200,
-            endDelay: 1500,
-            opacity: [1, 1],
-            direction: 'alternate',
-            loop: true
+            delayPerChild: 300
         }
 
         staggerPositionParts(positionProp1);
-        staggerPositionParts(positionProp2);
     });
 
     return(

@@ -95,6 +95,7 @@ export const scaleElement = (properties) => {
 export const staggerScaleParts = (properties) => {
     let factor = properties.scaleFactor || 0.5;
     let StaggerOrigin = properties.staggerOrigin || 'first';
+    let StaggerStart = properties.staggerStart || 0;
     let TransformOrigin = properties.transformOrigin || '0% 0%';
     let Duration = properties.duration || 1000;
     let Delay = properties.delayPerChild || 0;
@@ -110,7 +111,7 @@ export const staggerScaleParts = (properties) => {
         easing: Easing,
         scale: factor,
         'transform-origin': TransformOrigin,
-        delay: anime.stagger(Delay, {from: StaggerOrigin}),
+        delay: anime.stagger(Delay, {from: StaggerOrigin, start: StaggerStart}),
         endDelay: EndDelay,
         loop: Loop,
         direction: Direction,

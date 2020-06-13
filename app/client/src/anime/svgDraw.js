@@ -26,6 +26,7 @@ export const drawMultiplePaths = (properties) => {
 
   let Duration = properties.duration || 1000;
   let StaggerOrigin = properties.staggerOrigin || 'first';
+  let StaggerStart = properties.staggerStart || 0;
   let Delay = properties.delayPerChild || 10;
   let EndDelay = properties.endDelay || 0;
   let Loop = properties.loop || false;
@@ -39,7 +40,7 @@ export const drawMultiplePaths = (properties) => {
       stroke: properties.strokeColor,
       easing: Easing,
       duration: Duration,
-      delay: anime.stagger(Delay, {from: StaggerOrigin}),
+      delay: anime.stagger(Delay, {from: StaggerOrigin, start: StaggerStart}),
       endDelay: EndDelay,
       direction: Direction,
       loop: Loop
@@ -50,7 +51,7 @@ export const drawMultiplePaths = (properties) => {
       strokeDashoffset: [anime.setDashoffset, 0],
       easing: Easing,
       duration: Duration,
-      delay: anime.stagger(Delay, {from: StaggerOrigin}),
+      delay: anime.stagger(Delay, {from: StaggerOrigin, start: StaggerStart}),
       endDelay: EndDelay,
       direction: Direction,
       loop: Loop

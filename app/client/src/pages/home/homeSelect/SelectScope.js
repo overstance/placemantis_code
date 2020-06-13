@@ -7,24 +7,13 @@ const SelectScope = props => {
 
     useEffect(() => {
         let positionProp1 = {
-            animatedClass: '.homeSelectScope button svg',
+            animatedClass: '.homeSelectScope button',
             translateX: [-30, 0],
             translateY: [0, 0],
-            delayPerChild: 500
+            delayPerChild: 300
         }
 
-        let positionProp2 = {
-            animatedClass: '.homeSelectScope button',
-            translateY: [1, -1],
-            translateX: [0, 0],
-            delayPerChild: 200,
-            endDelay: 1500,
-            opacity: [1, 1],
-            direction: 'alternate',
-            loop: true
-        }
         staggerPositionParts(positionProp1);
-        staggerPositionParts(positionProp2);
     });
 
     return(

@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import './homeSelect.scss';
 import SelectHeader from './SelectHeader';
-import {staggerPositionParts} from '../../../anime/position';
 import {scaleElement} from '../../../anime/scale';
 
 const SelectType = props => {
@@ -13,19 +12,7 @@ const SelectType = props => {
             scaleFactor: [0.75, 1],
             transformOrigin: '50% 50%'
         }
-        
-        let positionProp1 = {
-            animatedClass: '.homeResumeMission button',
-            translateY: [1, -1],
-            translateX: [0, 0],
-            delayPerChild: 200,
-            endDelay: 1500,
-            opacity: [1, 1],
-            direction: 'alternate',
-            loop: true
-        }
-
-        staggerPositionParts(positionProp1);
+ 
         scaleElement(scaleProp);
     });
 
