@@ -2,7 +2,6 @@
 
 .screenTracker {
     @include by-parent;
-    display: flex;
     position: absolute;
     z-index: $z5;
 }
@@ -46,7 +45,7 @@
 }
 
 .trackerOrientationLandscape {
-    transform-origin: 50% 100%;
+    // transform-origin: 50% 100%;
     position: absolute;
     z-index: $z5-1;
     height: 25vw;
@@ -88,6 +87,7 @@
     justify-content: center;
     padding: $frame-30;
     box-sizing: border-box;
+    background: $dark-blue;
 }
 
 .trackerSizeBottom {
@@ -95,13 +95,14 @@
     padding: $frame-30;
     padding-top: $frame-60;
     box-sizing: border-box;
+    background: $dark-blue;
 }
 
 .trackerSizeSvg {
     width: calc(28vw);
     height: calc(28vw);
     display: flex;
-    transform-origin: 50% 100%;
+    // transform-origin: 50% 100%;
 }
 
 .trackerSizeLandscape {

@@ -36,9 +36,9 @@ const Orientation = props => {
                 delay: 500,
                 endDelay: 1500,
                 direction: 'alternate',
-                loop: true
+                loop: true,
             }
-    
+
             let rotateProp = {
                 animatedClass: '.trackerOrientationLandscape',
                 rotate: [0, 90],
@@ -46,7 +46,8 @@ const Orientation = props => {
                 delay: 500,
                 endDelay: 1500,
                 direction: 'alternate',
-                loop: true
+                loop: true,
+                transformOrigin: '50% 100%'
             }
             simpleRotate(rotateProp);
             drawSinglePath(drawProp);

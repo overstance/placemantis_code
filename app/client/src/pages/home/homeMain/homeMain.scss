@@ -1,0 +1,158 @@
+@import "../../../variables.scss";
+
+.homeMain {
+    display: flex;
+    flex-flow: column;
+    @include by-parent;
+    background: $dark-blue;
+
+}
+
+.homeMainDisplayArt {
+    flex: 0 1 78%;
+    display: flex;
+
+    div {
+       @include by-parent;
+        align-items: center;
+        display: flex;
+        position: relative;
+    }
+
+    svg {
+        position: absolute;
+        width: 100%;
+        max-height: 100%;
+    }
+}
+
+#home_main_large_blocks_stroke path{
+    stroke-width: 4;
+}
+
+.homeMainMenuBar {
+    flex: 0 0 16%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    > div {
+        padding: $frame-30;
+        box-sizing: border-box;
+    }
+}
+
+.homeMainMenuBar {
+    button {
+        @include font-b48;
+        color: $light-purple;
+        // text-transform: uppercase;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.homeMainStartMission {
+    text-align: right;
+    button {
+        @include font-b48;
+        color: $green;
+        // text-transform: uppercase;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+.homeMainAuth {
+    flex: 0 0 38%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.homeMainAuthenticated {
+    flex: 0 0 50%;
+}
+
+.homeMainUnauthenticated {
+    @include by-parent;
+    display: flex;
+    text-align: left;
+}
+
+.homeMainLogin {
+    flex: 0 0 50%;
+}
+
+.homeMainRegister {
+    flex: 0 0 50%;
+}
+
+.homeMainStartMission {
+    flex: 0 0 53%;
+    color: $green;
+}
+
+.homeMainAudio {
+    flex: 0 0 9%;
+    // position: relative;
+
+    div {
+        @include by-parent;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        padding: 0;
+        display: flex;
+        background: none;
+        border: none;
+    }
+    
+    svg {
+        width: 100%;
+    }
+}
+
+.homeMainAuthenticated {
+
+    button {
+        padding: 0;
+        display: flex;
+        background: none;
+        border: none;
+        width: 12vh;
+        border: $frame-6 solid $light-purple;
+        border-radius: 50%;
+    }
+    
+    svg {
+        width: 100%;
+    }
+}
+
+.homeMainAudioOn {
+    path {
+        stroke: $green;
+    }
+}
+
+.homeMainAudioOff {
+    path {
+        stroke: $light-purple;
+    }
+}
+
+.homeMainFooter {
+    flex: 0 0 6%;
+    @include font-r30;
+    color: $blue1;
+    span {
+        padding-right: $frame-6;
+    }
+}

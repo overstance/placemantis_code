@@ -1,11 +1,12 @@
 @import '../../../variables.scss';
 
 .layoutContainer {
-    @include font-b36;
+    // @include font-b36;
     @include by-screen;
     position: relative;
 }
 
 .pageContainer {
-    color: $purple;
+    // color: $purple;
+    @include by-parent;
 }

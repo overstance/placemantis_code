@@ -47,7 +47,6 @@ function reducer(state, { type, width, height }) {
     }
 }
 
-
 const ScreenTracker = props => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -86,18 +85,13 @@ const ScreenTracker = props => {
     }, [state.windowWidth]);
     
     return (
+        state.showOrientation || state.showSize ?
         <div className="screenTracker">
-            { state.showOrientation ?
-                <Orientation windowWidth={state.windowWidth}/>
-                :
-                null
-            }
-            { state.showSize ?
-                <Size />
-                :
-                null
-            }
+            { state.showOrientation ? <Orientation windowWidth={state.windowWidth}/> : null }
+            { state.showSize ? <Size /> : null }
         </div>
+        :
+        null
     )
 }
 

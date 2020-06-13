@@ -1,0 +1,327 @@
+@import '../../../variables.scss';
+
+.selectHeader {
+    display: flex;
+    flex-flow: row nowrap;
+    @include by-parent;
+    align-items: center;
+
+    > div {
+        padding: $frame-48;
+        box-sizing: border-box;
+        display: flex;
+    }
+
+    .selectHeaderGoBack {
+        flex: 0 0 11.25%;
+    } 
+
+    .selectHeaderGoBack button {
+        border: none;
+        padding: 0;
+        background: none;
+        cursor: pointer;
+    }
+
+    .selectHeaderGoBack svg {
+        width: 100%;
+        vertical-align: middle;
+    }
+
+    .selectHeaderHeading {
+        flex: 0 0 88.75%;
+        position: relative;
+        /* max-height: 25vh; */
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            width: 100%;
+            position: absolute;
+            // vertical-align: middle;
+        }
+    }
+}
+
+.homeSelectType {
+    display: flex;
+    flex-flow: column;
+    @include by-parent;
+    background: $dark-blue;
+
+    > div {
+        flex: 0 0 25%;
+        box-sizing: border-box;
+        display: flex;
+        padding: $frame-48;
+        max-height: 25vh;
+    }
+
+    .homeSelectTypeSingle, .homeSelectTypeMultilevel {
+        button {
+            padding: 0;
+            width: 100%;
+            border: none;
+            background: none;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        svg {
+            height: 100%;
+        }
+    }
+}
+
+.homeSelectScope {
+    display: flex;
+    flex-flow: column;
+    @include by-parent;
+    background: $dark-blue;
+
+    .homeSelectScopeHeader {
+        flex: 0 0 25%;
+        box-sizing: border-box;
+        display: flex;
+        padding: $frame-48;
+        max-height: 25vh;
+    }
+
+    .homeSelectScopeLayout {
+        flex: 0 0 75%;
+        box-sizing: border-box;
+        max-height: 75vh;
+        position: relative;
+        display: flex;
+        flex-flow: column;
+    }
+
+    .homeSelectScopeBackground {
+        position: absolute;
+        @include by-parent;
+        display: flex;
+        flex-flow: column;
+
+        svg {
+            @include by-parent
+        }
+    }
+    
+    .homeSelectScopeOptions {
+        position: absolute;
+        @include by-parent;
+        display: flex;
+        flex-flow: column;
+
+        > div {
+        flex: 0 0 33.33%;
+        // box-sizing: border-box;
+        display: flex;
+        max-height: 33.33vh;
+        }
+
+        .homeSelectScopeTop, .homeSelectScopeMiddle, .homeSelectScopeBottom {
+            display: flex;
+            flex-flow: row nowrap;
+
+            > div {
+                flex: 0 0 50%;
+                padding: $frame-48;
+                box-sizing: border-box;
+                max-height: 25vh;
+            }
+
+            button {
+                @include by-parent;
+                padding: 0;
+                // width: 100%;
+                border: none;
+                background: none;
+                display: flex;
+                justify-content: center;
+                cursor: pointer;
+            }
+    
+            svg {
+                @include by-parent;
+            }
+        }
+
+        .homeSelectScopeBottom {
+            justify-content: flex-end;
+        }
+    }
+}
+
+.homeSelectStage {
+    display: flex;
+    flex-flow: column;
+    @include by-parent;
+    background: $dark-blue;
+
+    > div {
+        flex: 0 0 25%;
+        box-sizing: border-box;
+        display: flex;
+        padding: $frame-48;
+        max-height: 25vh;
+    }
+
+    .homeSelectStageTop,
+    .homeSelectStageMiddle,
+    .homeSelectStageBottom
+    {
+        display: flex;
+        flex-flow: row nowrap;
+
+        button {
+            flex: 0 0 50%;
+            padding: 0;
+            border: none;
+            background: none;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        svg {
+            @include by-parent
+        }
+    }
+}
+
+.homeSelectDifficulty {
+    display: flex;
+    flex-flow: column;
+    @include by-parent;
+    background: $dark-blue;
+
+    .homeSelectDifficultyHeader {
+        flex: 0 0 25%;
+        box-sizing: border-box;
+        display: flex;
+        padding: $frame-48;
+        max-height: 25vh;
+    }
+
+    .homeSelectDifficultyLayout {
+        flex: 0 0 75%;
+        box-sizing: border-box;
+        max-height: 75vh;
+        position: relative;
+        display: flex;
+        flex-flow: column;
+    }
+    
+    .homeSelectDifficultyOptions {
+        position: absolute;
+        @include by-parent;
+        display: flex;
+        flex-flow: column;
+
+        > div {
+            flex: 0 0 50%;
+            display: flex;
+            max-height: 50vh;
+            @include by-parent;
+            padding: $frame-48;
+            box-sizing: border-box;              
+
+            > button {      
+            padding: 0;
+            border: none;
+            background: none;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            @include by-parent;
+    
+                svg {
+                    height: 100%;                     
+                }
+            }
+        }       
+    }
+}
+
+.homeResumeMission {
+    display: flex;
+    flex-flow: column;
+    @include by-parent;
+    background: $dark-blue;
+
+    .homeResumeMissionHeader {
+        flex: 0 0 25%;
+        box-sizing: border-box;
+        display: flex;
+        padding: $frame-48;
+        max-height: 25vh;
+    }
+
+    .homeResumeMissionDialogueWrapper {
+        flex: 0 0 75%;
+        box-sizing: border-box;
+        max-height: 75vh;
+        display: flex;
+        flex-flow: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: $frame-48;
+        box-sizing: border-box;
+
+        .homeResumeMissionDialogue {
+            width: 60%;
+            max-height: 80%;
+            display: flex;
+            flex-flow: column;
+            border: $frame-6 solid $blue1;
+
+            > div {
+                flex: 0 0 50%;
+                padding: $frame-48;
+                box-sizing: border-box;
+                max-height: 25vh;
+            }
+
+            .homeResumeMissionDialogueText {
+                color: $light-purple;
+                @include font-m48;
+                line-height: 1.2;
+
+                span {
+                    @include font-r36;
+                }
+            }
+
+            .homeResumeMissionDialogueOptions {
+                display: flex;
+                flex-flow: row nowrap;
+
+                > div {
+                    padding: $frame-48;
+                    box-sizing: border-box;
+                    flex: 0 0 50%;
+                }
+
+                button {
+                    @include by-parent;
+                    padding: 0;
+                    // width: 100%;
+                    border: none;
+                    background: none;
+                    display: flex;
+                    justify-content: center;
+                    cursor: pointer;
+                    color: $green;
+                    @include font-m48;
+                }
+
+                svg {
+                    height: 100%;
+                }
+            }
+        }
+
+    }
+}

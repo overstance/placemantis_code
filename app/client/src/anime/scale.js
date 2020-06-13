@@ -69,8 +69,9 @@ export const scaleSvgPart = (properties) => {
 export const scaleElement = (properties) => {
 
     let factor = properties.scaleFactor || 0.5;
-    let Rotate = properties.rotate;
+    let Rotate = properties.rotate || 0;
     let Duration = properties.duration || 1000;
+    let TransformOrigin = properties.transformOrigin || '0% 0%'
     let Delay = properties.delay || 0;
     let EndDelay = properties.endDelay || 0;
     let Loop = properties.loop || false;
@@ -81,11 +82,38 @@ export const scaleElement = (properties) => {
         targets: properties.animatedClass,
         duration: Duration,
         easing: Easing,
-        rotate: [Rotate, Rotate],
+        rotate: Rotate,
         scale: factor,
+        'transform-origin': TransformOrigin,
         delay: Delay,
         endDelay: EndDelay,
         loop: Loop,
         direction: Direction
+    });
+}
+
+export const staggerScaleParts = (properties) => {
+    let factor = properties.scaleFactor || 0.5;
+    let StaggerOrigin = properties.staggerOrigin || 'first';
+    let TransformOrigin = properties.transformOrigin || '0% 0%';
+    let Duration = properties.duration || 1000;
+    let Delay = properties.delayPerChild || 0;
+    let EndDelay = properties.endDelay || 0;
+    let Loop = properties.loop || false;
+    let Easing = properties.easing || 'easeOutElastic';
+    let Direction = properties.direction || 'normal';
+    let Opacity = properties.opacity || [0, 1];
+
+    anime({
+        targets: properties.animatedClass,
+        duration: Duration,
+        easing: Easing,
+        scale: factor,
+        'transform-origin': TransformOrigin,
+        delay: anime.stagger(Delay, {from: StaggerOrigin}),
+        endDelay: EndDelay,
+        loop: Loop,
+        direction: Direction,
+        opacity: Opacity
     });
 }
