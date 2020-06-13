@@ -1708,7 +1708,6 @@ const HomeMain = props => {
                     }                   
                 </div>
                 <div className='homeMainStartMission'>
-                    {/* {props.optionStartMission} */}
                     <button onClick={props.startMissionSelected}>Start Mission</button>
                 </div>
                 <div className='homeMainAudio'>

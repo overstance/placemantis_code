@@ -7,7 +7,7 @@ import SelectStage from './homeSelect/SelectStage';
 import SelectDifficulty from './homeSelect/SelectDifficulty';
 import ResumeMission from './homeSelect/ResumeMission';
 
-// savedMission, isAuthenticated, audioOn, and avatarType
+// savedMission, isAuthenticated, audioOn, and avatarType:
 // are props coming in from global state
 
 
@@ -42,7 +42,8 @@ const Home = props => {
     useEffect(() => {
 
         if (startOrResumeMission) {
-            console.log(gameData);            
+            console.log(gameData); 
+            props.history.push('/game_play');           
         }
         
     }, [startOrResumeMission]);
