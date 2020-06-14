@@ -19,15 +19,16 @@ const Home = props => {
     const [missionStage, setMissionStage] = useState('');
     const [missionDifficulty, setMissionDifficulty] = useState('');
     const [startOrResumeMission, setStartOrResumeMission] = useState(false);
+    const [resumeSavedMission, setResumeSavedMission] = useState(false);
     // savedMission state below is used for testing purpose only,
     // retrieve the value of savedMission from global state
     const [savedMission] = useState(false);
 
     let gameData;
-    if (savedMission) {
+    if (resumeSavedMission) {
         gameData = {
             savedMission: savedMission,
-            resumeMission: true
+            resumeMission: resumeSavedMission
         }
     } else {
         gameData = {
@@ -42,7 +43,9 @@ const Home = props => {
     useEffect(() => {
 
         if (startOrResumeMission) {
-            console.log(gameData); 
+            console.log(gameData);
+            // Launch a global action then push /game_play
+            // setGameData(gameData); 
             props.history.push('/game_play');           
         }
         
@@ -60,10 +63,12 @@ const Home = props => {
 
     const optionAudio = () => {
         // Launch a global action to alter audioOn state
+        // changeAudioPreference(props.audioOn)
         console.log('audio button clicked');     
     }
     
     const optionResume = () => {
+        setResumeSavedMission(true);
         setStartOrResumeMission(true);      
     }
 
