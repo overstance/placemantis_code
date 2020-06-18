@@ -11,7 +11,11 @@ const place = new Schema({
   territory: Boolean,
   sovereignState: String,
   commonLanguages: Array,
-  geographicFeatures: Object
+  geographicFeatures: Object,
+  continent: String,
+  stages: Array,
+  callingCode: String,
+  tourismAttractions: Array
 });
 
 module.exports = mongoose.model('places', place);

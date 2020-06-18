@@ -1,3 +1,4 @@
+
 import React, {useState, useEffect} from 'react';
 import styles from './home.module.scss';
 import HomeMain from './homeMain/HomeMain';
@@ -6,9 +7,8 @@ import SelectScope from './homeSelect/SelectScope';
 import SelectStage from './homeSelect/SelectStage';
 import SelectDifficulty from './homeSelect/SelectDifficulty';
 import ResumeMission from './homeSelect/ResumeMission';
-
-// savedMission, isAuthenticated, audioOn, and avatarType:
-// are props coming in from global state
+import {connect} from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 
 const Home = props => {
@@ -43,12 +43,10 @@ const Home = props => {
     useEffect(() => {
 
         if (startOrResumeMission) {
-            console.log(gameData);
-            // Launch a global action then push /game_play
-            // setGameData(gameData); 
+            props.onSetGameData(gameData); 
             props.history.push('/game_play');           
         }
-        
+    // eslint-disable-next-line react-hooks/exhaustive-deps    
     }, [startOrResumeMission]);
 
     const optionStartMission = () => {
@@ -153,7 +151,7 @@ const Home = props => {
     }
 
     const optionNorthAmerica = () => {
-        setMissionStage('NorthAmerica');
+        setMissionStage('North_America');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
@@ -165,61 +163,61 @@ const Home = props => {
     }
 
     const optionSouthAmerica = () => {
-        setMissionStage('SouthAmerica');
+        setMissionStage('South_America');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionSEurope = () => {
-        setMissionStage('SEurope');
+        setMissionStage('Southern_Europe');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionSCAsia = () => {
-        setMissionStage('SCAsia');
+        setMissionStage('Central_and_South_Asia');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionWCAfrica = () => {
-        setMissionStage('WCAfrica');
+        setMissionStage('West_and_Central_Africa');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionCaribbean = () => {
-        setMissionStage('Caribbean');
+        setMissionStage('The_Caribbean_Islands');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionSAfrica = () => {
-        setMissionStage('SAfrica');
+        setMissionStage('Southern_Africa');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionIndiesAfrica = () => {
-        setMissionStage('IndiesAfrica');
+        setMissionStage('West_Indies_and_West_Africa');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionAsiaOceania = () => {
-        setMissionStage('AsiaOceania');
+        setMissionStage('Southeast_Asia_and_Oceania');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionAfricaAsia = () => {
-        setMissionStage('AfricaAsia');
+        setMissionStage('East_Africa_and_Middle_East_Asia');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionGlobal = () => {
-        setMissionScope('Global');
+        setMissionScope('World');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectScope');
     }
@@ -324,4 +322,18 @@ const Home = props => {
     )  
 }
 
-export default Home;
+// savedMission, isAuthenticated, audioOn, and avatarType:
+// will be coming in from global states below
+const mapStateToProps = state => {
+    return {
+        gameData: state.game.gameData
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onSetGameData: ( gameData ) => dispatch(actions.setGameData( gameData ))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -27,7 +27,7 @@ app.get('/home', (req, res) => {
 });
 
 app.get('/seed_places', (req, res) => {
-  seedPlaces();
+  // seedPlaces();
   res.send('Testing database connection');
 });
 

@@ -7,13 +7,13 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
-import sampleReducer from './store/reducers/sampleReducer';
+import gameReducer from './store/reducers/gameReducer';
 
 const composeEnhancers = 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  sample: sampleReducer
+  game: gameReducer
 });
 
 

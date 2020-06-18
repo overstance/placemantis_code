@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 220 160">
+  <defs>
+    <path id="triangle" stroke="#0038b8" stroke-width="5.5" fill-opacity="0" d="M0-29.14101615l-25.23686028 43.71152423h50.47372056z"/>
+  </defs>
+  <path fill="white" d="M0 0h220v160H0z"/>
+  <path fill="#0038b8" d="M0 15h220v25H0z"/>
+  <path fill="#0038b8" d="M0 120h220v25H0z"/>
+  <use xlink:href="#triangle" transform="translate(110 80)"/>
+  <use xlink:href="#triangle" transform="rotate(180 55 40)"/>
+</svg>

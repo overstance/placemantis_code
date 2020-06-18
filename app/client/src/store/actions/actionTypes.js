@@ -1,0 +1,2 @@
+// GAME ACTIONS
+export const SET_GAME_DATA = 'SET_GAME_DATA';

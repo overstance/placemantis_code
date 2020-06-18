@@ -7,10 +7,11 @@ const initialState = {
     showOrientation: false,
     showSize: false,
     windowWidth: 0,
-    windowHeight: 0
+    windowHeight: 0,
+    orientation: null
 };
 
-function reducer(state, { type, width, height }) {
+function reducer(state, { type, width, height, orientation }) {
     switch (type) {
         case "SET_WINDOW_DIMENSIONS":
             return {...state,
@@ -23,7 +24,7 @@ function reducer(state, { type, width, height }) {
             return {
                 ...state, 
                 windowWidth: width,
-                windowHeight: height,
+                windowHeight: height
             }
         case "SHOW_ORIENTATION":
             return {
@@ -31,7 +32,7 @@ function reducer(state, { type, width, height }) {
                 showOrientation: true,
                 showSize: false,
                 windowWidth: width,
-                windowHeight: height,
+                windowHeight: height
             }
         case "SHOW_SCREEN_SIZE":
             return {
@@ -66,7 +67,7 @@ const ScreenTracker = props => {
             dispatch({ type: "RESET"});
         } else {
             // console.log(width, "dispatching track window size");
-            dispatch({ type: "TRACK_WINDOW_RESIZE", width: width, height: height });
+            dispatch({ type: "TRACK_WINDOW_RESIZE", width: width, height: height});
         }
     };
     
@@ -81,8 +82,8 @@ const ScreenTracker = props => {
         return () => {
           window.removeEventListener("resize", handleResize);
         }
-    
-    }, [state.windowWidth]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.windowWidth, state.orientation]);
     
     return (
         state.showOrientation || state.showSize ?

@@ -1,0 +1,21 @@
+<svg viewBox="-225 -114 450 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M-225-114h450v300h-450z"/>
+  <circle fill="#ce1126" r="64.5"/>
+  <g id="a">
+    <g id="b">
+      <g id="c">
+        <g id="d">
+          <path id="e" d="M0 0c-2.16666 0-3 3.25-3 6.5 0 7.833332.95963 11.928508 3 23.5C2.04036 18.428508 3 14.333332 3 6.5 3 3.25 2.16667 0 0 0z" fill="#ce1126" transform="translate(0 -102)"/>
+          <use transform="rotate(4.9999987)" xlink:href="#e"/>
+        </g>
+        <use transform="rotate(10.000001)" xlink:href="#d"/>
+      </g>
+      <use transform="rotate(20.0000001)" xlink:href="#c"/>
+    </g>
+    <use transform="rotate(40.0000003)" xlink:href="#b"/>
+  </g>
+  <use transform="rotate(-79.9999999)" xlink:href="#a"/>
+  <path d="M-225-21.5h450V186h-450z"/>
+  <path d="M-225-14h450v200h-450z" fill="#ce1126"/>
+  <path d="M-225 86h450v100h-450z" fill="#339e35"/>
+</svg>
