@@ -27,8 +27,8 @@ const Home = props => {
     let gameData;
     if (resumeSavedMission) {
         gameData = {
-            savedMission: savedMission,
-            resumeMission: resumeSavedMission
+            type: 'ResumeSavedGame',
+            savedMission: savedMission
         }
     } else {
         gameData = {

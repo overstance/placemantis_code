@@ -70,7 +70,7 @@ const HomeMain = props => {
             position2TimeOffset: '-=750',
 
             position3Class: '.homeMainMenuBar button',
-            position3Y: [80, 0],
+            position3Y: [20, 0],
             position3X: [0, 0],
             position3DelayPerChild: 140,
             position3TimeOffset: '-=750'

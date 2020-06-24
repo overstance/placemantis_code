@@ -1,3 +1,8 @@
 export {
-    setGameData
+    setGameData,
+    singleTypeTimerEnd,
+    resetGameState,
+    multilevelTypeTimerEnd,
+    showLevelsDialogue,
+    showTypeDialogue
 } from './gameActions';

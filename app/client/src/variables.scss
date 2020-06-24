@@ -32,6 +32,11 @@ $red: #ff1a00;
     font-weight: 400;
 }
 
+@mixin font-r48 {
+    font-size: calc(2.5vw);
+    font-weight: 400;
+}
+
 // medium
 
 @mixin font-m30 {
@@ -98,6 +103,9 @@ $red: #ff1a00;
 
 // paddings and margins
 
+// micro 3/1920% of screensize
+$frame-3: calc(0.15625vw);
+
 // smallest 6/1920% of screensize
 $frame-6: calc(0.3125vw);
 
@@ -115,6 +123,12 @@ $frame-48: calc(2.5vw);
 
 // largest 60/1920% of screensize
 $frame-60: calc(3.125vw);
+
+// macro 90/1920% of screensize
+$frame-90: calc(4.6875vw);
+
+// mega 120/1920% of screensize
+$frame-120: calc(6.25vw);
 
 // size presets
 

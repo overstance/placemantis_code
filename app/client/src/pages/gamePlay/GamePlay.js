@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-// import * as actions from '../../store/actions/index';
+import * as actions from '../../store/actions/index';
 import styles from './gamePlay.module.scss';
 import Moderator from './moderator/Moderator';
 
@@ -17,10 +17,14 @@ class GamePlay extends Component {
     }
 
     componentDidMount() {
-        if (this.props.gameData.type === null || this.props.gameData.resumeMission === false) {
+        if (this.props.gameData.type === null) {
             // console.log(this.props.gameData, this.props.gameData.type, this.props.gameData.resumeMission);
             this.props.history.push('/');
         }
+    }
+
+    componentWillUnmount() {
+        this.props.onResetGameState();
     }
 
     render() {
@@ -30,22 +34,26 @@ class GamePlay extends Component {
               {props.gameData ? <div>{this.props.gameData.type}</div> : null}
             </div> */
             <div className={styles.gamePlay}>
-                <div className={styles.moderator}>
-                    <Moderator 
-                        gameType={this.props.gameData.type}
-                        gameStage={this.props.gameData.stage}
-                        gameDifficulty={this.props.gameData.difficulty}
-                        gameScope={this.props.gameData.scope}
-                        savedGame={this.props.gameData.savedMission}
-                        resumeGame={this.props.gameData.resumeMission}
-                    />
-                </div>
+                { this.props.showModerator ?
+                    <div className={styles.moderator}>
+                        <Moderator 
+                            gameType={this.props.gameData.type}
+                            gameStage={this.props.gameData.stage}
+                            gameDifficulty={this.props.gameData.difficulty}
+                            gameScope={this.props.gameData.scope}
+                            savedGame={this.props.gameData.savedMission}
+                        />
+                    </div>
+                    :
+                    null
+                }
                 <div className={styles.player}>
       
                 </div>
                 <div className={styles.felicitator}>
       
                 </div>
+                This is gameplay
             </div>
           )
     }    
@@ -53,8 +61,18 @@ class GamePlay extends Component {
 
 const mapStateToProps = state => {
     return {
-        gameData: state.game.gameData
+        gameData: state.game.gameData,
+
+        showModerator: state.game.showModerator,
+        showPlayer: state.game.showPlayer,
+        showFelicitator: state.game.showFelicitator,
     }
 }
 
-export default connect(mapStateToProps)(GamePlay);
+const mapDispatchToProps = dispatch => {
+    return {
+        onResetGameState: () => dispatch(actions.resetGameState())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(GamePlay);

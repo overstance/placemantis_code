@@ -3,3 +3,7 @@
 .gamePlay {
     @include by-parent;
 }
+
+.moderator {
+    @include by-parent;
+}
