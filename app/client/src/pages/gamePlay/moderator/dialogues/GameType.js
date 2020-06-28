@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import '../moderator.scss';
-import Timer from '../../../../components/common/timer/Timer';
+import Timer from '../../Timer';
 import {positionX} from '../../../../anime/position';
 
 const GameType = props => {
@@ -18,16 +18,6 @@ const GameType = props => {
 
     return(
         <div className='gameTypeDialogue'>
-            <div className='gameTypeDialogueTimer'>
-                <Timer 
-                    seconds={4}
-                    // minutes={1}
-                    // almostUpWarning
-                    timerType='gameType'
-                    gameType={props.type}
-                    dispatchOnEnd
-                />
-            </div>
             <div className='gameTypeDialogueMessages'>
                 <div>
                     <h3>
@@ -69,6 +59,14 @@ const GameType = props => {
                         {props.difficulty}
                     </span>
                 </div>
+            </div>
+            <div className='gameTypeDialogueTimer'>
+                <Timer 
+                    seconds={3}
+                    timerType='gameType'
+                    gameType={props.type}
+                    dispatchOnEnd
+                />
             </div>
         </div>
     )

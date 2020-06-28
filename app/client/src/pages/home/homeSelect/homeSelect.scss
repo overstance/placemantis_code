@@ -26,6 +26,7 @@
     .selectHeaderGoBack svg {
         width: 100%;
         vertical-align: middle;
+        max-height: 25vh;
     }
 
     .selectHeaderHeading {
@@ -38,6 +39,7 @@
         svg {
             width: 100%;
             position: absolute;
+            max-height: 25vh;
             // vertical-align: middle;
         }
     }
@@ -53,24 +55,26 @@
         flex: 0 0 25%;
         box-sizing: border-box;
         display: flex;
-        padding: $frame-48;
+        // padding-top: $frame-48;
+        padding: $frame-12;
         max-height: 25vh;
+        justify-content: center;
     }
 
     .homeSelectTypeSingle, .homeSelectTypeMultilevel {
         button {
             padding: 0;
-            width: 100%;
             border: none;
             background: none;
             display: flex;
             justify-content: center;
+            align-items: center;
             cursor: pointer;
         }
 
         svg {
-            // height: 100%;
             width: 100%;
+            max-height: 16vh;
         }
     }
 }
@@ -85,7 +89,7 @@
         flex: 0 0 25%;
         box-sizing: border-box;
         display: flex;
-        padding: $frame-48;
+        // padding: $frame-48;
         max-height: 25vh;
     }
 
@@ -105,7 +109,7 @@
         flex-flow: column;
 
         svg {
-            @include by-parent
+            @include by-parent;
         }
     }
     
@@ -128,24 +132,29 @@
 
             > div {
                 flex: 0 0 50%;
-                padding: $frame-48;
+                // padding-top: $frame-48;
+                padding: $frame-12;
                 box-sizing: border-box;
                 max-height: 25vh;
+                display: flex;
+                justify-content: center;
             }
 
             button {
-                @include by-parent;
+                // @include by-parent;
                 padding: 0;
                 // width: 100%;
                 border: none;
                 background: none;
                 display: flex;
                 justify-content: center;
+                align-items: center;
                 cursor: pointer;
             }
     
             svg {
                 @include by-parent;
+                max-height: 14vh;
             }
         }
 
@@ -165,7 +174,7 @@
         flex: 0 0 25%;
         box-sizing: border-box;
         display: flex;
-        padding: $frame-48;
+        // padding-top: $frame-48;
         max-height: 25vh;
     }
 
@@ -176,8 +185,16 @@
         display: flex;
         flex-flow: row nowrap;
 
-        button {
+        > div {
             flex: 0 0 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: $frame-12;
+            box-sizing: border-box;
+        }
+
+        button {          
             padding: 0;
             border: none;
             background: none;
@@ -187,7 +204,9 @@
         }
 
         svg {
-            @include by-parent
+            @include by-parent;
+            max-height: 14vh;
+            min-width: 46vw;
         }
     }
 }
@@ -202,7 +221,7 @@
         flex: 0 0 25%;
         box-sizing: border-box;
         display: flex;
-        padding: $frame-48;
+        // padding: $frame-48;
         max-height: 25vh;
     }
 
@@ -222,11 +241,13 @@
         flex-flow: column;
 
         > div {
-            flex: 0 0 50%;
+            flex: 0 0 33.3%;
             display: flex;
-            max-height: 37.5vh;
+            justify-content: center;
+            max-height: 25vh;
             @include by-parent;
-            padding: $frame-48;
+            // padding-top: $frame-48;
+            padding: $frame-12;
             box-sizing: border-box;              
 
             > button {      
@@ -236,11 +257,12 @@
             display: flex;
             justify-content: center;
             cursor: pointer;
-            @include by-parent;
+            // @include by-parent;
     
                 svg {
                     // height: 100%;  
-                    width: 100%;                   
+                    width: 100%; 
+                    max-height: 16vh;                  
                 }
             }
         }       
@@ -321,6 +343,8 @@
 
                 svg {
                     height: 100%;
+                    // width: 100%;
+                    // max-height: 12vh;
                 }
             }
         }

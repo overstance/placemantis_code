@@ -9,16 +9,12 @@ export const setGameData = (gameData) => {
     }
 }
 
-// MODERATOR TRIGGERED ACTIONS
-export const showLevelsDialogue = () => {
+// LEVELS DIALOGUE TRIGGERED ACTIONS
+export const setGameLevel = (levelNumber, levelStage) => {
     return {
-        type: actionTypes.SHOW_LEVELS_DIALOGUE
-    }
-}
-
-export const showTypeDialogue = () => {
-    return {
-        type: actionTypes.SHOW_TYPE_DIALOGUE
+        type: actionTypes.SET_GAME_LEVEL,
+        number: levelNumber,
+        stage: levelStage
     }
 }
 
@@ -38,9 +34,28 @@ export const multilevelTypeTimerEnd = () => {
     }
 }
 
+// close levels dailogue and moderator and show player
+export const levelsDailogueTimerEnd = () => {
+    return {
+        type: actionTypes.LEVELS_DIALOGUE_TIMER_END
+    }
+}
+
 // GAMEPLAY TRIGGERED ACTIONS
 
-// reset game state
+export const showLevelsDialogue = () => {
+    return {
+        type: actionTypes.SHOW_LEVELS_DIALOGUE
+    }
+}
+
+export const showTypeDialogue = (stagesShuffled) => {
+    return {
+        type: actionTypes.SHOW_TYPE_DIALOGUE,
+        stages: stagesShuffled
+    }
+}
+
 export const resetGameState = () => {
     return {
         type: actionTypes.RESET_GAME_STATE

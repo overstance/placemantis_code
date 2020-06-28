@@ -1,0 +1,47 @@
+@import '../../../../variables.scss';
+
+#Southern_Africa_Graticules {
+    fill: none;
+    stroke: $light-blue;
+    stroke-width: 0.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+}
+
+#Southern_Africa_0N_0E_Frame {
+    fill: none;
+    stroke: $dark-green;
+    stroke-width: 0.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+}
+
+#Southern_Africa_Lat_Long {
+    fill: $light-blue
+}
+
+#Southern_Africa_Outline {
+    fill: $blue2;
+    stroke: $light-purple;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+}
+
+#Southern_Africa_Places path{
+    fill: $dark-purple;
+    stroke: $light-purple;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    display: none;
+}
+
+#Southern_Africa_Markers path{
+    fill: $green;
+    display: none;
+}

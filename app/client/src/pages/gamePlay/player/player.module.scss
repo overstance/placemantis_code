@@ -1,0 +1,98 @@
+@import '../../../variables.scss';
+
+.player {
+    @include by-parent;
+    display: flex;
+    flex-flow: column;
+}
+
+.stage {
+    flex: 0 0 65%;
+    position: relative;
+
+
+    .map {
+        border: 2px solid $red;
+        box-sizing: border-box;
+        @include by-parent;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        background: $dark-blue;
+
+        svg {
+            max-height: 65vh;
+            width: 100%;
+        }
+    }
+
+    .hud {
+        @include by-parent;
+        display: flex;
+        flex-flow: column;
+        position: absolute;
+        justify-content: space-between;
+
+        .toolBar {
+            display: flex;
+            flex-flow: row;
+            flex: 0 0 12%;
+            justify-content: space-between;
+
+            > div {
+                flex: 0 0 12%;
+                border: 2px solid $purple;
+                box-sizing: border-box;
+            }
+        }
+
+        .propertiesBar {
+            display: flex;
+            flex-flow: row;
+            flex: 0 0 58%;
+            justify-content: space-between;
+
+            > div {
+                flex: 0 0 17%;
+                border: 2px solid $purple;
+                box-sizing: border-box;
+            }
+        }
+    }
+}
+
+.particulars {
+    display: flex;
+    flex-flow: row;
+    flex: 0 0 7%;
+
+    .stageId {
+        flex: 0 0 70%;
+        border: 2px solid $purple;
+        box-sizing: border-box;
+    }
+
+    .score {
+        flex: 0 0 30%;
+        border: 2px solid $purple;
+        box-sizing: border-box;
+    }
+}
+
+.activity {
+    display: flex;
+    flex-flow: row;
+    flex: 0 0 28%;
+
+    .timer, .round {
+        flex: 0 0 15%;
+        border: 2px solid $purple;
+        box-sizing: border-box;
+    }
+
+    .options {
+        flex: 0 0 70%;
+        border: 2px solid $purple;
+        box-sizing: border-box;
+    }
+}

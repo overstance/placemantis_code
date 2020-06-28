@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions/index';
+import * as actions from '../../store/actions/index';
 
 class Timer extends Component {
 
@@ -73,7 +73,7 @@ class Timer extends Component {
             // this.props.onPlayerRoundTimerEnd();
         }
         else if (this.props.timerType === 'levels' && this.props.dispatchOnEnd) {
-            // this.props.onLevelsDailogueTimerEnd();
+            this.props.onLevelsDailogueTimerEnd();
         } else if (this.props.timerType === 'facilitator' && this.props.dispatchOnEnd) {
             // this.props.onFacilitatorTimerEnd();
         }
@@ -106,7 +106,7 @@ const mapDispatchToProps = dispatch => {
         onSingleTypeTimerEnd: () => dispatch(actions.singleTypeTimerEnd()),
         onMultilevelTypeTimerEnd: () => dispatch(actions.multilevelTypeTimerEnd()), 
         // onPlayerRoundTimerEnd: () => dispatch(actions.playerRoundTimerEnd()),
-        // onLevelsDailogueTimerEnd: () => dispatch(actions.levelsDailogueTimerEnd()),
+        onLevelsDailogueTimerEnd: () => dispatch(actions.levelsDailogueTimerEnd()),
         // onFacilitatorTimerEnd: () => dispatch(actions.facilitatorTimerEnd()),
     }
 }

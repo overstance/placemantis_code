@@ -4,5 +4,7 @@ export {
     resetGameState,
     multilevelTypeTimerEnd,
     showLevelsDialogue,
-    showTypeDialogue
+    showTypeDialogue,
+    setGameLevel,
+    levelsDailogueTimerEnd
 } from './gameActions';

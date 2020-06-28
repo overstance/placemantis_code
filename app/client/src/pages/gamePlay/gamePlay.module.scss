@@ -7,3 +7,7 @@
 .moderator {
     @include by-parent;
 }
+
+.player {
+    @include by-parent;
+}

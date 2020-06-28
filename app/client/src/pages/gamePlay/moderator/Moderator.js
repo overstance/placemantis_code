@@ -1,18 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './moderator.scss';
 import GameType from './dialogues/GameType';
 import {connect} from 'react-redux';
-import * as actions from '../../../store/actions/index';
+import Levels from './dialogues/Levels';
+// import * as actions from '../../../store/actions/index';
 
 const Moderator = props => {
-
-    useEffect(() => {
-        if (props.gameType === 'ResumeSavedGame') {
-            props.onShowLevelsDialogue();
-        } else {
-            props.onShowTypeDialogue();
-        }
-    }, [props]);
 
     return(
         <div className="gameModerator">
@@ -28,6 +21,14 @@ const Moderator = props => {
                     :
                     null
                 }
+                { props.showLevels ?
+                    <Levels
+                        level={props.level}
+                        shuffledStages={props.shuffledStages}
+                    />
+                    :
+                    null
+                }
             </div>
         </div>
     )
@@ -35,8 +36,6 @@ const Moderator = props => {
 
 const mapStateToProps = state => {
     return {
-        gameType: state.game.gameData.type,
-
         showModerator: state.game.showModerator,
         showPlayer: state.game.showPlayer,
         showFelicitator: state.game.showFelicitator,
@@ -45,15 +44,15 @@ const mapStateToProps = state => {
         showLevels: state.game.showGameLevelsDialogue,
         showRestartMission: state.game.showRestartMissionDialogue,
         showEndMission: state.game.showEndMissionDialogue,
-        showGameOver: state.game.showGameOverDialogue
+        showGameOver: state.game.showGameOverDialogue,
+
+        level: state.game.level,
+        shuffledStages: state.game.shuffledStages
     }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        onShowLevelsDialogue: () => dispatch(actions.showLevelsDialogue()), 
-        onShowTypeDialogue: () => dispatch(actions.showTypeDialogue())
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Moderator);

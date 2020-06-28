@@ -1,5 +1,4 @@
 import * as actionTypes from '../actions/actionTypes';
-// import { singleTypeTimerEnd } from '../actions';
 
 const initialState = {
     gameData: {
@@ -10,8 +9,6 @@ const initialState = {
         savedMission: null
     },
 
-    activeGame: null,
-
     showModerator: true,
     showPlayer: false,
     showFelicitator: false,
@@ -20,8 +17,25 @@ const initialState = {
     showGameLevelsDialogue: false,
     showRestartMissionDialogue: false,
     showEndMissionDialogue: false,
-    showGameOverDialogue: false
+    showGameOverDialogue: false,
    
+    singleGameActive: false,
+    multilevelGameActive: false,
+    resumedMultilevelGame: false,
+
+    totalStageRounds: 0,
+    totalGameScore: 0,
+    gameStatus: 'off',
+    gameOver: false,
+    gameEndReport: null, 
+
+    rankingTaskCleared: false,
+    
+    startNextLevel: false,
+    level: 0,
+    levelScore: 0,
+    levelStage: null,
+    shuffledStages: []
 }
 
 const setGameData = (state, action) => {
@@ -41,7 +55,8 @@ const showLevelsDialogue = (state, action) => {
 const showTypeDialogue = (state, action) => {
     return {
         ...state,
-        showGameTypeDialogue: true
+        showGameTypeDialogue: true,
+        shuffledStages: action.stages
     }
 };
 
@@ -49,7 +64,8 @@ const singleTypeTimerEnd = (state, action) => {
     return {
         ...state,
         showGameTypeDialogue: false,
-        showModerator: false
+        showModerator: false,
+        showPlayer: true
     }
 
 }
@@ -58,10 +74,28 @@ const multilevelTypeTimerEnd = (state, action) => {
     return {
         ...state,
         showGameTypeDialogue: false,
-        showLevelsDialogue: true
+        showGameLevelsDialogue: true
+    }
+}
+
+const levelsDialogueTimerEnd = (state, action) => {
+    return {
+        ...state,
+        showGameLevelsDialogue: false,
+        showModerator: false,
+        showPlayer: true
     }
 
 }
+
+const setGameLevel = (state, action) => {
+    return {
+        ...state,
+        level: action.number,
+        levelStage: action.stage
+    }
+}
+
 
 const resetGameState = (state, action) => {
     return {
@@ -75,14 +109,30 @@ const resetGameState = (state, action) => {
             resumeMission: false
         },
     
-        activeGame: null,
-    
         showModerator: true,
         showGameTypeDialogue: true,
         showGameLevelsDialogue: false,
         showRestartMissionDialogue: false,
         showEndMissionDialogue: false,
-        showGameOverDialogue: false
+        showGameOverDialogue: false,
+
+        singleGameActive: false,
+        multilevelGameActive: false,
+        resumedMultilevelGame: false,
+
+        totalStageRounds: 0,
+        totalGameScore: 0,
+        gameStatus: 'off',
+        gameOver: false,
+        gameEndReport: null, 
+
+        rankingTaskCleared: false,
+        
+        startNextLevel: false,
+        level: 0,
+        levelScore: 0,
+        levelStage: null,
+        shuffledStages: []
     }
 }
 
@@ -99,7 +149,11 @@ const reducer = (state = initialState, action) => {
         case actionTypes.MULTILEVEL_TYPE_TIMER_END:
             return multilevelTypeTimerEnd(state, action);
         case actionTypes.RESET_GAME_STATE:
-            return resetGameState(state, action)
+            return resetGameState(state, action);
+        case actionTypes.SET_GAME_LEVEL:
+            return setGameLevel(state, action);
+        case actionTypes.LEVELS_DIALOGUE_TIMER_END:
+            return levelsDialogueTimerEnd(state, action);
         default: return state;
     }
 };
