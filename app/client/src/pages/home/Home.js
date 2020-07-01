@@ -163,55 +163,55 @@ const Home = props => {
     }
 
     const optionSouthAmerica = () => {
-        setMissionStage('South_America');
+        setMissionStage('South America');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionSEurope = () => {
-        setMissionStage('Southern_Europe');
+        setMissionStage('Southern Europe');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionSCAsia = () => {
-        setMissionStage('Central_and_South_Asia');
+        setMissionStage('Central and South Asia');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionWCAfrica = () => {
-        setMissionStage('West_and_Central_Africa');
+        setMissionStage('West and Central Africa');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionCaribbean = () => {
-        setMissionStage('The_Caribbean_Islands');
+        setMissionStage('The Caribbean Islands');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionSAfrica = () => {
-        setMissionStage('Southern_Africa');
+        setMissionStage('Southern Africa');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionIndiesAfrica = () => {
-        setMissionStage('West_Indies_and_West_Africa');
+        setMissionStage('West Indies and West Africa');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionAsiaOceania = () => {
-        setMissionStage('Southeast_Asia_and_Oceania');
+        setMissionStage('Southeast Asia and Oceania');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
 
     const optionAfricaAsia = () => {
-        setMissionStage('East_Africa_and_Middle_East_Asia');
+        setMissionStage('East Africa and Middle East Asia');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }

@@ -20,15 +20,15 @@ class GamePlay extends Component {
 
     componentDidMount() {
         const gameStages = [
-            'Africa', 'Oceania', 'Europe', 'North_America',
-            'Asia', 'South_America', 'Southern_Europe', 
-            'Central_and_South_Asia', 'West_and_Central_Africa',
-            'The_Caribbean_Islands', 'West_Indies_and_West_Africa', 
-            'Southeast_Asia_and_Oceania', 'East_Africa_and_Middle_East_Asia'
+            'Africa', 'Oceania', 'Europe', 'North America',
+            'Asia', 'South America', 'Southern Europe', 
+            'Central and South Asia', 'West and Central Africa',
+            'The Caribbean Islands', 'West Indies and West Africa', 
+            'Southeast Asia and Oceania', 'East Africa and Middle East Asia'
         ]
     
         const stagesShuffled = shuffleArray(gameStages);
-        stagesShuffled.unshift('Southern_Africa');
+        stagesShuffled.unshift('Southern Africa');
         stagesShuffled.push('World');
 
         if (this.props.gameData.type === null) {

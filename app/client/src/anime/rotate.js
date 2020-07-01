@@ -10,7 +10,7 @@ export const simpleRotate = (properties) => {
     let Loop = properties.loop || false;
     let Easing = properties.easing || 'easeOutElastic';
     let Direction = properties.direction || 'normal';
-    let TransformOrigin = properties.transformOrigin || '0% 0%'
+    let TransformOrigin = properties.transformOrigin || '0% 0%';
 
     anime({
         targets: properties.animatedClass,
@@ -21,6 +21,6 @@ export const simpleRotate = (properties) => {
         direction: Direction,
         loop: Loop,
         easing: Easing,
-        'transform-origin': TransformOrigin
+        'transform-origin': TransformOrigin,
     });
 }

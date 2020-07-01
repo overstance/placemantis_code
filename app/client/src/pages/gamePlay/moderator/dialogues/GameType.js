@@ -14,6 +14,8 @@ const GameType = props => {
         }
 
         positionX(animationProp);
+
+        // return() => {}
     }, []);
 
     return(

@@ -35,6 +35,7 @@ const initialState = {
     level: 0,
     levelScore: 0,
     levelStage: null,
+    
     shuffledStages: []
 }
 
@@ -65,7 +66,7 @@ const singleTypeTimerEnd = (state, action) => {
         ...state,
         showGameTypeDialogue: false,
         showModerator: false,
-        showPlayer: true
+        showPlayer: true,       
     }
 
 }

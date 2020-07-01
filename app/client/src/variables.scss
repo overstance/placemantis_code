@@ -25,16 +25,22 @@ $red: #ff1a00;
 @mixin font-r30 {
     font-size: calc(1.5625vw);
     font-weight: 400;
+    font-size: -webkit-calc(1.5625vw);
+    font-size: -moz-calc(1.5625vw);
 }
 
 @mixin font-r36 {
     font-size: calc(1.875vw);
     font-weight: 400;
+    font-size: -webkit-calc(1.875vw);
+    font-size: -moz-calc(1.875vw);
 }
 
 @mixin font-r48 {
     font-size: calc(2.5vw);
     font-weight: 400;
+    font-size: -webkit-calc(2.5vw);
+    font-size: -moz-calc(2.5vw);
 }
 
 // medium
@@ -42,63 +48,87 @@ $red: #ff1a00;
 @mixin font-m30 {
     font-size: calc(1.5625vw);
     font-weight: 500;
+    font-size: -webkit-calc(1.5625vw);
+    font-size: -moz-calc(1.5625vw);
 }
 
 @mixin font-m36 {
     font-size: calc(1.875vw);
     font-weight: 500;
+    font-size: -webkit-calc(1.875vw);
+    font-size: -moz-calc(1.875vw);
 }
 
 @mixin font-m48 {
     font-size: calc(2.5vw);
     font-weight: 500;
+    font-size: -webkit-calc(2.5vw);
+    font-size: -moz-calc(2.5vw);
 }
 
 @mixin font-m60 {
     font-size: calc(3.125vw);
     font-weight: 500;
+    font-size: -webkit-calc(3.125vw);
+    font-size: -moz-calc(3.125vw);
 }
 
 @mixin font-m75 {
     font-size: calc(3.9vw);
     font-weight: 500;
+    font-size: -webkit-calc(3.9vw);
+    font-size: -moz-calc(3.9vw);
 }
 
 @mixin font-m90 {
     font-size: calc(4.6875vw);
     font-weight: 500;
+    font-size: -webkit-calc(4.6875vw);
+    font-size: -moz-calc(4.6875vw);
 }
 
 // bold
 
 @mixin font-b24 {
-    font-size: calc(11.25vw);
+    font-size: calc(1.25vw);
     font-weight: 700;
+    font-size: -webkit-calc(1.25vw);
+    font-size: -moz-calc(1.25vw);
 }
 
 @mixin font-b36 {
     font-size: calc(1.875vw);
     font-weight: 700;
+    font-size: -webkit-calc(1.875vw);
+    font-size: -moz-calc(1.875vw);
 }
 
 @mixin font-b48 {
     font-size: calc(2.5vw);
     font-weight: 700;
+    font-size: -webkit-calc(2.5vw);
+    font-size: -moz-calc(2.5vw);
 }
 
 @mixin font-b60 {
     font-size: calc(3.125vw);
     font-weight: 700;
+    font-size: -webkit-calc(3.125vw);
+    font-size: -moz-calc(3.125vw);
 }
 
 @mixin font-b75 {
     font-size: calc(3.9vw);
     font-weight: 700;
+    font-size: -webkit-calc(3.9vw);
+    font-size: -moz-calc(3.9vw);
 }
 
 @mixin font-b90 {
     font-size: calc(4.6875vw);
     font-weight: 700;
+    font-size: -webkit-calc(4.6875vw);
+    font-size: -moz-calc(4.6875vw);
 }
 
 // paddings and margins

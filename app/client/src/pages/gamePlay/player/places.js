@@ -1,4 +1,4 @@
-export const places = [
+export const Places = [
   {
     name: "Cape Verde",
     domID: "Cape_Verde",
@@ -16,7 +16,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+238",
     touristAttractions: []
   },
@@ -37,7 +37,7 @@ export const places = [
       waters: "Senegal River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+222",
     touristAttractions: []
   },
@@ -58,7 +58,7 @@ export const places = [
       waters: "Macina"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+223",
     touristAttractions: []
   },
@@ -79,7 +79,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+227",
     touristAttractions: []
   },
@@ -100,7 +100,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+220",
     touristAttractions: ["Kololi"]
   },
@@ -121,7 +121,7 @@ export const places = [
       waters: "Casamance Rivers"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+221",
     touristAttractions: ["N'Gor"]
   },
@@ -142,7 +142,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+245",
     touristAttractions: []
   },
@@ -163,7 +163,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+224",
     touristAttractions: []
   },
@@ -184,7 +184,7 @@ export const places = [
       waters: "Red Volta"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+226",
     touristAttractions: []
   },
@@ -205,7 +205,7 @@ export const places = [
       waters: "Oueme River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+229",
     touristAttractions: ["Pendjari National Park"]
   },
@@ -226,7 +226,7 @@ export const places = [
       waters: "Niger Delta"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+234",
     touristAttractions: ["The Millennium Park", "Freedom Park"]
   },
@@ -247,7 +247,7 @@ export const places = [
       waters: "Moa River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+232",
     touristAttractions: []
   },
@@ -268,7 +268,7 @@ export const places = [
       waters: "Saint John River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+231",
     touristAttractions: []
   },
@@ -289,7 +289,7 @@ export const places = [
       waters: "Bandama River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+225",
     touristAttractions: ["Comoe National Park"]
   },
@@ -310,7 +310,7 @@ export const places = [
       waters: "Lake Volta"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+233",
     touristAttractions: ["Busua", "Kakum National Park"]
   },
@@ -331,7 +331,7 @@ export const places = [
       waters: "Mono River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "West_Indies_and_West_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "West Indies and West Africa"],
     callingCode: "+228",
     touristAttractions: []
   },   
@@ -352,7 +352,7 @@ export const places = [
       waters: "Chari River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+235",
     touristAttractions: []
   },
@@ -373,7 +373,7 @@ export const places = [
       waters: "Ubangi River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+236",
     touristAttractions: []
   },
@@ -394,7 +394,7 @@ export const places = [
       waters: "Lake Nyos"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+237",
     touristAttractions: ["Dja Fauna Reserve"]
   },
@@ -415,7 +415,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+239",
     touristAttractions: []
   },
@@ -436,7 +436,7 @@ export const places = [
       waters: "Muni River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+240",
     touristAttractions: ["Basilica of the Immaculate Conception"]
   },
@@ -457,7 +457,7 @@ export const places = [
       waters: "Ogooue"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+241",
     touristAttractions: []
   },
@@ -478,7 +478,7 @@ export const places = [
       waters: "Kouilou-Niari River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+242",
     touristAttractions: []
   },
@@ -499,7 +499,7 @@ export const places = [
       waters: "Lulonga River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "Southern_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "Southern Africa"],
     callingCode: "+243",
     touristAttractions: []
   },
@@ -520,7 +520,7 @@ export const places = [
       waters: "Lake Kivu"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "West and Central Africa", "East Africa and Middle East Asia"],
     callingCode: "+250",
     touristAttractions: []
   },
@@ -541,7 +541,7 @@ export const places = [
       waters: "Rurubu River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "West and Central Africa", "East Africa and Middle East Asia"],
     callingCode: "+257",
     touristAttractions: []
   },
@@ -562,7 +562,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+247",
     touristAttractions: []
   },
@@ -583,7 +583,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa"],
+    stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+290",
     touristAttractions: []
   },
@@ -604,7 +604,7 @@ export const places = [
       waters: "Cuanza River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "West_and_Central_Africa", "Southern_Africa"],
+    stages: ["World", "Africa", "West and Central Africa", "Southern Africa"],
     callingCode: "+244",
     touristAttractions: ["Mussulo Island"]
   },
@@ -625,7 +625,7 @@ export const places = [
       waters: "Lake Victoria"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+255",
     touristAttractions: ["Serengeti National Park"]
   },
@@ -646,7 +646,7 @@ export const places = [
       waters: "Zambezi"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+260",
     touristAttractions: ["Victoria Falls", "Kafue National Park"]
   },
@@ -667,7 +667,7 @@ export const places = [
       waters: "Shire River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+265",
     touristAttractions: []
   },
@@ -688,7 +688,7 @@ export const places = [
       waters: "Lake Cahora Bassa"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+258",
     touristAttractions: []
   },
@@ -709,7 +709,7 @@ export const places = [
       waters: "The Orange River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa"],
+    stages: ["World", "Africa", "Southern Africa"],
     callingCode: "+264",
     touristAttractions: ["Fish River Canyon"]
   },
@@ -730,7 +730,7 @@ export const places = [
       waters: "Okovango Delta"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa"],
+    stages: ["World", "Africa", "Southern Africa"],
     callingCode: "+267",
     touristAttractions: []
   },
@@ -751,7 +751,7 @@ export const places = [
       waters: "Zambezi River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+263",
     touristAttractions: ["Victoria Falls"]
   },
@@ -772,7 +772,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+269",
     touristAttractions: []
   },
@@ -793,7 +793,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+261",
     touristAttractions: []
   },
@@ -814,7 +814,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+230",
     touristAttractions: []
   },
@@ -835,13 +835,13 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "Southern Africa", "East Africa and Middle East Asia"],
     callingCode: "+248",
     touristAttractions: ["Beau Vallon"]
   },
   {
-    name: "Ewatini",
-    domID: "Ewatini",
+    name: "Eswatini",
+    domID: "Eswatini",
     capital: "Mbabane",
     flag: true,
     emblem: true,
@@ -856,7 +856,7 @@ export const places = [
       waters: "Mbuluzi River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa"],
+    stages: ["World", "Africa", "Southern Africa"],
     callingCode: "+268",
     touristAttractions: ["Hlane Royal National Park"]
   },
@@ -877,7 +877,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa"],
+    stages: ["World", "Africa", "Southern Africa"],
     callingCode: "+266",
     touristAttractions: ["Sani Pass"]
   },
@@ -898,7 +898,7 @@ export const places = [
       waters: "Orange River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "Southern_Africa"],
+    stages: ["World", "Africa", "Southern Africa"],
     callingCode: "+27",
     touristAttractions: ["Kruger National Park", "Cradle of Humankind"]
   },
@@ -919,7 +919,7 @@ export const places = [
       waters: "Suez Canal"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+20",
     touristAttractions: ["Giza Necropolis"]
   },
@@ -940,7 +940,7 @@ export const places = [
       waters: "The Blue Nile"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+249",
     touristAttractions: []
   },
@@ -961,7 +961,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+291",
     touristAttractions: []
   },
@@ -982,7 +982,7 @@ export const places = [
       waters: "White Nile"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+211",
     touristAttractions: []
   },
@@ -1003,7 +1003,7 @@ export const places = [
       waters: "Lake Tana"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+251",
     touristAttractions: ["Axum", "Sodere"]
   },
@@ -1024,7 +1024,7 @@ export const places = [
       waters: "Lake Assal"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+253",
     touristAttractions: []
   },
@@ -1045,7 +1045,7 @@ export const places = [
       waters: ""
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+252",
     touristAttractions: []
   },
@@ -1066,7 +1066,7 @@ export const places = [
       waters: "Jubba River"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+252",
     touristAttractions: ["Kismayo National Park"]
   },
@@ -1087,7 +1087,7 @@ export const places = [
       waters: "Lake turkana"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+254",
     touristAttractions: ["Masai Mara"]
   },
@@ -1108,7 +1108,7 @@ export const places = [
       waters: "Lake Kyoga"
     },
     continent: "Africa",
-    stages: ["World", "Africa", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Africa", "East Africa and Middle East Asia"],
     callingCode: "+256",
     touristAttractions: []
   },
@@ -1234,7 +1234,7 @@ export const places = [
       waters: "Kardiva Channel"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+960",
     touristAttractions: ["VOI Maayafushi Resort"]
   },
@@ -1255,7 +1255,7 @@ export const places = [
       waters: "Lake Balkhash"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+7",
     touristAttractions: []
   },
@@ -1276,7 +1276,7 @@ export const places = [
       waters: "Aral Sea"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+998",
     touristAttractions: ["Zaamin National Park"]
   },
@@ -1297,7 +1297,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+993",
     touristAttractions: []
   },
@@ -1318,7 +1318,7 @@ export const places = [
       waters: "Amu River"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+93",
     touristAttractions: []
   },
@@ -1339,7 +1339,7 @@ export const places = [
       waters: "Issyk-Kul Lake"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+996",
     touristAttractions: ["Karakol"]
   },
@@ -1360,7 +1360,7 @@ export const places = [
       waters: "Kulikalon Lakes"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+992",
     touristAttractions: []
   },
@@ -1381,7 +1381,7 @@ export const places = [
       waters: "Lake Saiful Muluk"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "92",
     touristAttractions: ["Takht-i-Bahi", "Taxila", "Mohenjo-daro"]
   },
@@ -1402,7 +1402,7 @@ export const places = [
       waters: "Ganges"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+91",
     touristAttractions: ["Bodh Gaya", "Taj Mahal"]
   },
@@ -1423,7 +1423,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+977",
     touristAttractions: []
   },
@@ -1444,7 +1444,7 @@ export const places = [
       waters: "Mo Chhu"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+975",
     touristAttractions: ["Drukgyel Dzong"]
   },
@@ -1465,7 +1465,7 @@ export const places = [
       waters: "Mahaweli River"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+94",
     touristAttractions: ["Yala National Park"]
   },
@@ -1486,7 +1486,7 @@ export const places = [
       waters: "Ganges-Brahmaputra Delta"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Central_and_South_Asia"],
+    stages: ["World", "Asia", "Central and South Asia"],
     callingCode: "+880",
     touristAttractions: ["Cox's Bazar"]
   },
@@ -1507,7 +1507,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["Southeast_Asia_and_Oceania"],
+    stages: ["Southeast Asia and Oceania"],
     callingCode: "+61 891",
     touristAttractions: []
   },
@@ -1528,7 +1528,7 @@ export const places = [
       waters: "Irrawaddy"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+95",
     touristAttractions: ["Bagan", "Kyaiktiyo"]
   },
@@ -1549,7 +1549,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+856",
     touristAttractions: ["Vat Phou", "Luang Prabang"]
   },
@@ -1570,7 +1570,7 @@ export const places = [
       waters: "Ba Be Lake"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+84",
     touristAttractions: ["Ha Long Bay"]
   },
@@ -1591,7 +1591,7 @@ export const places = [
       waters: "Chao Phraya"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+66",
     touristAttractions: ["Wat Phra Kaew"]
   },
@@ -1612,7 +1612,7 @@ export const places = [
       waters: "Tonle Sap Lake"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+855",
     touristAttractions: ["Angkor Wat"]
   },
@@ -1633,7 +1633,7 @@ export const places = [
       waters: "Cagayan River"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+63",
     touristAttractions: ["Banaue Rice Terraces"]
   },
@@ -1654,7 +1654,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+65",
     touristAttractions: ["River Safari", "Marina Bay Sands"]
   },
@@ -1675,7 +1675,7 @@ export const places = [
       waters: "Perlis River"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+60",
     touristAttractions: ["Gunung Mulu National Park"]
   },
@@ -1696,7 +1696,7 @@ export const places = [
       waters: "Lake Toba"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+62",
     touristAttractions: ["Borodudur", "Komodo National Park"]
   },
@@ -1717,7 +1717,7 @@ export const places = [
       waters: "Lake Ira Lalaro"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Asia", "Southeast Asia and Oceania"],
     callingCode: "+670",
     touristAttractions: []
   },
@@ -1738,7 +1738,7 @@ export const places = [
       waters: "Bosphorus"
     },
     continent: "Asia",
-    stages: ["World", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "East Africa and Middle East Asia"],
     callingCode: "+90",
     touristAttractions: ["Turkish Riviera"]
   },
@@ -1759,7 +1759,7 @@ export const places = [
       waters: "Pedieos River"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+357",
     touristAttractions: []
   },
@@ -1780,7 +1780,7 @@ export const places = [
       waters: "Leontes"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+961",
     touristAttractions: ["Baalbek"]
   },
@@ -1801,7 +1801,7 @@ export const places = [
       waters: "The Euphrates"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+963",
     touristAttractions: []
   },
@@ -1822,7 +1822,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+970",
     touristAttractions: []
   },
@@ -1843,7 +1843,7 @@ export const places = [
       waters: "Dead Sea"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+972",
     touristAttractions: ["Ein Bokek"]
   },
@@ -1864,7 +1864,7 @@ export const places = [
       waters: "Jordan River"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+962",
     touristAttractions: ["Al-Maghtas"]
   },
@@ -1885,7 +1885,7 @@ export const places = [
       waters: "Shatt al-Arab"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+964",
     touristAttractions: []
   },
@@ -1906,7 +1906,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+98",
     touristAttractions: ["Kish Island", "Isfahan"]
   },
@@ -1927,7 +1927,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+965",
     touristAttractions: []
   },
@@ -1948,7 +1948,7 @@ export const places = [
       waters: "Tubli Bay"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+973",
     touristAttractions: ["Beit Al Quran"]
   },
@@ -1969,7 +1969,7 @@ export const places = [
       waters: "Hkor al Adaid"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+974",
     touristAttractions: []
   },
@@ -1990,7 +1990,7 @@ export const places = [
       waters: "Lake Zakher"
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+971",
     touristAttractions: ["Dubai Marina"]
   },
@@ -2011,7 +2011,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+968",
     touristAttractions: []
   },
@@ -2032,7 +2032,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+966",
     touristAttractions: []
   },
@@ -2053,7 +2053,7 @@ export const places = [
       waters: ""
     },
     continent: "Asia",
-    stages: ["World", "Asia", "East_Africa_and_Middle_East_Asia"],
+    stages: ["World", "Asia", "East Africa and Middle East Asia"],
     callingCode: "+967",
     touristAttractions: []
   },
@@ -2914,7 +2914,7 @@ export const places = [
       waters: "The Tagus"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+351",
     touristAttractions: ["Fatima", "Sintra"]
   },
@@ -2935,7 +2935,7 @@ export const places = [
       waters: "The Ebro"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+34",
     touristAttractions: ["Benidorm", "Ibiza"]
   },
@@ -2956,7 +2956,7 @@ export const places = [
       waters: "The Seine"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+33",
     touristAttractions: ["Eiffel Tower", "Chateau de Versailles"]
   },
@@ -2977,7 +2977,7 @@ export const places = [
       waters: "Gran Valira"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+376",
     touristAttractions: []
   },
@@ -2998,7 +2998,7 @@ export const places = [
       waters: "The Po"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+39",
     touristAttractions: ["Venice", "Florence"]
   },
@@ -3019,7 +3019,7 @@ export const places = [
       waters: ""
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+356",
     touristAttractions: []
   },
@@ -3040,7 +3040,7 @@ export const places = [
       waters: "Lake Bled"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+386",
     touristAttractions: ["Postojna Cave"]
   },
@@ -3061,7 +3061,7 @@ export const places = [
       waters: "Kupa River"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+385",
     touristAttractions: ["Opatija"]
   },
@@ -3082,7 +3082,7 @@ export const places = [
       waters: "The Bosna"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+387",
     touristAttractions: ["Medugorje"]
   },
@@ -3103,7 +3103,7 @@ export const places = [
       waters: "Zeta River"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+382",
     touristAttractions: ["Sveti Stefan"]
   },
@@ -3124,7 +3124,7 @@ export const places = [
       waters: "Danube Delta"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+40",
     touristAttractions: ["Mamaia", "Putna Monastery"]
   },
@@ -3145,7 +3145,7 @@ export const places = [
       waters: ""
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+383",
     touristAttractions: ["Brezovica Ski Resort"]
   },
@@ -3166,7 +3166,7 @@ export const places = [
       waters: "Lake of Ohrid"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+355",
     touristAttractions: []
   },
@@ -3187,7 +3187,7 @@ export const places = [
       waters: "Lake Mavrovo"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+389",
     touristAttractions: []
   },
@@ -3208,7 +3208,7 @@ export const places = [
       waters: ""
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+381",
     touristAttractions: ["Kopaonik"]
   },
@@ -3229,7 +3229,7 @@ export const places = [
       waters: "Myrtoan Sea"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+30",
     touristAttractions: ["Santorini", "Thessaloniki"]
   },
@@ -3250,7 +3250,7 @@ export const places = [
       waters: "The Iska"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+359",
     touristAttractions: []
   },
@@ -3271,7 +3271,7 @@ export const places = [
       waters: "Colgilnic River"
     },
     continent: "Europe",
-    stages: ["World", "Europe", "Southern_Europe"],
+    stages: ["World", "Europe", "Southern Europe"],
     callingCode: "+373",
     touristAttractions: []
   },
@@ -3292,7 +3292,7 @@ export const places = [
       waters: "Dardanelles"
     },
     continent: "Europe",
-    stages: ["Europe", "Southern_Europe"],
+    stages: ["Europe", "Southern Europe"],
     callingCode: "+90",
     touristAttractions: []
   },
@@ -3312,8 +3312,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-242",
     touristAttractions: ["Atlantis Paradise Island"]
   },
@@ -3333,8 +3333,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+53",
     touristAttractions: ["Varadero"]
   },
@@ -3354,8 +3354,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-345",
     touristAttractions: ["Seven Mile Beach"]
   },
@@ -3375,8 +3375,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-876",
     touristAttractions: ["Doctor's Cave Beach Club", "Dunn's River Falls"]
   },
@@ -3396,8 +3396,8 @@ export const places = [
       desert: "",
       waters: "Guayamouc River"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+509",
     touristAttractions: ["Labadee"]
   },
@@ -3417,8 +3417,8 @@ export const places = [
       desert: "",
       waters: "Yuna River"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-809",
     touristAttractions: ["Punta Cana", "Casa De Campo"]
   },
@@ -3438,8 +3438,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+297",
     touristAttractions: []
   },
@@ -3459,8 +3459,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+599",
     touristAttractions: ["Porto Marie Beach"]
   },
@@ -3480,8 +3480,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+599-7",
     touristAttractions: []
   },
@@ -3501,8 +3501,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-787",
     touristAttractions: []
   },
@@ -3522,8 +3522,8 @@ export const places = [
       desert: "",
       waters: "Magens Bay"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-340",
     touristAttractions: []
   },
@@ -3543,8 +3543,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-284",
     touristAttractions: ["The Baths"]
   },
@@ -3564,8 +3564,8 @@ export const places = [
       desert: "",
       waters: "Great Salt Pond"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-869",
     touristAttractions: []
   },
@@ -3585,8 +3585,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-268",
     touristAttractions: []
   },
@@ -3606,8 +3606,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-767",
     touristAttractions: []
   },
@@ -3627,8 +3627,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-758",
     touristAttractions: ["Marigot Bay"]
   },
@@ -3648,8 +3648,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-784",
     touristAttractions: []
   },
@@ -3669,8 +3669,8 @@ export const places = [
       desert: "",
       waters: "Grand Etang Lake"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-473",
     touristAttractions: []
   },
@@ -3690,8 +3690,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-246",
     touristAttractions: []
   },
@@ -3711,8 +3711,8 @@ export const places = [
       desert: "",
       waters: "Narina Swamp"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa", "The_Caribbean_Islands"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa", "The Caribbean Islands"],
     callingCode: "+1-868",
     touristAttractions: ["Pigeon Point"]
   },
@@ -3732,8 +3732,8 @@ export const places = [
       desert: "",
       waters: "Lake Arenal"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+506",
     touristAttractions: ["Tamarindo", "Arenal"]
   },
@@ -3753,8 +3753,8 @@ export const places = [
       desert: "Sonoran",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+52",
     touristAttractions: ["Cancun", "Riviera Maya"]
   },
@@ -3774,8 +3774,8 @@ export const places = [
       desert: "",
       waters: "Sarstoon River"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+501",
     touristAttractions: ["Ambergris Caye"]
   },
@@ -3795,8 +3795,8 @@ export const places = [
       desert: "",
       waters: "Dulce River"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+502",
     touristAttractions: ["Antigua Guatemala"]
   },
@@ -3816,8 +3816,8 @@ export const places = [
       desert: "Jiboa River",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+503",
     touristAttractions: []
   },
@@ -3837,8 +3837,8 @@ export const places = [
       desert: "",
       waters: "Coco River"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+504",
     touristAttractions: []
   },
@@ -3858,8 +3858,8 @@ export const places = [
       desert: "",
       waters: "Lake Managua"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+505",
     touristAttractions: ["San Juan del Sur"]
   },
@@ -3879,8 +3879,8 @@ export const places = [
       desert: "",
       waters: "Rio Chagres"
     },
-    continent: "North_America",
-    stages: ["World", "North_America", "West_Indies_and_West_Africa"],
+    continent: "North America",
+    stages: ["World", "North America", "West Indies and West Africa"],
     callingCode: "+507",
     touristAttractions: []
   },
@@ -3900,8 +3900,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America"],
+    continent: "North America",
+    stages: ["World", "North America"],
     callingCode: "+299",
     touristAttractions: []
   },
@@ -3921,8 +3921,8 @@ export const places = [
       desert: "",
       waters: "Nass River"
     },
-    continent: "North_America",
-    stages: ["World", "North_America"],
+    continent: "North America",
+    stages: ["World", "North America"],
     callingCode: "+1",
     touristAttractions: ["Banff National Park", "The Muskoka"]
   },
@@ -3942,8 +3942,8 @@ export const places = [
       desert: "",
       waters: "Lake Michigan"
     },
-    continent: "North_America",
-    stages: ["World", "North_America"],
+    continent: "North America",
+    stages: ["World", "North America"],
     callingCode: "+1",
     touristAttractions: ["Walt Disney World", "The Grand Canyon"]
   },
@@ -3963,8 +3963,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "North_America",
-    stages: ["World", "North_America"],
+    continent: "North America",
+    stages: ["World", "North America"],
     callingCode: "+1-441",
     touristAttractions: []
   },
@@ -3985,7 +3985,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+680",
     touristAttractions: []
   },
@@ -4006,7 +4006,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+1-671",
     touristAttractions: []
   },
@@ -4027,7 +4027,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+1-670",
     touristAttractions: ["Tumon"]
   },
@@ -4048,7 +4048,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+691",
     touristAttractions: []
   },
@@ -4069,7 +4069,7 @@ export const places = [
       waters: "Sepik River"
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+675",
     touristAttractions: []
   },
@@ -4090,7 +4090,7 @@ export const places = [
       waters: "Murray River"
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+61",
     touristAttractions: ["Dandenong Ranges"]
   },
@@ -4111,7 +4111,7 @@ export const places = [
       waters: "Lake Tegano"
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+677",
     touristAttractions: ["East Rennell"]
   },
@@ -4132,7 +4132,7 @@ export const places = [
       waters: "Buada Lagoon"
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+674",
     touristAttractions: []
   },
@@ -4153,7 +4153,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+692",
     touristAttractions: []
   },
@@ -4174,7 +4174,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+686",
     touristAttractions: []
   },
@@ -4195,7 +4195,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+678",
     touristAttractions: []
   },
@@ -4216,7 +4216,7 @@ export const places = [
       waters: "Diahot River"
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+687",
     touristAttractions: []
   },
@@ -4237,7 +4237,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+679",
     touristAttractions: ["Nadi", "Mamanuca Islands"]
   },
@@ -4258,7 +4258,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+685",
     touristAttractions: []
   },
@@ -4279,7 +4279,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+676",
     touristAttractions: []
   },
@@ -4300,7 +4300,7 @@ export const places = [
       waters: "Lake Taupo"
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+64",
     touristAttractions: ["Bay of Islands"]
   },
@@ -4321,7 +4321,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+683",
     touristAttractions: []
   },
@@ -4342,7 +4342,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+682",
     touristAttractions: ["Aitutaki"]
   },
@@ -4363,7 +4363,7 @@ export const places = [
       waters: ""
     },
     continent: "Oceania",
-    stages: ["World", "Oceania", "Southeast_Asia_and_Oceania"],
+    stages: ["World", "Oceania", "Southeast Asia and Oceania"],
     callingCode: "+64",
     touristAttractions: []
   },
@@ -4383,8 +4383,8 @@ export const places = [
       desert: "",
       waters: "Magdalena River"
     },
-    continent: "South_America",
-    stages: ["World", "South_America", "West_Indies_and_West_Africa"],
+    continent: "South America",
+    stages: ["World", "South America", "West Indies and West Africa"],
     callingCode: "+57",
     touristAttractions: ["Barranquilla"]
   },
@@ -4404,8 +4404,8 @@ export const places = [
       desert: "",
       waters: "Caroni River"
     },
-    continent: "South_America",
-    stages: ["World", "South_America", "West_Indies_and_West_Africa"],
+    continent: "South America",
+    stages: ["World", "South America", "West Indies and West Africa"],
     callingCode: "+58",
     touristAttractions: ["Margarita Island"]
   },
@@ -4425,8 +4425,8 @@ export const places = [
       desert: "",
       waters: "Rupununi River"
     },
-    continent: "South_America",
-    stages: ["World", "South_America", "West_Indies_and_West_Africa"],
+    continent: "South America",
+    stages: ["World", "South America", "West Indies and West Africa"],
     callingCode: "+592",
     touristAttractions: []
   },
@@ -4446,8 +4446,8 @@ export const places = [
       desert: "",
       waters: "Coppename River"
     },
-    continent: "South_America",
-    stages: ["World", "South_America", "West_Indies_and_West_Africa"],
+    continent: "South America",
+    stages: ["World", "South America", "West Indies and West Africa"],
     callingCode: "+597",
     touristAttractions: ["Brokopondo Reservoir"]
   },
@@ -4467,8 +4467,8 @@ export const places = [
       desert: "",
       waters: "Waki River"
     },
-    continent: "South_America",
-    stages: ["South_America", "West_Indies_and_West_Africa"],
+    continent: "South America",
+    stages: ["South America", "West Indies and West Africa"],
     callingCode: "+594",
     touristAttractions: ["Kourou"]
   },
@@ -4488,8 +4488,8 @@ export const places = [
       desert: "",
       waters: "Napo River"
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+593",
     touristAttractions: ["Galapagos Islands"]
   },
@@ -4509,8 +4509,8 @@ export const places = [
       desert: "",
       waters: "Ucayali River"
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+51",
     touristAttractions: ["Machu Picchu"]
   },
@@ -4530,8 +4530,8 @@ export const places = [
       desert: "",
       waters: "Amazon River"
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+55",
     touristAttractions: ["Rio de Janeiro"]
   },
@@ -4551,8 +4551,8 @@ export const places = [
       desert: "",
       waters: "Rio Grande"
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+591",
     touristAttractions: ["Sala de Uyuni"]
   },
@@ -4572,8 +4572,8 @@ export const places = [
       desert: "Atacama",
       waters: ""
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+56",
     touristAttractions: []
   },
@@ -4593,8 +4593,8 @@ export const places = [
       desert: "",
       waters: "Santa Cruz River"
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+54",
     touristAttractions: ["Iguazu Falls"]
   },
@@ -4614,8 +4614,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+500",
     touristAttractions: []
   },
@@ -4635,8 +4635,8 @@ export const places = [
       desert: "",
       waters: ""
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+500",
     touristAttractions: []
   },
@@ -4656,8 +4656,8 @@ export const places = [
       desert: "",
       waters: "Parana River"
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+595",
     touristAttractions: ["San Bernardino"]
   },
@@ -4677,8 +4677,8 @@ export const places = [
       desert: "",
       waters: "Rio Negro"
     },
-    continent: "South_America",
-    stages: ["South_America"],
+    continent: "South America",
+    stages: ["South America"],
     callingCode: "+598",
     touristAttractions: ["Punta del Este", "Colonia del Sacremento"]
   }

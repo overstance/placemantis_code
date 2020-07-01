@@ -1,0 +1,206 @@
+@import '../../../../variables.scss';
+
+.stageHintBoard {
+    // @include by-parent;
+    width: 100%;
+    max-height: 50vh ;
+    display: flex;
+    flex-flow: column;
+    // padding: $frame-12;
+    // box-sizing: border-box;
+    background: $dark-purple;
+
+    .hintBoardHeader {
+        flex: 0 0 13%;
+        border: $frame-3 solid $green;
+        box-sizing: border-box;
+        background: $purple;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            @include font-b36;
+            color: $green;
+            background: none;
+            padding: 0;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            width: 100%;
+
+            span {
+                flex: 0 0 80%;
+            }
+
+            div {
+                width: 20%;
+                padding-right: $frame-24;
+            }
+
+            svg {
+                fill: $green;
+                width: 100%;
+            }
+        }
+    }
+
+    .stageHintBoardHints {
+        flex: 0 0 87%;
+        display: flex;
+        flex-flow: column;
+        border: $frame-3 solid $dark-purple;
+        box-sizing: border-box;
+
+        > div {
+            flex: 0 0 33.3%;
+            background: $light-purple;
+            max-height: 10vh;
+            border-bottom: $frame-3 solid $dark-purple;
+        }
+
+        .hintType1 {
+            display: flex;
+            flex-flow: row nowrap;
+            @include font-m30;
+            color: $dark-blue;
+
+            div {
+                flex: 0 0 50%;
+                display: flex;
+                align-items: center;
+                padding-left: $frame-6;
+                box-sizing: border-box;
+            }
+
+            img {
+                width: 100%;
+                max-height: 10vh;
+                padding: $frame-3;
+                box-sizing: border-box;
+            }
+        }
+
+        .hintType2 {
+            display: flex;
+            flex-flow: column;
+            @include font-m30;
+            color: $dark-blue;
+            height: 100%;
+            width: 100%;
+
+            div, span {
+                flex: 0 0 50%;
+                max-height: 5vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            div {
+                background: $purple;
+            }
+
+            img {
+                width: 100%;
+                max-height: 16.8vh;
+            }
+        }
+    }
+}
+
+.stageRankBoard {
+    // height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-end;
+
+    .rankBoardPanel {
+        // flex: 0 0 74%;
+        display: flex;
+
+        .rankBoardPanelNav {
+            display: flex;
+            align-items: center;
+
+            svg {
+                width: 1.6vw;
+                fill: $green;
+            }
+        }
+
+        .rankBoardRanking {
+            @include by-parent;
+            display: flex;
+            flex-flow: column;
+            background: $purple;
+            border: $frame-3 solid $dark-purple;
+            box-sizing: border-box;
+
+            > div {
+                flex: 0 0 50%
+            }
+
+            .rankBoardUserRanking, .nextRankingMission {
+                display: flex;
+                flex-flow: column;
+
+                div {
+                    // flex: 30%;
+                    background: $dark-purple;
+                    color: $light-purple;
+                    @include font-b24;
+                }
+
+                span {
+                    flex: 0 1 100%;
+                    @include font-r24;
+                    color: $green;
+                    padding: $frame-6;
+                    line-height: 1.1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    .stageRankMedallions {
+        flex: 0 0 26%;
+        height: 100%;
+        background: $purple;
+        border: $frame-3 solid $green;
+        box-sizing: border-box;
+
+        button {
+            background: none;
+            padding: 0;
+            border: none;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            @include by-parent;
+
+            div {
+                flex: 0 0 20%;
+                max-height: 10vh;
+                display: flex;
+                align-items: center;
+                padding: $frame-6;
+                border-bottom: $frame-3 solid $dark-purple;
+                box-sizing: border-box;
+            }
+
+            svg {
+                width: 100%;
+                max-height: 10vh;
+            }
+        }
+    }
+}

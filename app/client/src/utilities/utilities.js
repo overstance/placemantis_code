@@ -19,12 +19,18 @@ export const sortArray = (array) => {
 }
 
 export const shuffleArray = (array) => {
-    let i = array.length - 1;
-    for (; i > 0; i--) {
+    for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        const temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+        [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
 }
+
+export const numberWithCommas = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export const numberWithSpaces = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+

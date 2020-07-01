@@ -49,13 +49,13 @@ export const scaleSvgPart = (properties) => {
         yTranslate = ((1 - factor) * (height + cy)) / factor;
     } 
 
-    console.log(cx, cy, width, height, xTranslate, yTranslate);
+    // console.log(cx, cy, width, height, xTranslate, yTranslate);
 
     anime({
         targets: properties.animatedClass,
-        scale: factor,
-        translateX: xTranslate,
-        translateY: yTranslate,
+        scale: [factor, 1],
+        translateX: [xTranslate, 0],
+        translateY: [yTranslate, 0],
         duration: Duration,
         rotate: [Rotate, Rotate],
         delay: Delay,
