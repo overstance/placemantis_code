@@ -1,0 +1,299 @@
+@import '../../../../variables.scss';
+
+.playerActivityTimerPanel {
+    @include by-parent;
+    display: flex;
+    flex-flow: column;
+    border: $frame-6 solid $light-blue;
+    box-sizing: border-box;
+
+    .activityTimerPanelTimer {
+        flex: 0 0 32%;
+        width: 100%;
+        max-height: 8.96vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: $frame-6 solid $light-blue;
+        box-sizing: border-box;
+        color: $green;
+
+        span {
+            @include font-r48;
+        }
+    }
+
+    .activityTimerPanelPrompter {
+        display: flex;
+        flex-flow: column;
+        flex: 0 0 68%;
+        width: 100%;
+        max-height: 19.04vh;
+
+        .activityTimerPanelPrompt {
+            flex: 0 0 50%;
+            max-height: 9vh;
+            display: flex;
+            flex-flow: row nowrap;
+
+            h3 {
+                margin: 0;
+                display: inline-block;
+                color: $purple;
+                @include font-m60; 
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-left: $frame-24;
+            }
+
+            div {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex: 0 1 100%;
+            }
+
+            span {
+                display: inline-block;
+                @include font-m60;
+                color: $purple;
+            }
+        }
+
+        .activityTimerPanelScore {
+            flex: 0 0 50%;
+            max-height: 9vh;
+            display: flex;
+            @include by-parent;
+            align-items: center;
+            padding: $frame-12;
+            box-sizing: border-box;
+
+            div {
+                border: $frame-6 solid $light-blue;
+                box-sizing: border-box;
+                @include font-r48;
+                @include by-parent;
+                color: $green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+    }
+}
+
+.activityRoundsPanel {
+    @include by-parent;
+    display: flex;
+    flex-flow: column;
+    border: $frame-6 solid $light-blue;
+    box-sizing: border-box;
+
+    .roundsPanelLives {
+        flex: 0 0 32%;
+        width: 100%;
+        max-height: 8.96vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: $frame-6 solid $light-blue;
+        padding: $frame-6;
+        box-sizing: border-box;
+        color: $green;
+
+        span {
+            flex: 0 0 25%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 100%;
+                max-height: 12vh;
+                max-width: 12vh;
+            }
+        }
+    }
+
+    .roundsPanelCounter {
+        display: flex;
+        flex-flow: column;
+        flex: 0 0 68%;
+        width: 100%;
+        max-height: 19.04vh;
+        background: $blue1;
+
+        .roundsPanelCounterHead {
+            flex: 0 0 34%;
+            max-height: 6vh;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+
+            h3 {
+                margin: 0;
+                // display: inline-block;
+                color: $light-purple;
+                @include font-m60; 
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+            }
+        }
+
+        .roundsPanelCount {
+            flex: 0 0 66%;
+            max-height: 12vh;
+            display: flex;
+            @include by-parent;
+            align-items: center;
+            justify-content: center;
+            padding: $frame-12;
+            box-sizing: border-box;
+            
+
+            > div {
+                border: $frame-6 solid $light-blue;
+                box-sizing: border-box;
+                @include font-r48;
+                @include by-parent;
+                color: $green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                span {
+                    color: $green;
+                    @include font-m75;
+                    display: flex;
+                    height: 100%;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                div {
+                    color: $light-purple;
+                    @include font-m75;
+                    display: flex;
+                    height: 100%;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
+    }
+}
+
+.playerActivityOption {
+    flex: 0 0 25%;
+    max-width: 17.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100%;
+    background: none;
+    padding: 0;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    border: $frame-3 solid $purple;
+    box-sizing: border-box;
+
+    .activityOptionArt {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .activityOptionText {
+            fill: $green;
+        }
+
+        .activityOptionMap {
+            stroke: $green;
+            fill: $light-purple;
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-miterlimit: round;
+        }
+
+        svg {
+            width: 100%;
+            max-height: 27vh;
+        }
+    }
+
+    .activityOptionWrong {
+        position: absolute;
+        box-sizing: border-box;
+        border: $frame-6 solid $red;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        @include by-parent;
+        // max-width: 17.5vw;
+
+        span {
+            display: flex;
+            box-sizing: border-box;
+            border-top: $frame-6 solid $red;
+            border-left: $frame-6 solid $red;
+
+            svg {
+                width: 3vh;
+                height: 3vh;
+
+                path {
+                    stroke: $red;
+                    fill: none;
+                    stroke-width: 8;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: round;
+                }
+            }
+        }
+    }
+
+    .activityOptionRight {
+        position: absolute;
+        box-sizing: border-box;
+        border: $frame-6 solid $green;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        @include by-parent;
+        // max-width: 17.5vw;
+
+        span {
+            display: flex;
+            box-sizing: border-box;
+            border-top: $frame-6 solid $green;
+            border-left: $frame-6 solid $green;
+
+            svg {
+                width: 3vh;
+                height: 3vh;
+
+                path {
+                    stroke: $green;
+                    fill: none;
+                    stroke-width: 8;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                    stroke-miterlimit: round;
+                }
+            }
+        }
+    }
+}

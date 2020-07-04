@@ -5,7 +5,8 @@ import {usePreviousValue} from '../../../../utilities/utilities';
 
 
 const SouthernAfrica = props => {
-    const previousPlace = usePreviousValue(props.nextPlace);  
+    const previousPlace = usePreviousValue(props.nextPlace); 
+    const previousRightOrWrongChoice = usePreviousValue(props.isRightOption);
 
     useEffect(() => {
         if (props.nextPlace === '') {
@@ -13,18 +14,60 @@ const SouthernAfrica = props => {
                 animatedClass: '#Southern_Africa_Outline',
                 scaleOrigin: 'bottom-center',
                 scaleFactor: 0.8,
-                duration: 2000
+                duration: 2000,
+                opacity: [1, 1]
             }
             scaleSvgPart(scaleProp);
         } 
 
-        if (previousPlace !== props.nextPlace) {
-            console.log(previousPlace, props.nextPlace);
+        if (previousPlace !== props.nextPlace && props.nextPlace !== '') {
+            let animatedClass = `${"#" + props.nextPlace + "_Marker"}`;
+
+            console.log('placeChanged', previousPlace, props.nextPlace);
+
+            let scaleProp = {
+                animatedClass: animatedClass,
+                scaleOrigin: 'bottom-center',
+                scaleFactor: 2,
+                duration: 2000,
+                // opacity: [1, 1]
+            }
+            scaleSvgPart(scaleProp);
+
+            if (previousPlace !== null) {
+                let animatedClassPrev = `${"#" + previousPlace + "_Marker"}`;
+
+                let scalePropPrev = {
+                    animatedClass: animatedClassPrev,
+                    scaleOrigin: 'bottom-center',
+                    scaleFactor: 0,
+                    duration: 1000,
+                    opacity: [1, 0]
+                }
+                scaleSvgPart(scalePropPrev);
+            }
+
+        }
+
+        if (previousRightOrWrongChoice === false && props.isRightOption === true) {
+            let animatedClass = `${"#" + props.nextPlace + "_Place"}`
+
+            console.log('right Choice', props.nextPlace);
+
+            let scaleProp = {
+                animatedClass: animatedClass,
+                scaleOrigin: 'center',
+                scaleFactor: 0.5,
+                duration: 2000,
+                // opacity: [1, 1]
+            }
+
+            scaleSvgPart(scaleProp);
         }
 
         return() => {}
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.nextPlace])
+    }, [props.nextPlace, props.isRightOption])
     return(
         <>
             <svg version="1.1" id="Southern_Africa_Stage" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 2000 880" xmlSpace="preserve">

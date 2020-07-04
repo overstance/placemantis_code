@@ -41,6 +41,20 @@ export const levelsDailogueTimerEnd = () => {
     }
 }
 
+// affirm roundTimerElapsed global state
+export const playerRoundTimerEnd = () => {
+    return {
+        type: actionTypes.PLAYER_ROUND_TIMER_END
+    }
+}
+
+// affirm timerAlmostUp global state 
+export const roundTimerAlmostUp = () => {
+    return {
+        type: actionTypes.ROUND_TIMER_ALMOST_UP
+    }
+}
+
 // GAMEPLAY TRIGGERED ACTIONS
 
 export const showLevelsDialogue = () => {
@@ -59,5 +73,23 @@ export const showTypeDialogue = (stagesShuffled) => {
 export const resetGameState = () => {
     return {
         type: actionTypes.RESET_GAME_STATE
+    }
+}
+
+// PLAYER TRIGGERED ACTIONS
+
+export const playerRoundOver = () => {
+    return {
+        type: actionTypes.PLAYER_ROUND_OVER
+    }
+}
+
+export const singleGameOver = (totalRounds, nextRound, totalScore, gameEndReport) => {
+    return {
+        type: actionTypes.SINGLE_GAME_OVER,
+        totalStageRounds: totalRounds,
+        completedStageRounds: nextRound,
+        totalScore: totalScore,
+        report: gameEndReport
     }
 }

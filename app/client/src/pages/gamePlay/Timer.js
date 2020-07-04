@@ -20,9 +20,12 @@ class Timer extends Component {
                             seconds: seconds - 1
                         }))
 
-                        if (this.props.almostUpWarning && minutes === 0 && seconds === 30 && this.props.timerType === 'roundTimer') {
-                            // console.log('Time almost up');
+                        if (this.props.almostUpWarning && minutes === 0 && seconds === 5 && this.props.timerType === 'roundTimer') {                            
                             this.roundTimerWarning();
+                        }
+
+                        if (this.props.timerType === 'roundTimer' && this.props.terminateOnRightOption === true) {
+                            this.playerRoundOver();
                         }
                     }
 
@@ -49,6 +52,14 @@ class Timer extends Component {
                         this.setState(({ seconds }) => ({
                             seconds: seconds - 1
                         }))
+
+                       if (seconds === 5 && this.props.timerType === 'roundTimer') {                           
+                            this.roundTimerWarning();
+                        }
+
+                        if (this.props.timerType === 'roundTimer' && this.props.terminateOnRightOption === true) {
+                            this.playerRoundOver();
+                        }
                     }
                     if (seconds === 0) {
                         // console.log('dispatch s only action');
@@ -70,16 +81,24 @@ class Timer extends Component {
         } else if (this.props.timerType === 'gameType' && this.props.dispatchOnEnd && this.props.gameType === 'Multilevel') {
             this.props.onMultilevelTypeTimerEnd();
         } else if (this.props.timerType === 'roundTimer' && this.props.dispatchOnEnd) {
-            // this.props.onPlayerRoundTimerEnd();
+            this.props.onPlayerRoundTimerEnd();
         }
         else if (this.props.timerType === 'levels' && this.props.dispatchOnEnd) {
             this.props.onLevelsDailogueTimerEnd();
-        } else if (this.props.timerType === 'facilitator' && this.props.dispatchOnEnd) {
-            // this.props.onFacilitatorTimerEnd();
+        } else if (this.props.timerType === 'felicitator' && this.props.dispatchOnEnd) {
+            // this.props.onFelicitatorTimerEnd();
+        } else if (this.props.timerType === 'roundIntervalTimer') {
+            this.props.onRoundIntervalTimerEnds();
         }
     }
 
-    roundTimerWarning = () => {}
+    playerRoundOver = () => {
+        clearInterval(this.timerInterval);
+    }
+
+    roundTimerWarning = () => {
+        this.props.onRoundTimerAlmostUp()
+    }
 
     render() {
 
@@ -105,9 +124,10 @@ const mapDispatchToProps = dispatch => {
     return {
         onSingleTypeTimerEnd: () => dispatch(actions.singleTypeTimerEnd()),
         onMultilevelTypeTimerEnd: () => dispatch(actions.multilevelTypeTimerEnd()), 
-        // onPlayerRoundTimerEnd: () => dispatch(actions.playerRoundTimerEnd()),
+        onPlayerRoundTimerEnd: () => dispatch(actions.playerRoundTimerEnd()),
         onLevelsDailogueTimerEnd: () => dispatch(actions.levelsDailogueTimerEnd()),
-        // onFacilitatorTimerEnd: () => dispatch(actions.facilitatorTimerEnd()),
+        onRoundTimerAlmostUp: () => dispatch(actions.roundTimerAlmostUp())
+        // onFelicitatorTimerEnd: () => dispatch(actions.felicitatorTimerEnd()),
     }
 }
 

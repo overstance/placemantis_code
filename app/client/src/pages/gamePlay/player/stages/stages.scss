@@ -39,10 +39,10 @@
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
-    display: none;
+    opacity: 0;
 }
 
 #Southern_Africa_Markers path{
     fill: $green;
-    display: none;
+    opacity: 0;
 }

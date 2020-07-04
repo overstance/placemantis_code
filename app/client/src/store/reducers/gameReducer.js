@@ -24,10 +24,14 @@ const initialState = {
     resumedMultilevelGame: false,
 
     totalStageRounds: 0,
+    stageRoundsCompleted: 0,
     totalGameScore: 0,
     gameStatus: 'off',
     gameOver: false,
     gameEndReport: null, 
+
+    roundTimerElapsed: false,
+    timerAlmostUp: false,
 
     rankingTaskCleared: false,
     
@@ -89,11 +93,51 @@ const levelsDialogueTimerEnd = (state, action) => {
 
 }
 
+const playerRoundTimerEnd = (state, action) => {
+    return {
+        ...state,
+        roundTimerElapsed: true
+    }
+}
+
+const roundTimerAlmostUp = (state, action) => {
+    return {
+        ...state,
+        timerAlmostUp: true
+    }
+
+}
+
 const setGameLevel = (state, action) => {
     return {
         ...state,
         level: action.number,
         levelStage: action.stage
+    }
+}
+
+const playerRoundOver = (state, action) => {
+    return {
+        ...state,
+        roundTimerElapsed: false,
+        timerAlmostUp: false,
+        gameStatus: 'On',
+    }
+}
+
+const singleGameOver = (state, action) => {
+    return {
+        ...state,
+        roundTimerElapsed: false,
+        timerAlmostUp: false,
+        showPlayer: false,
+        singleGameActive: false,
+        totalStageRounds: action.totalStageRounds,
+        stageRoundsCompleted: action.completedStageRounds,
+        totalGameScore: action.totalScore,
+        gameStatus: 'Off',
+        gameOver: true,
+        gameEndReport: action.report,
     }
 }
 
@@ -106,33 +150,39 @@ const resetGameState = (state, action) => {
             scope: null,
             stage: null,
             difficulty: null,
-            savedMission: null,
-            resumeMission: false
+            savedMission: null
         },
     
         showModerator: true,
-        showGameTypeDialogue: true,
+        showPlayer: false,
+        showFelicitator: false,
+    
+        showGameTypeDialogue: false,
         showGameLevelsDialogue: false,
         showRestartMissionDialogue: false,
         showEndMissionDialogue: false,
         showGameOverDialogue: false,
-
+       
         singleGameActive: false,
         multilevelGameActive: false,
         resumedMultilevelGame: false,
-
+    
         totalStageRounds: 0,
         totalGameScore: 0,
         gameStatus: 'off',
         gameOver: false,
         gameEndReport: null, 
-
+    
+        roundTimerElapsed: false,
+        timerAlmostUp: false,
+    
         rankingTaskCleared: false,
         
         startNextLevel: false,
         level: 0,
         levelScore: 0,
         levelStage: null,
+        
         shuffledStages: []
     }
 }
@@ -155,6 +205,14 @@ const reducer = (state = initialState, action) => {
             return setGameLevel(state, action);
         case actionTypes.LEVELS_DIALOGUE_TIMER_END:
             return levelsDialogueTimerEnd(state, action);
+        case actionTypes.PLAYER_ROUND_TIMER_END:
+            return playerRoundTimerEnd(state, action);
+        case actionTypes.ROUND_TIMER_ALMOST_UP:
+            return roundTimerAlmostUp(state, action);
+        case actionTypes.PLAYER_ROUND_OVER:
+            return playerRoundOver(state, action);
+        case actionTypes.SINGLE_GAME_OVER:
+            return singleGameOver(state, action);
         default: return state;
     }
 };
