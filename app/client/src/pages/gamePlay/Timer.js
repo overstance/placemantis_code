@@ -13,14 +13,15 @@ class Timer extends Component {
         if ((this.props.minutes && this.props.seconds) || this.props.minutes) {            
             this.setState({minutes: this.props.minutes, seconds: this.props.seconds || 0}, () => {               
                 this.timerInterval = setInterval(() => {
-                    const { seconds, minutes } = this.state
+                    const { seconds, minutes } = this.state;
+                    let warningSecond = this.props.warningSecond || 5;
         
                     if (seconds > 0) {
                         this.setState(({ seconds }) => ({
                             seconds: seconds - 1
                         }))
 
-                        if (this.props.almostUpWarning && minutes === 0 && seconds === 5 && this.props.timerType === 'roundTimer') {                            
+                        if (this.props.almostUpWarning && minutes === 0 && seconds === warningSecond && this.props.timerType === 'roundTimer') {                            
                             this.roundTimerWarning();
                         }
 
@@ -47,13 +48,15 @@ class Timer extends Component {
             this.setState({seconds: this.props.seconds}, () => {
                 // console.log('seconds only: ', this.state.seconds);
                 this.timerInterval = setInterval(() => {
-                    const {seconds} = this.state   
+                    const {seconds} = this.state;
+                    let warningSecond = this.props.warningSecond || 5;
+
                     if (seconds > 0) {
                         this.setState(({ seconds }) => ({
                             seconds: seconds - 1
                         }))
 
-                       if (seconds === 5 && this.props.timerType === 'roundTimer') {                           
+                       if (seconds === warningSecond && this.props.timerType === 'roundTimer') {                           
                             this.roundTimerWarning();
                         }
 

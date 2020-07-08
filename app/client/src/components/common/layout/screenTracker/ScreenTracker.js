@@ -2,6 +2,8 @@ import React, {useReducer, useEffect} from 'react';
 import './screenTracker.scss';
 import Orientation from './Orientation';
 import Size from './Size';
+import {connect} from 'react-redux';
+import * as actions from '../../../../store/actions/index';
 
 const initialState = { 
     showOrientation: false,
@@ -75,13 +77,30 @@ const ScreenTracker = props => {
 
         const height = document.documentElement.clientHeight;
         const width = document.documentElement.clientWidth;
+        let trackerActive = false;
 
         dispatch({ type: "SET_WINDOW_DIMENSIONS", width: width, height: height });
+
+        if (state.showOrientation === true || state.showSize === true) {
+            trackerActive = true;
+            
+        } else if (state.showOrientation === false || state.showSize === false) {
+            trackerActive = false;
+        }
+
+        if (trackerActive === true) {
+            props.onScreenTrackerActiveOrInactive(true);
+            // console.log('Screen Tracker Active');
+        } else if (trackerActive === false) {
+            props.onScreenTrackerActiveOrInactive(false);
+            // console.log('Screen Tracker InActive');
+        }
         
         return () => {
           window.removeEventListener("resize", handleResize);
         }
-    }, []);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.showOrientation, state.showSize]);
     
     return (
         state.showOrientation || state.showSize ?
@@ -94,4 +113,10 @@ const ScreenTracker = props => {
     )
 }
 
-export default ScreenTracker;
+const mapDispatchToProps = dispatch => {
+    return {
+        onScreenTrackerActiveOrInactive: (trueOrFalse) => dispatch(actions.screenTrackerActiveOrInactive(trueOrFalse)),
+    }
+}
+
+export default connect(null, mapDispatchToProps)(ScreenTracker);

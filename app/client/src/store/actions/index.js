@@ -11,6 +11,8 @@ export {
     roundTimerAlmostUp,
 
     playerRoundOver,
-    singleGameOver
+    singleGameOver,
+
+    screenTrackerActiveOrInactive
 
 } from './gameActions';

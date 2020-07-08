@@ -2,23 +2,29 @@ import React, {useEffect} from 'react';
 import './activity.scss';
 import Timer from '../../Timer';
 import {positionX} from '../../../../anime/position';
-// import {usePreviousValue} from '../../../../utilities/utilities';
+import {usePreviousValue} from '../../../../utilities/utilities';
 
 const TimerPanel = props => {
 
     // const previousTimeElapsed = usePreviousValue(props.timerElapsed);
     // const previousTimeAlmostUp = usePreviousValue(props.timerAlmostUp);
+    const previouslyPaused = usePreviousValue(props.gamePaused);
 
     useEffect(() => {
 
         if (props.timerElapsed || props.timerAlmostUp) {
             const elem = document.querySelector('.activityTimerPanelTimer');
             elem.style.color = '#ff1a00';
-            console.log('change timer to red')
+            // console.log('change timer to red')
         } else if (props.timerElapsed ===  false || props.timerAlmostUp === false) {
             const elem = document.querySelector('.activityTimerPanelTimer');
             elem.style.color = '#d2ff77';
-            console.log('change timer to back to green')
+            // console.log('change timer to back to green')
+        } 
+        
+        if (previouslyPaused === true && props.gamePaused === false) {
+            const elem = document.querySelector('.activityTimerPanelTimer');
+            elem.style.color = '#d2ff77';
         }
 
         let positionProp = {
@@ -30,34 +36,34 @@ const TimerPanel = props => {
         }
 
         positionX(positionProp);
-
-    }, [props.timerElapsed, props.timerAlmostUp]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.timerElapsed, props.timerAlmostUp, props.gamePaused]);
 
     return(
         <div className='playerActivityTimerPanel'>
             <div className='activityTimerPanelTimer'>
-                { props.timerElapsed &&  props.showTimer ? 
+                { props.timerElapsed && props.gamePaused === false && props.showTimer ? 
                     <span>Time Up</span>
                     :
                     null
                 }
-                { props.timerElapsed === false &&  props.showTimer ?
+                { props.timerElapsed === false && props.gamePaused === false &&  props.showTimer ?
                     <Timer 
-                        seconds={10}
+                        seconds={props.secondsPerRound}
                         almostUpWarning
                         timerType='roundTimer'
                         gameType={props.gameType}
                         dispatchOnEnd
                         terminateOnRightOption={props.rightUserOption}
+                        warningSecond={props.warningSecond}
                     />
                     :
                     null
                 }
-
             </div>
             <div className='activityTimerPanelPrompter'>
                 <div className='activityTimerPanelPrompt'>
-                    { props.rightUserOption || props.timerElapsed ?
+                    { props.rightUserOption || props.timerElapsed || props.gamePaused ?
                         null :
                         <>
                             <h3>Select</h3>
@@ -68,9 +74,15 @@ const TimerPanel = props => {
                     }
                 </div>
                 <div className='activityTimerPanelScore'>
-                    <div>
-                        {props.roundScore}
-                    </div>
+                    { props.scoreLoss ?
+                        <div className='timerPanelScoreLoss'>
+                            {props.roundScore}
+                        </div>
+                        :
+                        <div>
+                            {props.roundScore}
+                        </div>
+                    }
                 </div>   
             </div>
         </div>

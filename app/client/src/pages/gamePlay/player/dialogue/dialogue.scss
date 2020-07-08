@@ -1,0 +1,92 @@
+@import '../../../../variables.scss';
+
+.playerDialogue {
+    @include by-parent;
+    position: absolute;
+    z-index: $z2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playerDialogueBackGround {
+    @include by-parent;
+    position: absolute;
+    background: $dark-blue;
+    opacity: 0.9;
+}
+
+.playerDialogueModal {
+    width: 50vw;
+    height: 50vh;
+    background: $dark-blue;
+    display: flex;
+    flex-flow: column nowrap;
+    padding: $frame-24;
+    background: $dark-blue;
+    border: $frame-6 solid $light-blue;
+    z-index: $z1;
+
+    .playerDialogueModalHead {
+        flex: 0 0 30%;
+
+        h3 {
+            background: $green;
+            color: $dark-purple;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @include by-parent;
+            @include font-m60;
+        }
+
+        .cancelMission {
+            background: $red;
+        }
+    }
+
+    .playerDialogueModalOptionsWrapper {
+        flex: 0 0 70%;
+        display: flex;
+        // flex-flow: column nowrap;
+        justify-content: center;
+
+        .playerDialogueModalOptions {
+            width: 40%;
+            height: 100%;
+            display: flex;
+            flex-flow: column nowrap;
+
+            > div {
+                flex: 0 0 50%;
+                padding: calc(1.25vw);
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+
+               /*  button {
+                    background: $light-blue;
+                    padding: 0;
+                    display: flex;
+                    flex-flow: column;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    @include font-b48;
+                    color: $green;
+                    border: $frame-3 solid $green;
+                    width: 100%;
+                    padding: $frame-24;
+
+                    &:hover {
+                        background: $dark-purple;
+                    }
+                } */
+            }
+        }
+
+    }
+
+
+}

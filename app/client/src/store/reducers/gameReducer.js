@@ -40,7 +40,9 @@ const initialState = {
     levelScore: 0,
     levelStage: null,
     
-    shuffledStages: []
+    shuffledStages: [],
+
+    screenTrackerActive: false
 }
 
 const setGameData = (state, action) => {
@@ -168,6 +170,7 @@ const resetGameState = (state, action) => {
         resumedMultilevelGame: false,
     
         totalStageRounds: 0,
+        stageRoundsCompleted: 0,
         totalGameScore: 0,
         gameStatus: 'off',
         gameOver: false,
@@ -183,7 +186,14 @@ const resetGameState = (state, action) => {
         levelScore: 0,
         levelStage: null,
         
-        shuffledStages: []
+        shuffledStages: [],
+    }
+}
+
+const screenTrackerActiveOrInactive = (state, action) => {
+    return {
+        ...state,
+        screenTrackerActive: action.trueOrFalse
     }
 }
 
@@ -213,6 +223,8 @@ const reducer = (state = initialState, action) => {
             return playerRoundOver(state, action);
         case actionTypes.SINGLE_GAME_OVER:
             return singleGameOver(state, action);
+        case actionTypes.SCREEN_TRACKER_ACTIVE_OR_INACTIVE:
+            return screenTrackerActiveOrInactive(state, action);
         default: return state;
     }
 };

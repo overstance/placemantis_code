@@ -4,6 +4,7 @@
     @include by-parent;
     display: flex;
     flex-flow: column;
+    position: relative;
 }
 
 .stage {
@@ -223,6 +224,10 @@
             box-sizing: border-box;
             border: $frame-3 solid $dark-blue;
             background: $blue1;
+        }
+
+        .negativeScore {
+            color: $red
         }
 
     }

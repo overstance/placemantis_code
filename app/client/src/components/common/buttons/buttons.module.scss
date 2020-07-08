@@ -1,0 +1,28 @@
+@import '../../../variables.scss';
+
+%buttonBasic {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    @include font-b48;
+    color: $green;
+    border: $frame-3 solid $green;
+    width: 100%;
+    padding: $frame-24;
+}
+
+.DialogueButton {
+    @extend %buttonBasic;
+    background: $light-blue;
+
+    &:hover {
+        background: $dark-purple;
+    }
+}
+
+.DialogueWarningButton {
+    @extend %buttonBasic;
+    background: $red;
+}

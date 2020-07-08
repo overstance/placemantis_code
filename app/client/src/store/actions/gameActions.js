@@ -84,12 +84,21 @@ export const playerRoundOver = () => {
     }
 }
 
-export const singleGameOver = (totalRounds, nextRound, totalScore, gameEndReport) => {
+export const singleGameOver = (totalRounds, rightCount, totalScore, gameEndReport) => {
     return {
         type: actionTypes.SINGLE_GAME_OVER,
         totalStageRounds: totalRounds,
-        completedStageRounds: nextRound,
+        completedStageRounds: rightCount,
         totalScore: totalScore,
         report: gameEndReport
+    }
+}
+
+// SCREENTRACKER INITIATED ACTIONS
+
+export const screenTrackerActiveOrInactive = (trueOrFalse) => {
+    return {
+        type: actionTypes.SCREEN_TRACKER_ACTIVE_OR_INACTIVE,
+        trueOrFalse: trueOrFalse
     }
 }

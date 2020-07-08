@@ -1,7 +1,7 @@
 import React, {/* useEffect, useState */Component} from 'react';
 import styles from './player.module.scss';
 import {Places} from './places';
-import {shuffleArray, /* numberWithCommas, */ numberWithSpaces} from '../../../utilities/utilities';
+import {shuffleArray, numberWithCommas/* , numberWithSpaces */} from '../../../utilities/utilities';
 import SouthernAfrica from './stages/SouthernAfrica';
 import {connect} from 'react-redux';
 import Avatar from '../../../components/common/Avatar';
@@ -12,8 +12,8 @@ import RoundsPanel from './activity/RoundsPanel';
 import Option from './activity/Option';
 import * as actions from '../../../store/actions/index';
 import Timer from '../Timer';
-
-// const roundIntervalTimer = props
+import Dialogue from './dialogue/Dialogue';
+import {withRouter} from 'react-router-dom';
 
 class Player extends Component {
     state = {
@@ -53,19 +53,28 @@ class Player extends Component {
         rightUserOption: false,
         clickedOption: null,
 
-        roundOverReason: null,
-
         showHints: false,
         showUserRanking: false,
+        showTimerPanelSelect: false,
+        showTimerPanelTimer: false,
 
-        totalScore: 1000000,
+        totalScore: 0,
         roundScore: 0,
         levelScore: 0,
+        scorePerRound: 1000,
+        displayedScorePerRound: "+1000",
+        simpleWrongChoiceLoss: 500,
+        simpleDisplayedWrongChoiceLoss: "-500",
+        hardWrongChoiceLoss: 1000,
+        hardDisplayedWrongChoiceLoss: "-1,000",
+        displayedRoundScore: "0",
+        isRoundScoreLoss: false,
 
-        showTimerPanelSelect: true,
-        showTimerPanelTimer: true,
-        // timerTimedOut: false,
+        simpleSecondsPerRound: 15,
+        hardSecondsPerRound: 10,
+        roundTimerWarningSecond: 5,
 
+        roundOverReason: null,
         isRoundInterval: false,
         roundIntervalSeconds: 2,
 
@@ -75,7 +84,15 @@ class Player extends Component {
         hasLive4: true,
 
         gameEndReport: null,
-        gameOver: false
+        gameOver: false,
+
+        gamePaused: false,
+
+        // new states below
+        showCancelGame: false,
+        showRestartGame: false,
+
+        restartMission: false
     }
 
     componentDidMount() {
@@ -84,47 +101,180 @@ class Player extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) { 
 
-        /* if (prevProps.roundTimerElapsed === false && this.props.roundTimerElapsed === true) {
-            this.initializeRoundInterval()
-        } */
-
-        if ((prevState.rightUserOption === false && this.state.rightUserOption === true) || 
-            (prevProps.roundTimerElapsed === false && this.props.roundTimerElapsed === true) ||
-            (this.state.hasLive1 === false)
-            ) {
-                let reason = null;
-
-
-                if (this.state.rightUserOption === true) {
-                    reason = "Good Choice";
-                } else if (this.props.roundTimerElapsed === true) {
-                    reason = "Time Up";
-                } else if (this.state.nextRound === this.state.totalRounds) {
-                    reason = "Stage Completed"
-                } else if (this.state.hasLive1 === false) {
-                    reason = "Game Over"
-                }
-
-                if (this.state.rightUserOption === true) {
-                    let newRightChoiceCount = this.state.rightChoiceCount + 1;
-
-                    this.setState({ rightChoiceCount: newRightChoiceCount});
-                }
-            // console.log(prevState.rightUserOption, this.state.rightUserOption);
-            console.log('round interval starts');
+        if (prevProps.screenTrackerActive === false && this.props.screenTrackerActive === true) {
             this.setState({ 
+                gamePaused: true, 
+                showCancelGame: false,
+                showRestartGame: false
+            });
+        } else if (prevProps.screenTrackerActive === true && this.props.screenTrackerActive === false) {
+            this.setState({ gamePaused: false });
+        } else if (prevState.gameOver === false && this.state.gameOver === true) {
+            console.log('Running Game Over Routine');
+            let reason = "Game Over"
+
+            if (this.state.nextRound === this.state.totalRounds) {
+                reason = "Stage Completed"
+            }
+
+            this.setState({
+                isRoundInterval: true, 
+                roundOverReason: reason
+            });
+        } else if (prevState.hasLive1 === true && this.state.hasLive1 === false) {
+            console.log('Running last life Spent');
+            this.setState({gameOver: true});
+
+        } else if (prevState.rightUserOption === false && this.state.rightUserOption === true && this.state.gameOver === false) {
+
+            console.log('Running Right Option Routine');
+
+            let newRightChoiceCount = this.state.rightChoiceCount + 1;
+            let newRoundScore = this.state.scorePerRound;
+            let newTotalScore = this.state.totalScore + newRoundScore;
+            let displayScore = this.state.displayedScorePerRound;
+
+
+            this.setState({ 
+                rightChoiceCount: newRightChoiceCount,
+                roundScore: newRoundScore,
+                totalScore: newTotalScore,
+                displayedRoundScore: displayScore,
+                isRoundScoreLoss: false,
+
                 isRoundInterval: true,
                 showTimerPanelSelect: false, 
                 showTimerPanelTimer: false,
-                roundOverReason: reason
+                roundOverReason: "Good Choice"
             });
-            // this.initializeRoundInterval()
-        }
+            
+        } else if (prevProps.roundTimerElapsed === false && this.props.roundTimerElapsed === true && this.state.gameOver === false)   {
+            
+            let totalScore = this.state.totalScore;
+            let scoreLoss = this.state.simpleWrongChoiceLoss;
+            let displayScore = this.state.simpleDisplayedWrongChoiceLoss;
+            let newTotalScore = this.state.totalScore - scoreLoss;
 
-        if (prevState.gameOver === false && this.state.gameOver === true) {
-            this.setState({isRoundInterval: true, roundOverReason: "Game Over"});
+            if (this.props.difficulty === 'Hard') {
+                scoreLoss = this.state.hardWrongChoiceLoss;
+                displayScore = this.state.hardDisplayedWrongChoiceLoss;
+                newTotalScore = this.state.totalScore - scoreLoss;
+            }
+
+
+            if (this.state.rightChoiceCount === 0 && totalScore === 0 ) {
+
+                console.log('Running Time Elapse Routine -- rightChoiceCount == 0, totalScore == 0');  
+
+                let live4 = this.state.hasLive4;
+                let live3 = this.state.hasLive3;
+                let live2 = this.state.hasLive2;
+                let live1 = this.state.hasLive1;
+                // let isGameOver = this.state.gameOver;
+
+                if (this.state.hasLive4) {
+                    live4 = false
+                } else if (this.state.hasLive3) {
+                    live3 = false
+                } else if (this.state.hasLive2) {
+                    live2 = false
+                } else if (this.state.hasLive1) {
+                    live1 = false;
+                    // isGameOver = true;
+                }
+
+                this.setState({ 
+                    roundScore: scoreLoss,
+                    displayedRoundScore: displayScore,
+                    isRoundScoreLoss: true,
+                    hasLive1: live1,
+                    hasLive2: live2,
+                    hasLive3: live3,
+                    hasLive4: live4,
+                    // gameOver: isGameOver,
+                    isRoundInterval: true,
+                    showTimerPanelSelect: false, 
+                    showTimerPanelTimer: false,
+                    roundOverReason: "Time Up"
+                });
+
+            } else if (this.state.rightChoiceCount >= 1 && newTotalScore > 0 ) {
+
+                console.log('Running Time Elapse Routine -- rightChoiceCount >= 1, totalScore > 0');
+
+                let live4 = this.state.hasLive4;
+                let live3 = this.state.hasLive3;
+                let live2 = this.state.hasLive2;
+                let live1 = this.state.hasLive1;
+                // let isGameOver = this.state.gameOver;
+
+                if (this.state.hasLive4) {
+                    live4 = false
+                } else if (this.state.hasLive3) {
+                    live3 = false
+                } else if (this.state.hasLive2) {
+                    live2 = false
+                } else if (this.state.hasLive1) {
+                    live1 = false;
+                    // isGameOver = true;
+                }
+
+                this.setState({ 
+                    roundScore: scoreLoss,
+                    totalScore: newTotalScore,
+                    displayedRoundScore: displayScore,
+                    isRoundScoreLoss: true,
+                    hasLive1: live1,
+                    hasLive2: live2,
+                    hasLive3: live3,
+                    hasLive4: live4,
+                    // gameOver: isGameOver,
+                    isRoundInterval: true,
+                    showTimerPanelSelect: false, 
+                    showTimerPanelTimer: false,
+                    roundOverReason: "Time Up"
+                });
+
+            } else if (this.state.rightChoiceCount >= 1 && newTotalScore <= 0) {   
+                
+                console.log('Running Time Elapse Routine -- right choice count >= 1, total score <= 0');
+
+                let live4 = this.state.hasLive4;
+                let live3 = this.state.hasLive3;
+                let live2 = this.state.hasLive2;
+                let live1 = this.state.hasLive1;
+                // let isGameOver = this.state.gameOver;
+
+                if (this.state.hasLive4) {
+                    live4 = false
+                } else if (this.state.hasLive3) {
+                    live3 = false
+                } else if (this.state.hasLive2) {
+                    live2 = false
+                } else if (this.state.hasLive1) {
+                    live1 = false;
+                    // isGameOver = true;
+                }
+
+                this.setState({ 
+                    roundScore: scoreLoss,
+                    totalScore: newTotalScore,
+                    displayedRoundScore: displayScore,
+                    isRoundScoreLoss: true,
+                    hasLive1: live1,
+                    hasLive2: live2,
+                    hasLive3: live3,
+                    hasLive4: live4,
+                    // gameOver: isGameOver, 
+                    
+                    isRoundInterval: true,
+                    showTimerPanelSelect: false, 
+                    showTimerPanelTimer: false,
+                    roundOverReason: "Time Up"
+                });
+            }
         }
     }
 
@@ -156,14 +306,17 @@ class Player extends Component {
             nextPlaceName: placeDomID,
 
             roundOptions: optionsShuffled,
+            showTimerPanelSelect: true,
+            showTimerPanelTimer: true,
+
+            restartMission: false
         })
         
-        console.log('initializing game', options, optionsShuffled);
+        // console.log('initializing game', options, optionsShuffled);
     }
 
     roundIntervalEnds = () => {
-        console.log('round interval ends');
-
+        // console.log('round interval ends');
         if (this.state.gameOver === true) {
             this.props.onSingleGameOver(this.state.totalRounds, this.state.rightChoiceCount, this.state.totalScore, this.state.gameEndReport);
         } else {
@@ -175,7 +328,7 @@ class Player extends Component {
 
     initializeNextRound = () => {
         if (this.state.nextRound === this.state.totalRounds || this.state.hasLive1 === false) {
-            console.log('GAME OVER!!!!!!!!');
+            // console.log('GAME OVER!!!!!!!!');
             this.setState({ gameOver: true });
         } else {
 
@@ -209,22 +362,116 @@ class Player extends Component {
                 showHints: false,
                 showUserRanking: false,
 
-                roundScore: 0,
+                // roundScore: 0,
 
                 showTimerPanelSelect: true,
                 showTimerPanelTimer: true,
             });
 
-            console.log('initializing next round', options, placeDomID, optionsShuffled);
+            console.log('next round target: ', placeDomID);
         }
     }
 
-    stopGame = () => {
-        console.log('stop game?');
+    cancelGame = () => {
+        // console.log('stop game?');
+        this.setState({ showCancelGame: true, gamePaused: true });
+    }
+
+    abortCancelMission = () => {
+        this.setState({ showCancelGame: false, gamePaused: false });
+    }
+
+    confirmCancelMission = () => {
+        this.props.history.push('/');
+    }
+
+    pauseGame = () => {
+        // console.log('pause game');
+        this.setState({ gamePaused: true});
+    }
+
+    unPauseGame = () => {
+        // console.log('unpause game');
+        this.setState({ gamePaused: false});
     }
 
     restartGame = () => {
-        console.log('restart game?');
+        // console.log('restart game?');
+        this.setState({ showRestartGame: true, gamePaused: true });
+    }
+
+    abortRestartMission = () => {
+        this.setState({ showRestartGame: false, gamePaused: false });
+    }
+
+    confirmRestartMission = () => {
+        this.props.onPlayerRoundOver();
+        this.setState({
+            totalRounds: 0,
+            nextRound: 0,
+
+            allPlaces: [],
+            stagePlaces: [],
+            nextPlace: {
+                name: "",
+                domID: "",
+                capital: "",
+                flag: false,
+                emblem: false,
+                currency: "",
+                territory: false,
+                sovereignState: null,
+                commonLanguages: [],
+                geographicFeatures: {
+                elevation: "",
+                forest: "",
+                desert: "",
+                waters: ""
+                },
+                continent: "",
+                stages: [],
+                callingCode: "",
+                touristAttractions: []
+            },
+            featuredPlaces: [], 
+            nextPlaceName: '',
+            
+            roundOptions: [],
+            wrongRoundChoices: [],
+            rightRoundChoice: '',
+            rightChoiceCount: 0,
+            rightUserOption: false,
+            clickedOption: null,
+
+            showHints: false,
+            showUserRanking: false,
+            showTimerPanelSelect: false,
+            showTimerPanelTimer: false,
+
+            totalScore: 0,
+            roundScore: 0,
+            levelScore: 0,
+            isRoundScoreLoss: false,
+
+            roundOverReason: null,
+            isRoundInterval: false,
+
+            hasLive1: true,
+            hasLive2: true,
+            hasLive3: true,
+            hasLive4: true,
+
+            gameEndReport: null,
+            gameOver: false,
+
+            gamePaused: false,
+
+            // new states below
+            showCancelGame: false,
+            showRestartGame: false,
+
+            restartMission: true
+        }, () => {this.initializeSingleGame()});
     }
 
     showHintsClicked = () => {
@@ -233,8 +480,6 @@ class Player extends Component {
                 showHints: !prevState.showHints
             }
         });
-
-        // this.setState({ rightUserOption: true });
     }
 
     showRankingClicked = () => {
@@ -246,21 +491,134 @@ class Player extends Component {
     }
 
     placeOptionClicked = (domID) => {
-        // console.log(domID);
-        this.setState({clickedOption: domID}, () => {
-
-        });
-
-        if (domID === this.state.clickedOption) {
+        if (domID === this.state.clickedOption || this.state.isRoundInterval) {
             return;
         } else {
             if (domID === this.state.nextPlaceName) {
-                this.setState({rightRoundChoice: domID, rightUserOption: true, clickedOption: domID});
+                this.setState({
+                    rightRoundChoice: domID, 
+                    rightUserOption: true, 
+                    clickedOption: domID,
+                    isRoundScoreLoss: false
+                });
             } else if (domID !== this.state.nextPlaceName) {
-                // console.log('wrong');
                 let wrongChoices = this.state.wrongRoundChoices
                 wrongChoices.push(domID);
-                this.setState({wrongRoundChoices: wrongChoices, rightUserOption: false, clickedOption: domID});
+
+                let totalScore = this.state.totalScore;
+                let scoreLoss = this.state.simpleWrongChoiceLoss;
+                let displayScore = this.state.simpleDisplayedWrongChoiceLoss;
+                let newTotalScore = this.state.totalScore - scoreLoss;
+
+                if (this.props.difficulty === 'Hard') {
+                    scoreLoss = this.state.hardWrongChoiceLoss;
+                    displayScore = this.state.hardDisplayedWrongChoiceLoss;
+                    newTotalScore = this.state.totalScore - scoreLoss;
+                }
+
+                if (this.state.rightChoiceCount === 0 && totalScore === 0 ) {
+                    console.log('Run WrongChoice Routine -- rightChoiceCount == 0, totalScore == 0');
+
+                    let live4 = this.state.hasLive4;
+                    let live3 = this.state.hasLive3;
+                    let live2 = this.state.hasLive2;
+                    let live1 = this.state.hasLive1;
+                    // let isGameOver = this.state.gameOver;
+
+                    if (this.state.hasLive4 === true) {
+                        live4 = false
+                    } else if (this.state.hasLive3 === true) {
+                        live3 = false
+                    } else if (this.state.hasLive2 === true) {
+                        live2 = false
+                    } else if (this.state.hasLive1 === true) {
+                        live1 = false;
+                        // isGameOver = true;
+                    }
+
+                    this.setState({ 
+                        roundScore: scoreLoss,
+                        displayedRoundScore: displayScore,
+                        isRoundScoreLoss: true,
+                        hasLive1: live1,
+                        hasLive2: live2,
+                        hasLive3: live3,
+                        hasLive4: live4,
+                        // gameOver: isGameOver,
+                        wrongRoundChoices: wrongChoices, 
+                        rightUserOption: false, 
+                        clickedOption: domID
+                    });
+
+                } else if (this.state.rightChoiceCount >= 1 && newTotalScore > 0) {
+                    console.log('Run WrongChoice Routine -- rightChoiceCount >= 1, totalScore > 0');
+                    let live4 = this.state.hasLive4;
+                    let live3 = this.state.hasLive3;
+                    let live2 = this.state.hasLive2;
+                    let live1 = this.state.hasLive1;
+                    // let isGameOver = this.state.gameOver;
+
+                    if (this.state.hasLive4 === true) {
+                        live4 = false
+                    } else if (this.state.hasLive3 === true) {
+                        live3 = false
+                    } else if (this.state.hasLive2 === true) {
+                        live2 = false
+                    } else if (this.state.hasLive1 === true) {
+                        live1 = false;
+                        // isGameOver = true;
+                    }
+
+                    this.setState({ 
+                        roundScore: scoreLoss,
+                        totalScore: newTotalScore,
+                        displayedRoundScore: displayScore,
+                        isRoundScoreLoss: true,
+                        hasLive1: live1,
+                        hasLive2: live2,
+                        hasLive3: live3,
+                        hasLive4: live4,
+                        // gameOver: isGameOver,
+                        wrongRoundChoices: wrongChoices, 
+                        rightUserOption: false, 
+                        clickedOption: domID
+                    });
+                } else if (this.state.rightChoiceCount >= 1 && newTotalScore <= 0) {
+
+                    console.log('Run WrongChoice Routine -- rightChoiceCount >= 1, totalScore <= 0');
+
+                    let live4 = this.state.hasLive4;
+                    let live3 = this.state.hasLive3;
+                    let live2 = this.state.hasLive2;
+                    let live1 = this.state.hasLive1;
+                    // let isGameOver = this.state.gameOver;
+
+                    if (this.state.hasLive4 === true) {
+                        live4 = false
+                    } else if (this.state.hasLive3 === true) {
+                        live3 = false
+                    } else if (this.state.hasLive2 === true) {
+                        live2 = false
+                    } else if (this.state.hasLive1 === true) {
+                        live1 = false;
+                        // isGameOver = true;
+                    }
+
+                    this.setState({
+                        roundScore: scoreLoss,
+                        totalScore: newTotalScore,
+                        displayedRoundScore: displayScore,
+                        isRoundScoreLoss: true,
+                        hasLive1: live1,
+                        hasLive2: live2,
+                        hasLive3: live3,
+                        hasLive4: live4,
+                        // gameOver:isGameOver,
+                        wrongRoundChoices: wrongChoices, 
+                        rightUserOption: false, 
+                        clickedOption: domID
+                    });
+                }
             }
         }
     }
@@ -275,16 +633,24 @@ class Player extends Component {
                 nextPlace={this.state.nextPlaceName}
                 isRightOption={this.state.rightUserOption}
                 nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
             />
         };
 
         let currentUserRank = 'Visitor';
 
         if (this.props.userRank) {
-            currentUserRank = this.props.userRank
+            currentUserRank = this.props.userRank;
         }
 
-        let printedScore = numberWithSpaces(this.state.totalScore);
+        let secondsPerRound = this.state.simpleSecondsPerRound;
+
+        if (this.props.difficulty === "Hard") {
+            secondsPerRound = this.state.hardSecondsPerRound
+        }
+
+
+        let printedScore = numberWithCommas(this.state.totalScore);
 
         let options =
         this.state.roundOptions.map((place, i) => (
@@ -307,18 +673,22 @@ class Player extends Component {
                         <div className={styles.toolBar}>
                             <div className={styles.leftTools}>
                                 <div> 
-                                    <button onClick={this.stopGame}>
+                                    <button onClick={this.cancelGame}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60">
                                             <path d="M70 55H20V5h50v50zm0-50L20 55m0-50l50 50"/>
                                         </svg>
                                     </button>
                                 </div>
                                 <div> 
-                                    <button onClick={this.restartGame}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60">
-                                            <path d="M18.995 40.608V5h52.01v7.325m0 7.067V55h-52.01v-7.325M7.963 30l11.032 10.607L30.028 30m52.009.001L71.005 19.395 59.972 30.001"/>
-                                        </svg>
-                                    </button>
+                                    {this.props.gameType === 'Single' ?
+                                        <button onClick={this.restartGame}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60">
+                                                <path d="M18.995 40.608V5h52.01v7.325m0 7.067V55h-52.01v-7.325M7.963 30l11.032 10.607L30.028 30m52.009.001L71.005 19.395 59.972 30.001"/>
+                                            </svg>
+                                        </button>
+                                        :
+                                        null
+                                    }
                                 </div>
                             </div>
                             {/* <div></div> */}
@@ -378,7 +748,11 @@ class Player extends Component {
                     </div>
                     <div className={styles.score}>
                         <div>
-                            <h3>SCORE:</h3><span>{printedScore}</span>
+                            <h3>SCORE:</h3>
+                            { this.state.totalScore < 0 ? 
+                                <span className={styles.negativeScore}>{printedScore}</span> 
+                                : 
+                                <span>{printedScore}</span>}
                         </div>                       
                     </div>
                 </div>
@@ -388,10 +762,14 @@ class Player extends Component {
                             timerElapsed={this.props.roundTimerElapsed}
                             gameType={this.props.gameType}
                             rightUserOption={this.state.rightUserOption}
-                            roundScore={this.state.roundScore}
+                            roundScore={this.state.displayedRoundScore}
                             timerAlmostUp={this.props.timerAlmostUp}
                             showSelect={this.state.showTimerPanelSelect}
                             showTimer={this.state.showTimerPanelTimer}
+                            scoreLoss={this.state.isRoundScoreLoss}
+                            secondsPerRound={secondsPerRound}
+                            warningSecond={this.state.roundTimerWarningSecond}
+                            gamePaused={this.state.gamePaused}
                         />
                     </div>
                     <div className={styles.optionsPanel}>
@@ -408,6 +786,24 @@ class Player extends Component {
                         />
                     </div>
                 </div>
+                { this.state.showCancelGame ?
+                    <Dialogue 
+                        cancelMission
+                        onAbortCancelMission={this.abortCancelMission}
+                        onConfirmCancelMission={this.confirmCancelMission}
+                    />
+                    :
+                    null
+                }
+                { this.state.showRestartGame ?
+                    <Dialogue 
+                        restartMission
+                        onAbortRestartMission={this.abortRestartMission}
+                        onConfirmRestartMission={this.confirmRestartMission}
+                    />
+                    :
+                    null
+                }
             </div>
         )
     }
@@ -418,21 +814,30 @@ const mapStateToProps = state => {
         gameType: state.game.gameData.type,
         gameStage: state.game.gameData.stage,
         difficulty: state.game.gameData.difficulty,
-        // userRank will come from auth state
-        userRank: "Place Marshal",
+        
+        roundTimerElapsed: state.game.roundTimerElapsed,
+        timerAlmostUp: state.game.timerAlmostUp,
 
         levelStage: state.game.levelStage,
+        startNextLevel: state.game.startNextLevel,
+        level: state.game.level,
+        levelScore: state.game.levelScore,
 
-        roundTimerElapsed: state.game.roundTimerElapsed,
-        timerAlmostUp: state.game.timerAlmostUp
+        screenTrackerActive: state.game.screenTrackerActive,
+
+        // userRank will come from auth state
+        userRank: "Place Marshal",
+        isAuthenticated: false,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onPlayerRoundOver: () => dispatch(actions.playerRoundOver()),
-        onSingleGameOver: (totalRounds, nextRound, totalScore, gameEndReport) => dispatch(actions.singleGameOver(totalRounds, nextRound, totalScore, gameEndReport))
+        // onLevelOver: () => dispatch(actions.levelOver()),
+        // onMultilevelGameOver: () => dispatch(actions.multilevelGameOver()),
+        onSingleGameOver: (totalRounds, rightCount, totalScore, gameEndReport) => dispatch(actions.singleGameOver(totalRounds, rightCount, totalScore, gameEndReport))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Player);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Player));
