@@ -34,3 +34,7 @@ export const numberWithSpaces = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
+export const stringUnderscoreForSpace = (string) => {
+    return string.split(' ').join('_');
+}
+

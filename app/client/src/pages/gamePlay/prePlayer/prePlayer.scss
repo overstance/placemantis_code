@@ -1,0 +1,14 @@
+@import '../../../variables.scss';
+
+.gamePlayerPrePlayer {
+    @include by-parent;
+    background: $dark-purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+        width: 100%;
+        max-height: 100vh;
+    }
+}

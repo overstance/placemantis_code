@@ -1,15 +1,11 @@
 @import '../../../../variables.scss';
 
-#Southern_Africa_Graticules {
-    fill: none;
-    stroke: $light-blue;
-    stroke-width: 0.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-miterlimit: 10;
-}
-
-#Southern_Africa_0N_0E_Frame {
+#Southern_Africa_0N_0E_Frame, #Central_and_South_Asia_0N_0E_Frame, 
+#Southern_Europe_0N_0E_Frame, #The_Caribbean_Islands_0N_0E_Frame,
+#West_and_Central_Africa_0N_0E_Frame, #East_Africa_and_Middle_East_Asia_0N_0E_Frame,
+#Southeast_Asia_and_Oceania_0N_0E_Frame, #West_Indies_and_West_Africa_0N_0E_Frame, 
+#Africa_0N_0E_Frame, #Asia_0N_0E_Frame, #Europe_0N_0E_Frame, #North_America_0N_0E_Frame, 
+#Oceania_0N_0E_Frame, #South_America_0N_0E_Frame, #World_0N_0E_Frame {
     fill: none;
     stroke: $dark-green;
     // stroke: $red;
@@ -19,11 +15,35 @@
     stroke-miterlimit: 10;
 }
 
-#Southern_Africa_Lat_Long {
-    fill: $light-blue
+#Southern_Africa_Graticules, #Central_and_South_Asia_Graticules,
+#Southern_Europe_Graticules, #The_Caribbean_Islands_Graticules,
+#West_and_Central_Africa_Graticules, #East_Africa_and_Middle_East_Asia_Graticules,
+#Southeast_Asia_and_Oceania_Graticules, #West_Indies_and_West_Africa_Graticules,
+#Africa_Graticules, #Asia_Graticules, #Europe_Graticules, #North_America_Graticules,
+#Oceania_Graticules, #South_America_Graticules, #World_Graticules {
+    fill: none;
+    stroke: $light-blue;
+    stroke-width: 0.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
 }
 
-#Southern_Africa_Outline {
+#Southern_Africa_Lat_Long, #Central_and_South_Asia_Lat_Long,
+#Southern_Europe_Lat_Long, #The_Caribbean_Islands_Lat_Long,
+#West_and_Central_Africa_Lat_Long, #East_Africa_and_Middle_East_Asia_Lat_Long,
+#Southeast_Asia_and_Oceania_Lat_Long, #West_Indies_and_West_Africa_Lat_Long,
+#Africa_Lat_Long, #Asia_Lat_Long, #Europe_Lat_Long, #North_America_Lat_Long,
+#Oceania_Lat_Long, #South_America_Lat_Long, #World_Lat_Long {
+    fill: $light-blue;
+}
+
+#Southern_Africa_Outline, #Central_and_South_Asia_Outline,
+#Southern_Europe_Outline, #The_Caribbean_Islands_Outline,
+#West_and_Central_Africa_Outline, #East_Africa_and_Middle_East_Asia_Outline,
+#Southeast_Asia_and_Oceania_Outline, #West_Indies_and_West_Africa_Outline,
+#Africa_Outline, #Asia_Outline, #Europe_Outline, #North_America_Outline,
+#Oceania_Outline, #South_America_Outline, #World_Outline {
     fill: $blue2;
     stroke: $light-purple;
     stroke-width: 3;
@@ -32,17 +52,35 @@
     stroke-miterlimit: 10;
 }
 
-#Southern_Africa_Places path{
-    fill: $dark-purple;
-    stroke: $light-purple;
-    stroke-width: 3;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-miterlimit: 10;
-    opacity: 0;
+#Southern_Africa_Places, #Central_and_South_Asia_Places,
+#Southern_Europe_Places, #The_Caribbean_Islands_Places,
+#West_and_Central_Africa_Places, #East_Africa_and_Middle_East_Asia_Places,
+#Southeast_Asia_and_Oceania_Places, #West_Indies_and_West_Africa_Places,
+#Africa_Places, #Asia_Places, #Europe_Places, #North_America_Places, 
+#Oceania_Places, #South_America_Places, #World_Places {
+    
+    path {
+        fill: $dark-purple;
+        stroke: $light-purple;
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-miterlimit: 10;
+        opacity: 0;
+    }
+    
 }
 
-#Southern_Africa_Markers path{
-    fill: $green;
-    opacity: 0;
+#Southern_Africa_Markers, #Central_and_South_Asia_Markers,
+#Southern_Europe_Markers, #The_Caribbean_Islands_Markers,
+#West_and_Central_Africa_Markers, #East_Africa_and_Middle_East_Asia_Markers,
+#Southeast_Asia_and_Oceania_Markers, #West_Indies_and_West_Africa_Markers,
+#Africa_Markers, #Asia_Markers, #Europe_Markers, #North_America_Markers,
+#Oceania_Markers, #South_America_Markers, #World_Markers {   
+
+    path {
+        fill: $green;
+        opacity: 0;
+    }
+   
 }

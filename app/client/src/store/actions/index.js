@@ -1,4 +1,6 @@
 export {
+    screenTrackerActiveOrInactive,
+
     setGameData,   
     singleTypeTimerEnd,
     resetGameState,
@@ -9,10 +11,10 @@ export {
     levelsDailogueTimerEnd,
     playerRoundTimerEnd,
     roundTimerAlmostUp,
+    prePlayerTimerEnd,
 
     playerRoundOver,
     singleGameOver,
-
-    screenTrackerActiveOrInactive
+    restartLastMission
 
 } from './gameActions';

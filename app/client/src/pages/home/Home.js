@@ -151,7 +151,7 @@ const Home = props => {
     }
 
     const optionNorthAmerica = () => {
-        setMissionStage('North_America');
+        setMissionStage('North America');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectStage');
     }
@@ -218,6 +218,7 @@ const Home = props => {
 
     const optionGlobal = () => {
         setMissionScope('World');
+        setMissionStage('World');
         setCurrentView('SelectDifficulty');
         setPreviousView('SelectScope');
     }

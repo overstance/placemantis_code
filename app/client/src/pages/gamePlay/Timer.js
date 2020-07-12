@@ -92,6 +92,8 @@ class Timer extends Component {
             // this.props.onFelicitatorTimerEnd();
         } else if (this.props.timerType === 'roundIntervalTimer') {
             this.props.onRoundIntervalTimerEnds();
+        } else if (this.props.timerType === 'prePlayerTimer') {
+            this.props.onPrePlayerTimerEnd();
         }
     }
 
@@ -129,7 +131,8 @@ const mapDispatchToProps = dispatch => {
         onMultilevelTypeTimerEnd: () => dispatch(actions.multilevelTypeTimerEnd()), 
         onPlayerRoundTimerEnd: () => dispatch(actions.playerRoundTimerEnd()),
         onLevelsDailogueTimerEnd: () => dispatch(actions.levelsDailogueTimerEnd()),
-        onRoundTimerAlmostUp: () => dispatch(actions.roundTimerAlmostUp())
+        onRoundTimerAlmostUp: () => dispatch(actions.roundTimerAlmostUp()),
+        onPrePlayerTimerEnd: () => dispatch(actions.prePlayerTimerEnd()),
         // onFelicitatorTimerEnd: () => dispatch(actions.felicitatorTimerEnd()),
     }
 }

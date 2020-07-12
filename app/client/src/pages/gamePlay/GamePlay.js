@@ -5,6 +5,8 @@ import styles from './gamePlay.module.scss';
 import Moderator from './moderator/Moderator';
 import {shuffleArray} from '../../utilities/utilities';
 import Player from './player/Player';
+import PrePlayer from './prePlayer/PrePlayer';
+import Timer from './Timer';
 
 /* const data = {
     name: "Australia"
@@ -13,9 +15,8 @@ import Player from './player/Player';
 class GamePlay extends Component {
 
     state = {
-        showModerator: true,
-        showPlayer: false,
-        showFelicitator: false
+        prePlayerOn: false,
+        prePlayerTimeOn: false,
     }
 
     componentDidMount() {
@@ -32,7 +33,7 @@ class GamePlay extends Component {
         stagesShuffled.push('World');
 
         if (this.props.gameData.type === null) {
-            // console.log(this.props.gameData, this.props.gameData.type, this.props.gameData.resumeMission);
+            console.log(this.props.gameData);
             this.props.history.push('/');
         }
 
@@ -40,6 +41,16 @@ class GamePlay extends Component {
             this.props.onShowLevelsDialogue();
         } else {
             this.props.onShowTypeDialogue(stagesShuffled);
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.showPlayer === false && this.props.showPlayer === true) {
+            this.setState({ prePlayerOn: true, prePlayerTimeOn: true});
+        } else if (prevProps.showPlayer === true && this.props.showPlayer === false) {
+            this.setState({ prePlayerOn: false, prePlayerTimeOn: false});
+        } else if (prevProps.prePlayerTimerEnded === false && this.props.prePlayerTimerEnded === true) {
+            this.setState({ prePlayerOn: false, prePlayerTimeOn: false});
         }
     }
 
@@ -69,8 +80,11 @@ class GamePlay extends Component {
                 }
                 { this.props.showPlayer ?
                     <div className={styles.player}>
-                        {/* {"GAME PLAYER SHOWS HERE level: " + this.props.level + 'stage: ' + this.props.levelStage} */}
-                        <Player />
+                        { this.state.prePlayerOn ?
+                            <PrePlayer stage={this.props.gameData.stage}/>
+                            :
+                            <Player />
+                        }
                     </div>
                     :
                     null
@@ -81,6 +95,16 @@ class GamePlay extends Component {
                     </div>
                     :
                     null
+                }
+                {this.state.prePlayerOn ?
+                    <div className={styles.prePlayerTimerDud}>
+                        <Timer 
+                            timerType='prePlayerTimer'
+                            seconds={2}
+                        />
+                    </div>
+                  :
+                  null
                 }
             </div>
           )
@@ -95,11 +119,13 @@ const mapStateToProps = state => {
         showPlayer: state.game.showPlayer,
         showFelicitator: state.game.showFelicitator,
 
-        showGameType: state.game.showGameTypeDialogue,
+        prePlayerTimerEnded: state.game.prePlayerTimerEnded,
+
+        /* showGameType: state.game.showGameTypeDialogue,
         showLevels: state.game.showGameLevelsDialogue,
         showRestartMission: state.game.showRestartMissionDialogue,
         showEndMission: state.game.showEndMissionDialogue,
-        showGameOver: state.game.showGameOverDialogue,
+        showGameOver: state.game.showGameOverDialogue, */
 
         level: state.game.level,
         levelStage: state.game.levelStage

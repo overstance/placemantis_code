@@ -2671,8 +2671,8 @@ const places = [
     touristAttractions: ["Igls"]
   },
   {
-    name: "Leichtenstein",
-    domID: "Leichtenstein",
+    name: "Liechtenstein",
+    domID: "Liechtenstein",
     capital: "Vadus",
     flag: true,
     emblem: true,

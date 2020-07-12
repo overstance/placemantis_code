@@ -31,6 +31,19 @@ const HintBoard = props => {
     let place = props.place;
     let placeName = place.domID;
 
+    if (placeName === "East_Thrace_Turkey") {
+        placeName = "Turkey"
+    } else if (placeName === "Siberia_Russia") {
+        placeName = "Russia"
+    } else if (placeName === "Anatolia_Turkey") {
+        placeName = "Turkey"
+    } else if (placeName === "Russia_Europe") {
+        placeName = "Russia"
+    } else if (placeName === "Svalbard_and_Jan_Mayen_Islands") {
+        placeName = 'Norway'
+    }
+
+
     let hint1 = null;
     let hint2 = null;
     let hint3 = null;
@@ -52,7 +65,7 @@ const HintBoard = props => {
                 Emblem:
             </div>
             <div>
-                <img src={`/images/emblems/${placeName + '.svg'}`} alt="flag"/>
+                <img src={`/images/emblems/${placeName + '.svg'}`} alt="emblem"/>
             </div>
         </div>
         

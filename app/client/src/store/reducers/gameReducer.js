@@ -9,6 +9,8 @@ const initialState = {
         savedMission: null
     },
 
+    // restartMissionAfterGameOver: false, 
+
     showModerator: true,
     showPlayer: false,
     showFelicitator: false,
@@ -27,22 +29,29 @@ const initialState = {
     stageRoundsCompleted: 0,
     totalGameScore: 0,
     gameStatus: 'off',
+
+    playedType: null,
+    playedStage: null,
+    playedDifficulty: null,
     gameOver: false,
     gameEndReport: null, 
+    rankingTaskCleared: false,
 
     roundTimerElapsed: false,
     timerAlmostUp: false,
-
-    rankingTaskCleared: false,
     
     startNextLevel: false,
     level: 0,
     levelScore: 0,
     levelStage: null,
+    totalMultilevelRounds: 0,
+    completedMultilevelRounds: 0,
     
     shuffledStages: [],
 
-    screenTrackerActive: false
+    screenTrackerActive: false,
+
+    prePlayerTimerEnded: false
 }
 
 const setGameData = (state, action) => {
@@ -140,6 +149,12 @@ const singleGameOver = (state, action) => {
         gameStatus: 'Off',
         gameOver: true,
         gameEndReport: action.report,
+        playedType: "Single",
+        playedStage: action.stage,
+        playedDifficulty: action.difficulty,
+        showModerator: true,
+        showGameOverDialogue: true,
+        prePlayerTimerEnded: false
     }
 }
 
@@ -173,6 +188,10 @@ const resetGameState = (state, action) => {
         stageRoundsCompleted: 0,
         totalGameScore: 0,
         gameStatus: 'off',
+
+        playedType: null,
+        playedStage: null,
+        playedDifficulty: null,
         gameOver: false,
         gameEndReport: null, 
     
@@ -185,8 +204,12 @@ const resetGameState = (state, action) => {
         level: 0,
         levelScore: 0,
         levelStage: null,
+        totalMultilevelRounds: 0,
+        completedMultilevelRounds: 0,
         
         shuffledStages: [],
+
+        prePlayerTimerEnded: false
     }
 }
 
@@ -194,6 +217,51 @@ const screenTrackerActiveOrInactive = (state, action) => {
     return {
         ...state,
         screenTrackerActive: action.trueOrFalse
+    }
+}
+
+const prePlayerTimerEnd = (state, action) => {
+    return {
+        ...state,
+        prePlayerTimerEnded: true
+    }
+}
+
+const restartLastMission = (state, action) => {
+    return {
+        ...state,
+        singleGameActive: false,
+        multilevelGameActive: false,
+        resumedMultilevelGame: false,
+
+        totalStageRounds: 0,
+        stageRoundsCompleted: 0,
+        totalGameScore: 0,
+        gameStatus: 'off',
+
+        playedType: null,
+        playedStage: null,
+        playedDifficulty: null,
+        gameOver: false,
+        gameEndReport: null, 
+        rankingTaskCleared: false,
+
+        roundTimerElapsed: false,
+        timerAlmostUp: false,
+        
+        startNextLevel: false,
+        level: 0,
+        levelScore: 0,
+        levelStage: null,
+        totalMultilevelRounds: 0,
+        completedMultilevelRounds: 0,
+
+        showModerator: false,
+        showFelicitator: false,
+        showPlayer: true,
+
+        /* restartMissionAfterGameOver: true,
+        gameData: action.gameData */
     }
 }
 
@@ -225,6 +293,10 @@ const reducer = (state = initialState, action) => {
             return singleGameOver(state, action);
         case actionTypes.SCREEN_TRACKER_ACTIVE_OR_INACTIVE:
             return screenTrackerActiveOrInactive(state, action);
+        case actionTypes.RESTART_LAST_MISSION:
+            return restartLastMission(state, action);
+        case actionTypes.PRE_PLAYER_TIMER_END:
+            return prePlayerTimerEnd(state, action);
         default: return state;
     }
 };

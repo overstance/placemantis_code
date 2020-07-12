@@ -3,11 +3,14 @@ import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import Timer from '../../Timer';
 import {positionX} from '../../../../anime/position';
+import {stringUnderscoreForSpace} from '../../../../utilities/utilities';
+import '../moderator.scss';
 
 const Levels = props => {
 
     const levelNumber = props.level + 1;
     const levelStage = props.shuffledStages[props.level];
+    const levelStageUnspaced = stringUnderscoreForSpace(levelStage);
 
     useEffect(() => {
         const animationProp = {
@@ -32,7 +35,7 @@ const Levels = props => {
                         {"Level" + levelNumber}
                     </h3>
                 </div>
-                <img src={`/images/levels_map/${levelStage + '.svg'}`} alt="levels map"/>
+                <img src={`/images/levels_map/${levelStageUnspaced + '.svg'}`} alt="levels map"/>
                 <div>
                     <div className='levelsDialogueStage'>
                         <h3>
@@ -58,8 +61,8 @@ const Levels = props => {
 
 const mapStateToProps = state => {
     return {
-        /* level: state.game.level,
-        shuffledStages: state.game.shuffledStages */
+        level: state.game.level,
+        shuffledStages: state.game.shuffledStages
     }
 }
 

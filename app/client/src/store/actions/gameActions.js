@@ -55,6 +55,14 @@ export const roundTimerAlmostUp = () => {
     }
 }
 
+export const prePlayerTimerEnd = () => {
+    return {
+        type: actionTypes.PRE_PLAYER_TIMER_END
+    }
+}
+
+
+
 // GAMEPLAY TRIGGERED ACTIONS
 
 export const showLevelsDialogue = () => {
@@ -76,6 +84,12 @@ export const resetGameState = () => {
     }
 }
 
+export const restartLastMission = () => {
+    return {
+        type: actionTypes.RESTART_LAST_MISSION,
+    }
+}
+
 // PLAYER TRIGGERED ACTIONS
 
 export const playerRoundOver = () => {
@@ -84,13 +98,15 @@ export const playerRoundOver = () => {
     }
 }
 
-export const singleGameOver = (totalRounds, rightCount, totalScore, gameEndReport) => {
+export const singleGameOver = (totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty) => {
     return {
         type: actionTypes.SINGLE_GAME_OVER,
         totalStageRounds: totalRounds,
         completedStageRounds: rightCount,
         totalScore: totalScore,
-        report: gameEndReport
+        report: gameEndReport,
+        stage: playedStage,
+        difficulty: playedDifficulty
     }
 }
 

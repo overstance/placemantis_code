@@ -3,6 +3,7 @@ import './moderator.scss';
 import GameType from './dialogues/GameType';
 import {connect} from 'react-redux';
 import Levels from './dialogues/Levels';
+import GameOver from './dialogues/GameOver';
 // import * as actions from '../../../store/actions/index';
 
 const Moderator = props => {
@@ -29,6 +30,11 @@ const Moderator = props => {
                     :
                     null
                 }
+                { props.showGameOver ?
+                    <GameOver />
+                    :
+                    null
+                }
             </div>
         </div>
     )
@@ -46,7 +52,23 @@ const mapStateToProps = state => {
         showEndMission: state.game.showEndMissionDialogue,
         showGameOver: state.game.showGameOverDialogue,
 
+        /* totalStageRounds: state.game.totalStageRounds,
+        stageRoundsCompleted: state.game.stageRoundsCompleted,
+        totalGameScore: state.game.totalGameScore,
+        gameStatus: state.game.gameStatus,
+
         level: state.game.level,
+        levelScore: state.game.levelScore,
+        levelStage: state.game.levelStage,
+
+        playedType: state.game.playedType,
+        playedStage: state.game.playedStage,
+        playedDifficulty: state.game.playedDifficulty,
+        gameOver: state.game.gameOver, */
+
+        gameEndReport: state.game.gameEndReport, 
+        rankingTaskCleared: state.game.rankingTaskCleared,
+
         shuffledStages: state.game.shuffledStages
     }
 }

@@ -1197,27 +1197,6 @@ export const Places = [
     touristAttractions: []
   },
   {
-    name: "",
-    domID: "",
-    capital: "",
-    flag: true,
-    emblem: true,
-    currency: "",
-    territory: false,
-    sovereignState: null,
-    commonLanguages: [],
-    geographicFeatures: {
-      elevation: "",
-      forest: "",
-      desert: "",
-      waters: ""
-    },
-    continent: "Africa",
-    stages: ["World", "Africa"],
-    callingCode: "",
-    touristAttractions: []
-  },
-  {
     name: "Maldives",
     domID: "Maldives",
     capital: "Male",
@@ -1617,8 +1596,8 @@ export const Places = [
     touristAttractions: ["Angkor Wat"]
   },
   {
-    name: "Philippines",
-    domID: "Philippines",
+    name: "The_Philippines",
+    domID: "The_Philippines",
     capital: "Manila",
     flag: true,
     emblem: true,
@@ -1701,8 +1680,8 @@ export const Places = [
     touristAttractions: ["Borodudur", "Komodo National Park"]
   },
   {
-    name: "Timor-Leste",
-    domID: "Timor_Leste",
+    name: "East Timor",
+    domID: "East_Timor",
     capital: "Dili",
     flag: true,
     emblem: true,
@@ -2625,8 +2604,29 @@ export const Places = [
     touristAttractions: ["Bojnice Castle"]
   },
   {
+    name: "Hungary",
+    domID: "Hungary",
+    capital: "Budapest",
+    flag: true,
+    emblem: true,
+    currency: "Forint(HUF)",
+    territory: false,
+    sovereignState: null,
+    commonLanguages: ["Hungarian"],
+    geographicFeatures: {
+      elevation: "Alpokalja",
+      forest: "",
+      desert: "",
+      waters: ""
+    },
+    continent: "Europe",
+    stages: ["World", "Europe"],
+    callingCode: "+36",
+    touristAttractions: [""]
+  },
+  {
     name: "Czech Republic",
-    domID: "Czech Republic",
+    domID: "Czech_Republic",
     capital: "Prague",
     flag: true,
     emblem: true,
@@ -2667,8 +2667,8 @@ export const Places = [
     touristAttractions: ["Igls"]
   },
   {
-    name: "Leichtenstein",
-    domID: "Leichtenstein",
+    name: "Liechtenstein",
+    domID: "Liechtenstein",
     capital: "Vadus",
     flag: true,
     emblem: true,
@@ -4347,8 +4347,8 @@ export const Places = [
     touristAttractions: ["Aitutaki"]
   },
   {
-    name: "Pitcairns Islands",
-    domID: "Pitcairns_Islands",
+    name: "Pitcairn Islands",
+    domID: "Pitcairn_Islands",
     capital: "Adamstown",
     flag: true,
     emblem: true,
@@ -4489,7 +4489,7 @@ export const Places = [
       waters: "Napo River"
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+593",
     touristAttractions: ["Galapagos Islands"]
   },
@@ -4510,7 +4510,7 @@ export const Places = [
       waters: "Ucayali River"
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+51",
     touristAttractions: ["Machu Picchu"]
   },
@@ -4531,7 +4531,7 @@ export const Places = [
       waters: "Amazon River"
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+55",
     touristAttractions: ["Rio de Janeiro"]
   },
@@ -4552,7 +4552,7 @@ export const Places = [
       waters: "Rio Grande"
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+591",
     touristAttractions: ["Sala de Uyuni"]
   },
@@ -4573,7 +4573,7 @@ export const Places = [
       waters: ""
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+56",
     touristAttractions: []
   },
@@ -4594,7 +4594,7 @@ export const Places = [
       waters: "Santa Cruz River"
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+54",
     touristAttractions: ["Iguazu Falls"]
   },
@@ -4615,7 +4615,7 @@ export const Places = [
       waters: ""
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+500",
     touristAttractions: []
   },
@@ -4636,7 +4636,7 @@ export const Places = [
       waters: ""
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+500",
     touristAttractions: []
   },
@@ -4657,7 +4657,7 @@ export const Places = [
       waters: "Parana River"
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+595",
     touristAttractions: ["San Bernardino"]
   },
@@ -4678,7 +4678,7 @@ export const Places = [
       waters: "Rio Negro"
     },
     continent: "South America",
-    stages: ["South America"],
+    stages: ["World", "South America"],
     callingCode: "+598",
     touristAttractions: ["Punta del Este", "Colonia del Sacremento"]
   }

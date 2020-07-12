@@ -1,4 +1,29 @@
 @import '../../../variables.scss';
+%dialogueBasics {
+    width: 75vw;
+    height: 75vh;
+    position: relative;
+    box-sizing: border-box;
+}
+
+%dialogueSection {
+    // background: $blue1;
+    border: $frame-3 solid $purple;
+    box-sizing: border-box;
+}
+
+%dialogueSectionHeader {
+    flex: 0 0 40%;
+    background: $dark-purple;
+    color: $light-purple;
+    @include font-b36;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+}
 
 .gameModerator {
     @include by-parent;
@@ -6,19 +31,18 @@
 }
 
 .gameModeratorDialogues {
-    padding: $frame-120;
+    // padding: $frame-120;
     @include by-parent;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .gameTypeDialogue {
-    @include by-parent;
-    position: relative;
+    @extend %dialogueBasics;
     background: $blue2;
-    // padding: $frame-60;
     border: $frame-6 solid $purple;
-    color: $green;
-    box-sizing: border-box;
 
     .gameTypeDialogueTimer {
         position: absolute;
@@ -34,6 +58,7 @@
             width: 10%;
             text-align: center;
             white-space: nowrap;
+            color: $green
         }
     }
 
@@ -56,18 +81,14 @@
         }
 
         span {
-            @include font-r36
+            @include font-r36;
+            color: $green; 
         }
     }
 }
 
 .levelsDialogue {
-    @include by-parent;
-    position: relative;
-    // background: $blue2;
-    // border: $frame-6 solid $purple;
-    color: $green;
-    box-sizing: border-box;
+    @extend %dialogueBasics;
 
     .levelsDialogueTimer {
         position: absolute;
@@ -80,6 +101,7 @@
             background: $purple;
             padding: $frame-30;
             @include font-r36;
+            color: $green;
             width: 10%;
             text-align: center;
             white-space: nowrap;
@@ -136,5 +158,170 @@
             @include font-r36;
             margin: auto;
         }
+    }
+}
+
+.gameOverDialogue {
+    @extend %dialogueBasics;
+    background: $dark-blue;
+    border: $frame-6 solid $light-blue; 
+    display: flex;
+    flex-flow: column nowrap;
+    padding: $frame-24;
+
+    .gameOverDialogueHead {
+        flex: 0 0 20%;
+        max-height: 18.75vh;
+
+        h2 {
+            margin: 0;
+            background: $green;
+            color: $dark-blue;
+            @include font-m60;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @include by-parent;
+        }
+
+        .gameOverDialogueMissionOver {
+            background: $purple;
+        }
+    }
+
+    .gameOverDialogueBody {
+        flex: 0 0 80%;
+        display: flex;
+        flex-flow: column nowrap;
+        max-height: 56.25vh;
+
+        > div {
+            max-height: 20vh;
+        }
+
+        .gameOverDialogueMissionInfo {
+            flex: 0 0 33.3%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: $frame-12;
+            box-sizing: border-box;
+            
+            > h3 {
+                flex: 0 0 59.375%;
+                @include font-m48;
+                color: $light-purple;
+                @extend %dialogueSection;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // box-sizing: border-box;
+                margin: 0;
+            }
+
+            .gameOverDialogueRoundInfo {
+                flex: 0 0 39.375%;
+                flex-flow: column;
+                padding: $frame-6;
+                @extend %dialogueSection;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // box-sizing: border-box;
+
+                h4 {
+                    @extend %dialogueSectionHeader;
+                }
+
+                > div {
+                    flex: 0 0 60%;
+                    @include font-r48;
+                    display: flex;
+                    width: 100%;
+
+                    h5 {
+                        margin: 0;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        color: $purple;
+                    }
+
+                    div {
+                        flex: 0 1 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        @include font-r48;
+                        color: $purple;
+
+                        .gameOverDialogueCompletedRounds {
+                            color: $green;
+                        }
+                    }
+                }
+            }
+        }
+
+        .gameOverDialogueScores {
+            flex: 0 0 33.3%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: $frame-12;
+            box-sizing: border-box;
+
+            > div {
+                flex: 0 0 32.5%;
+                display: flex;
+                flex-flow: column;
+                padding: $frame-6;
+                // box-sizing: border-box;
+                @extend %dialogueSection;
+                height: 100%;
+            }
+
+            h4 {
+                @extend %dialogueSectionHeader;
+            }
+
+            span {
+                flex: 0 0 60%;
+                @include font-r48;
+                color: $green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        .gameOverDialogueButtons {
+            flex: 0 0 33.3%;
+            padding-top: $frame-12;
+            box-sizing: border-box;
+            
+
+            .gameOverDialogueButtonsWrapper {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-items: center;
+                padding: $frame-12;
+                @extend %dialogueSection;
+                height: 100%;
+
+                > div {
+                    flex: 0 0 32.5%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
     }
 }

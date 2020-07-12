@@ -2,7 +2,6 @@ import React, {/* useEffect, useState */Component} from 'react';
 import styles from './player.module.scss';
 import {Places} from './places';
 import {shuffleArray, numberWithCommas/* , numberWithSpaces */} from '../../../utilities/utilities';
-import SouthernAfrica from './stages/SouthernAfrica';
 import {connect} from 'react-redux';
 import Avatar from '../../../components/common/Avatar';
 import HintBoard from '../player/stage/HintBoard';
@@ -14,6 +13,22 @@ import * as actions from '../../../store/actions/index';
 import Timer from '../Timer';
 import Dialogue from './dialogue/Dialogue';
 import {withRouter} from 'react-router-dom';
+
+import SouthernAfrica from './stages/SouthernAfrica';
+import CSAsia from './stages/CSAsia';
+import SouthernEurope from './stages/SouthernEurope';
+import Caribbean from './stages/Caribbean';
+import WCAfrica from './stages/WCAfrica';
+import EAfricaMEAsia from './stages/EAfricaMEASia';
+import SEAsiaOceania from './stages/SEAsiaOceania';
+import WIndiesWAfrica from './stages/WIndiesWAfrica';
+import Africa from './stages/Africa';
+import Asia from './stages/Asia';
+import Europe from './stages/Europe';
+import NorthAmerica from './stages/NorthAmerica';
+import Oceania from './stages/Oceania';
+import SouthAmerica from './stages/SouthAmerica';
+import World from './stages/World';
 
 class Player extends Component {
     state = {
@@ -83,16 +98,13 @@ class Player extends Component {
         hasLive3: true,
         hasLive4: true,
 
-        gameEndReport: null,
-        gameOver: false,
-
         gamePaused: false,
-
-        // new states below
         showCancelGame: false,
         showRestartGame: false,
+        restartMission: false,
 
-        restartMission: false
+        gameEndReport: null,
+        gameOver: false,
     }
 
     componentDidMount() {
@@ -125,7 +137,11 @@ class Player extends Component {
             });
         } else if (prevState.hasLive1 === true && this.state.hasLive1 === false) {
             console.log('Running last life Spent');
-            this.setState({gameOver: true});
+            this.setState({
+                gameOver: true,
+                showTimerPanelTimer: false,
+                showTimerPanelSelect: false
+            });
 
         } else if (prevState.rightUserOption === false && this.state.rightUserOption === true && this.state.gameOver === false) {
 
@@ -286,6 +302,8 @@ class Player extends Component {
         const placesShuffled = shuffleArray(places);
         const otherPlaces = Places.filter(place => place.stages.indexOf(stageName) === -1).slice(0, 4);
 
+        console.log(places, otherPlaces, "single game initialized", stageName);
+
         const allPlaces = placesShuffled.concat(otherPlaces);
         const round = this.state.nextRound + 1;
         const place = placesShuffled[0];
@@ -312,100 +330,10 @@ class Player extends Component {
             restartMission: false
         })
         
-        // console.log('initializing game', options, optionsShuffled);
+        console.log('initialized single game', placeDomID/* , options, optionsShuffled */);
     }
 
-    roundIntervalEnds = () => {
-        // console.log('round interval ends');
-        if (this.state.gameOver === true) {
-            this.props.onSingleGameOver(this.state.totalRounds, this.state.rightChoiceCount, this.state.totalScore, this.state.gameEndReport);
-        } else {
-            this.setState({ isRoundInterval: false, roundOverReason: null});
-            this.props.onPlayerRoundOver();
-            this.initializeNextRound();
-        }
-    }
-
-    initializeNextRound = () => {
-        if (this.state.nextRound === this.state.totalRounds || this.state.hasLive1 === false) {
-            // console.log('GAME OVER!!!!!!!!');
-            this.setState({ gameOver: true });
-        } else {
-
-            const round = this.state.nextRound + 1;
-            const lastPlace = this.state.nextPlaceName;
-
-            const allPlaces = this.state.allPlaces.filter(place => place.domID !== lastPlace);
-            const stagePlaces = this.state.stagePlaces.filter(place => place.domID !== lastPlace);
-
-            const place = stagePlaces[0];
-            const placeDomID = place.domID;
-            const featuredFiltered = allPlaces.filter(place => place.domID !== placeDomID);
-            const options = featuredFiltered.slice(0, 3);
-            options.push(place);
-            const optionsShuffled = shuffleArray(options);
-
-
-            this.setState({
-                nextRound: round,
-                allPlaces: allPlaces,
-                stagePlaces: stagePlaces,
-                nextPlace: place,
-                featuredPlaces: featuredFiltered,
-                nextPlaceName: placeDomID,
-
-                roundOptions: optionsShuffled,
-                wrongRoundChoices: [],
-                rightRoundChoice: '',
-                rightUserOption: false,
-
-                showHints: false,
-                showUserRanking: false,
-
-                // roundScore: 0,
-
-                showTimerPanelSelect: true,
-                showTimerPanelTimer: true,
-            });
-
-            console.log('next round target: ', placeDomID);
-        }
-    }
-
-    cancelGame = () => {
-        // console.log('stop game?');
-        this.setState({ showCancelGame: true, gamePaused: true });
-    }
-
-    abortCancelMission = () => {
-        this.setState({ showCancelGame: false, gamePaused: false });
-    }
-
-    confirmCancelMission = () => {
-        this.props.history.push('/');
-    }
-
-    pauseGame = () => {
-        // console.log('pause game');
-        this.setState({ gamePaused: true});
-    }
-
-    unPauseGame = () => {
-        // console.log('unpause game');
-        this.setState({ gamePaused: false});
-    }
-
-    restartGame = () => {
-        // console.log('restart game?');
-        this.setState({ showRestartGame: true, gamePaused: true });
-    }
-
-    abortRestartMission = () => {
-        this.setState({ showRestartGame: false, gamePaused: false });
-    }
-
-    confirmRestartMission = () => {
-        this.props.onPlayerRoundOver();
+    initializeSingleGameRestart = () => {
         this.setState({
             totalRounds: 0,
             nextRound: 0,
@@ -474,6 +402,100 @@ class Player extends Component {
         }, () => {this.initializeSingleGame()});
     }
 
+    roundIntervalEnds = () => {
+        // console.log('round interval ends');
+        if (this.state.gameOver === true) {
+            this.props.onSingleGameOver(this.state.totalRounds, this.state.rightChoiceCount, this.state.totalScore, this.state.gameEndReport, this.props.gameStage, this.props.difficulty);
+        } else {
+            this.setState({ isRoundInterval: false, roundOverReason: null});
+            this.props.onPlayerRoundOver();
+            this.initializeNextRound();
+        }
+    }
+
+    initializeNextRound = () => {
+        if (this.state.nextRound === this.state.totalRounds || this.state.hasLive1 === false) {
+            // console.log('GAME OVER!!!!!!!!');
+            this.setState({ gameOver: true });
+        } else {
+
+            const round = this.state.nextRound + 1;
+            const lastPlace = this.state.nextPlaceName;
+
+            const allPlaces = this.state.allPlaces.filter(place => place.domID !== lastPlace);
+            const stagePlaces = this.state.stagePlaces.filter(place => place.domID !== lastPlace);
+
+            const place = stagePlaces[0];
+            const placeDomID = place.domID;
+            const featuredFiltered = allPlaces.filter(place => place.domID !== placeDomID);
+            const options = featuredFiltered.slice(0, 3);
+            options.push(place);
+            const optionsShuffled = shuffleArray(options);
+
+
+            this.setState({
+                nextRound: round,
+                allPlaces: allPlaces,
+                stagePlaces: stagePlaces,
+                nextPlace: place,
+                featuredPlaces: featuredFiltered,
+                nextPlaceName: placeDomID,
+
+                roundOptions: optionsShuffled,
+                wrongRoundChoices: [],
+                rightRoundChoice: '',
+                rightUserOption: false,
+
+                showHints: false,
+                showUserRanking: false,
+
+                // roundScore: 0,
+
+                showTimerPanelSelect: true,
+                showTimerPanelTimer: true,
+            });
+
+            console.log('next round target', placeDomID/* , options */);
+        }
+    }
+
+    cancelMission = () => {
+        // console.log('stop game?');
+        this.setState({ showCancelGame: true, gamePaused: true });
+    }
+
+    abortCancelMission = () => {
+        this.setState({ showCancelGame: false, gamePaused: false });
+    }
+
+    confirmCancelMission = () => {
+        this.props.history.push('/');
+    }
+
+    pauseGame = () => {
+        // console.log('pause game');
+        this.setState({ gamePaused: true});
+    }
+
+    unPauseGame = () => {
+        // console.log('unpause game');
+        this.setState({ gamePaused: false});
+    }
+
+    restartMission = () => {
+        // console.log('restart game?');
+        this.setState({ showRestartGame: true, gamePaused: true });
+    }
+
+    abortRestartMission = () => {
+        this.setState({ showRestartGame: false, gamePaused: false });
+    }
+
+    confirmRestartMission = () => {
+        this.props.onPlayerRoundOver();
+        this.initializeSingleGameRestart();
+    }
+
     showHintsClicked = () => {
         this.setState((prevState) => {
             return {
@@ -501,6 +523,8 @@ class Player extends Component {
                     clickedOption: domID,
                     isRoundScoreLoss: false
                 });
+
+                // console.log(domID);
             } else if (domID !== this.state.nextPlaceName) {
                 let wrongChoices = this.state.wrongRoundChoices
                 wrongChoices.push(domID);
@@ -619,6 +643,8 @@ class Player extends Component {
                         clickedOption: domID
                     });
                 }
+
+                // console.log(domID);
             }
         }
     }
@@ -630,6 +656,118 @@ class Player extends Component {
         if (this.props.gameStage === 'Southern Africa') {
             playerStage = 
             <SouthernAfrica 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'Central and South Asia') {
+            playerStage = 
+            <CSAsia 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'Southern Europe') {
+            playerStage = 
+            <SouthernEurope 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'The Caribbean Islands') {
+            playerStage = 
+            <Caribbean 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'West and Central Africa') {
+            playerStage = 
+            <WCAfrica 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'East Africa and Middle East Asia') {
+            playerStage = 
+            <EAfricaMEAsia 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'Southeast Asia and Oceania') {
+            playerStage = 
+            <SEAsiaOceania 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'West Indies and West Africa') {
+            playerStage = 
+            <WIndiesWAfrica 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'Africa') {
+            playerStage = 
+            <Africa 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'Asia') {
+            playerStage = 
+            <Asia 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'Europe') {
+            playerStage = 
+            <Europe 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'North America') {
+            playerStage = 
+            <NorthAmerica 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'Oceania') {
+            playerStage = 
+            <Oceania 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'South America') {
+            playerStage = 
+            <SouthAmerica 
+                nextPlace={this.state.nextPlaceName}
+                isRightOption={this.state.rightUserOption}
+                nextRound={this.state.nextRound}
+                restartMission={this.state.restartMission}
+            />
+        } else if (this.props.gameStage === 'World') {
+            playerStage = 
+            <World 
                 nextPlace={this.state.nextPlaceName}
                 isRightOption={this.state.rightUserOption}
                 nextRound={this.state.nextRound}
@@ -673,7 +811,7 @@ class Player extends Component {
                         <div className={styles.toolBar}>
                             <div className={styles.leftTools}>
                                 <div> 
-                                    <button onClick={this.cancelGame}>
+                                    <button onClick={this.cancelMission}>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60">
                                             <path d="M70 55H20V5h50v50zm0-50L20 55m0-50l50 50"/>
                                         </svg>
@@ -681,7 +819,7 @@ class Player extends Component {
                                 </div>
                                 <div> 
                                     {this.props.gameType === 'Single' ?
-                                        <button onClick={this.restartGame}>
+                                        <button onClick={this.restartMission}>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 60">
                                                 <path d="M18.995 40.608V5h52.01v7.325m0 7.067V55h-52.01v-7.325M7.963 30l11.032 10.607L30.028 30m52.009.001L71.005 19.395 59.972 30.001"/>
                                             </svg>
@@ -836,7 +974,7 @@ const mapDispatchToProps = dispatch => {
         onPlayerRoundOver: () => dispatch(actions.playerRoundOver()),
         // onLevelOver: () => dispatch(actions.levelOver()),
         // onMultilevelGameOver: () => dispatch(actions.multilevelGameOver()),
-        onSingleGameOver: (totalRounds, rightCount, totalScore, gameEndReport) => dispatch(actions.singleGameOver(totalRounds, rightCount, totalScore, gameEndReport))
+        onSingleGameOver: (totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty) => dispatch(actions.singleGameOver(totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty))
     }
 }
 

@@ -30,6 +30,7 @@
             align-items: center;
             cursor: pointer;
             width: 100%;
+            padding: $frame-24;
 
             span {
                 flex: 0 0 80%;
@@ -97,16 +98,18 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding: calc(0.625vw);
+                box-sizing: border-box;
             }
 
             div {
                 background: $purple;
             }
 
-            img {
+            /* img {
                 width: 100%;
                 max-height: 16.8vh;
-            }
+            } */
         }
     }
 }
@@ -153,6 +156,8 @@
                     background: $dark-purple;
                     color: $light-purple;
                     @include font-b24;
+                    padding: calc(0.625vw);
+                    box-sizing: border-box;
                 }
 
                 span {

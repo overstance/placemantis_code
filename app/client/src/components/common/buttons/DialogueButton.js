@@ -20,6 +20,16 @@ const DialogueButton = props => {
             {props.children}
         </button>
     }
+
+    if (props.hasSideEffect) {
+        button =
+        <button 
+            onClick={props.buttonClicked}
+            className={styles.DialogueButton}
+        >
+            {props.sideEffectLoading ? <span>Loading</span> : props.children}
+        </button>
+    }
     return(button)
 }
 

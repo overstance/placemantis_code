@@ -11,3 +11,8 @@
 .player {
     @include by-parent;
 }
+
+.prePlayerTimerDud {
+    height: 0;
+    width: 0;
+}
