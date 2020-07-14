@@ -183,6 +183,22 @@
         align-items: center;
         @include font-m48;
         color: $dark-blue;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        span {
+            color: $green;
+            justify-content: center;
+            align-items: center;
+            margin-right: $frame-12;
+            @include font-m36;
+            border: $frame-3 solid $green;
+            display: inline-block;
+        }
     }
 
     .score {

@@ -9,8 +9,6 @@ const initialState = {
         savedMission: null
     },
 
-    // restartMissionAfterGameOver: false, 
-
     showModerator: true,
     showPlayer: false,
     showFelicitator: false,
@@ -18,7 +16,7 @@ const initialState = {
     showGameTypeDialogue: false,
     showGameLevelsDialogue: false,
     showRestartMissionDialogue: false,
-    showEndMissionDialogue: false,
+    showLevelOverDialogue: false,
     showGameOverDialogue: false,
    
     singleGameActive: false,
@@ -39,13 +37,15 @@ const initialState = {
 
     roundTimerElapsed: false,
     timerAlmostUp: false,
-    
-    startNextLevel: false,
+
     level: 0,
     levelScore: 0,
     levelStage: null,
     totalMultilevelRounds: 0,
     completedMultilevelRounds: 0,
+    levelRounds: 0,
+    completedLevelRounds: 0,
+    lifeCount: 0,
     
     shuffledStages: [],
 
@@ -81,7 +81,8 @@ const singleTypeTimerEnd = (state, action) => {
         ...state,
         showGameTypeDialogue: false,
         showModerator: false,
-        showPlayer: true,       
+        showPlayer: true, 
+        singleGameActive: true      
     }
 
 }
@@ -99,7 +100,10 @@ const levelsDialogueTimerEnd = (state, action) => {
         ...state,
         showGameLevelsDialogue: false,
         showModerator: false,
-        showPlayer: true
+        showPlayer: true,
+        multilevelGameActive: true,
+        levelStage: action.stage,
+        level: action.level
     }
 
 }
@@ -117,14 +121,6 @@ const roundTimerAlmostUp = (state, action) => {
         timerAlmostUp: true
     }
 
-}
-
-const setGameLevel = (state, action) => {
-    return {
-        ...state,
-        level: action.number,
-        levelStage: action.stage
-    }
 }
 
 const playerRoundOver = (state, action) => {
@@ -158,6 +154,57 @@ const singleGameOver = (state, action) => {
     }
 }
 
+const levelOver = (state, action) => {
+    return {
+        ...state,
+        roundTimerElapsed: false,
+        timerAlmostUp: false,
+        showPlayer: false,
+        totalMultilevelRounds: action.totalStageRounds,
+        completedMultilevelRounds: action.completedStageRounds,
+        levelScore: action.levelScore,
+        totalGameScore: action.totalScore,
+        gameStatus: 'On',
+        gameOver: false,
+        showModerator: true,
+        showLevelOverDialogue: true,
+        prePlayerTimerEnded: false,
+        levelRounds: action.levelRounds,
+        completedLevelRounds: action.completedLevelRounds,
+        lifeCount: action.lifeCount
+    }
+}
+
+const startNextLevel = (state, action) => {
+    return {
+        ...state,
+       showLevelOverDialogue: false,
+       showGameLevelsDialogue: true
+    }
+}
+
+const multilevelGameOver = (state, action) => {
+    return {
+        ...state,
+        roundTimerElapsed: false,
+        timerAlmostUp: false,
+        showPlayer: false,
+        singleGameActive: false,
+        totalMultilevelRounds: action.totalStageRounds,
+        completedMultilevelRounds: action.completedStageRounds,
+        levelScore: action.levelScore,
+        totalGameScore: action.totalScore,
+        gameStatus: 'Off',
+        gameOver: true,
+        gameEndReport: action.report,
+        playedType: "Multilevel",
+        playedDifficulty: action.difficulty,
+        showModerator: true,
+        showGameOverDialogue: true,
+        prePlayerTimerEnded: false
+    }
+}
+
 
 const resetGameState = (state, action) => {
     return {
@@ -177,7 +224,7 @@ const resetGameState = (state, action) => {
         showGameTypeDialogue: false,
         showGameLevelsDialogue: false,
         showRestartMissionDialogue: false,
-        showEndMissionDialogue: false,
+        showLevelOverDialogue: false,
         showGameOverDialogue: false,
        
         singleGameActive: false,
@@ -188,27 +235,30 @@ const resetGameState = (state, action) => {
         stageRoundsCompleted: 0,
         totalGameScore: 0,
         gameStatus: 'off',
-
+    
         playedType: null,
         playedStage: null,
         playedDifficulty: null,
         gameOver: false,
         gameEndReport: null, 
+        rankingTaskCleared: false,
     
         roundTimerElapsed: false,
         timerAlmostUp: false,
     
-        rankingTaskCleared: false,
-        
-        startNextLevel: false,
         level: 0,
         levelScore: 0,
         levelStage: null,
         totalMultilevelRounds: 0,
         completedMultilevelRounds: 0,
+        levelRounds: 0,
+        completedLevelRounds: 0,
+        lifeCount: 0,
         
         shuffledStages: [],
-
+    
+        screenTrackerActive: false,
+    
         prePlayerTimerEnded: false
     }
 }
@@ -248,6 +298,46 @@ const restartLastMission = (state, action) => {
 
         roundTimerElapsed: false,
         timerAlmostUp: false,
+
+        level: 0,
+        levelScore: 0,
+        levelStage: null,
+        totalMultilevelRounds: 0,
+        completedMultilevelRounds: 0,
+        levelRounds: 0,
+        completedLevelRounds: 0,
+        lifeCount: 0,
+
+        showModerator: false,
+        showFelicitator: false,
+        showPlayer: true,
+
+        /* restartMissionAfterGameOver: true,
+        gameData: action.gameData */
+    }
+}
+
+const restartMultilevelMission = (state, action) => {
+    return {
+        ...state,
+        singleGameActive: false,
+        multilevelGameActive: false,
+        resumedMultilevelGame: false,
+
+        totalStageRounds: 0,
+        stageRoundsCompleted: 0,
+        totalGameScore: 0,
+        gameStatus: 'off',
+
+        playedType: null,
+        playedStage: null,
+        playedDifficulty: null,
+        gameOver: false,
+        gameEndReport: null, 
+        rankingTaskCleared: false,
+
+        roundTimerElapsed: false,
+        timerAlmostUp: false,
         
         startNextLevel: false,
         level: 0,
@@ -256,12 +346,9 @@ const restartLastMission = (state, action) => {
         totalMultilevelRounds: 0,
         completedMultilevelRounds: 0,
 
-        showModerator: false,
-        showFelicitator: false,
-        showPlayer: true,
-
-        /* restartMissionAfterGameOver: true,
-        gameData: action.gameData */
+        showModerator: true,
+        showGameLevelsDialogue: true,
+        showGameOverDialogue: false
     }
 }
 
@@ -279,8 +366,8 @@ const reducer = (state = initialState, action) => {
             return multilevelTypeTimerEnd(state, action);
         case actionTypes.RESET_GAME_STATE:
             return resetGameState(state, action);
-        case actionTypes.SET_GAME_LEVEL:
-            return setGameLevel(state, action);
+        /* case actionTypes.SET_GAME_LEVEL:
+            return setGameLevel(state, action); */
         case actionTypes.LEVELS_DIALOGUE_TIMER_END:
             return levelsDialogueTimerEnd(state, action);
         case actionTypes.PLAYER_ROUND_TIMER_END:
@@ -291,12 +378,20 @@ const reducer = (state = initialState, action) => {
             return playerRoundOver(state, action);
         case actionTypes.SINGLE_GAME_OVER:
             return singleGameOver(state, action);
+        case actionTypes.LEVEL_OVER:
+            return levelOver(state, action);
+        case actionTypes.MULTILEVEL_GAME_OVER:
+            return multilevelGameOver(state, action);
         case actionTypes.SCREEN_TRACKER_ACTIVE_OR_INACTIVE:
             return screenTrackerActiveOrInactive(state, action);
         case actionTypes.RESTART_LAST_MISSION:
             return restartLastMission(state, action);
+        case actionTypes.RESTART_MULTILEVEL_MISSION:
+            return restartMultilevelMission(state, action);
         case actionTypes.PRE_PLAYER_TIMER_END:
             return prePlayerTimerEnd(state, action);
+        case actionTypes.START_NEXT_LEVEL:
+            return startNextLevel(state, action);
         default: return state;
     }
 };

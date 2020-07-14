@@ -7,7 +7,7 @@ export {
     multilevelTypeTimerEnd,
     showLevelsDialogue,
     showTypeDialogue,
-    setGameLevel,
+    // setGameLevel,
     levelsDailogueTimerEnd,
     playerRoundTimerEnd,
     roundTimerAlmostUp,
@@ -15,6 +15,10 @@ export {
 
     playerRoundOver,
     singleGameOver,
-    restartLastMission
+    levelOver,
+    multilevelGameOver,
+    restartLastMission,
+    restartMultilevelMission,
+    startNextLevel
 
 } from './gameActions';

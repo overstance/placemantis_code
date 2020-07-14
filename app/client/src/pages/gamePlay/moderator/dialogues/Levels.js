@@ -1,6 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect/* , useState */} from 'react';
 import {connect} from 'react-redux';
-import * as actions from '../../../../store/actions/index';
+// import * as actions from '../../../../store/actions/index';
 import Timer from '../../Timer';
 import {positionX} from '../../../../anime/position';
 import {stringUnderscoreForSpace} from '../../../../utilities/utilities';
@@ -20,19 +20,14 @@ const Levels = props => {
         }
 
         positionX(animationProp);
-
-        return () => {
-            props.onSetGameLevel(levelNumber, levelStage);
-            // console.log(props.shuffledStages, levelNumber, levelStage);
-        };
-    })
+    });
     
     return(
         <div className='levelsDialogue'>            
             <div className='levelsDialogueMessages'>
                 <div>
                     <h3>
-                        {"Level" + levelNumber}
+                        {"Level " + levelNumber}
                     </h3>
                 </div>
                 <img src={`/images/levels_map/${levelStageUnspaced + '.svg'}`} alt="levels map"/>
@@ -53,6 +48,8 @@ const Levels = props => {
                     timerType='levels'
                     gameType='Multilevel'
                     dispatchOnEnd
+                    level={levelNumber}
+                    stage={levelStage}
                 />
             </div>
         </div>
@@ -68,7 +65,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onSetGameLevel: (levelNumber, levelStage) => dispatch(actions.setGameLevel(levelNumber, levelStage))
+        // onSetGameLevel: (levelNumber, levelStage) => dispatch(actions.setGameLevel(levelNumber, levelStage))
     }
 }
 

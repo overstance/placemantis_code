@@ -9,14 +9,14 @@ export const setGameData = (gameData) => {
     }
 }
 
-// LEVELS DIALOGUE TRIGGERED ACTIONS
+/* // LEVELS DIALOGUE TRIGGERED ACTIONS
 export const setGameLevel = (levelNumber, levelStage) => {
     return {
         type: actionTypes.SET_GAME_LEVEL,
         number: levelNumber,
         stage: levelStage
     }
-}
+} */
 
 // TIMER TRIGGERED ACTIONS
 
@@ -35,9 +35,11 @@ export const multilevelTypeTimerEnd = () => {
 }
 
 // close levels dailogue and moderator and show player
-export const levelsDailogueTimerEnd = () => {
+export const levelsDailogueTimerEnd = (level, stage) => {
     return {
-        type: actionTypes.LEVELS_DIALOGUE_TIMER_END
+        type: actionTypes.LEVELS_DIALOGUE_TIMER_END,
+        level: level,
+        stage: stage
     }
 }
 
@@ -90,11 +92,42 @@ export const restartLastMission = () => {
     }
 }
 
-// PLAYER TRIGGERED ACTIONS
+export const restartMultilevelMission = () => {
+    return {
+        type: actionTypes.RESTART_MULTILEVEL_MISSION,
+    }
+}
+
+// GAME-PLAY [PLAYER] TRIGGERED ACTIONS
 
 export const playerRoundOver = () => {
     return {
         type: actionTypes.PLAYER_ROUND_OVER
+    }
+}
+
+export const levelOver = (levelRounds, completedLevelRounds, lifeCount, totalRounds, levelScore, rightCount, totalScore) => {
+    return {
+        type: actionTypes.LEVEL_OVER,
+        totalStageRounds: totalRounds,
+        levelScore: levelScore,
+        completedStageRounds: rightCount,
+        totalScore: totalScore,
+        levelRounds: levelRounds,
+        completedLevelRounds: completedLevelRounds,
+        lifeCount: lifeCount
+    }
+}
+
+export const multilevelGameOver = (totalRounds, levelScore, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty) => {
+    return {
+        type: actionTypes.MULTILEVEL_GAME_OVER,
+        totalStageRounds: totalRounds,
+        levelScore: levelScore,
+        completedStageRounds: rightCount,
+        totalScore: totalScore,
+        report: gameEndReport,
+        difficulty: playedDifficulty
     }
 }
 
@@ -107,6 +140,12 @@ export const singleGameOver = (totalRounds, rightCount, totalScore, gameEndRepor
         report: gameEndReport,
         stage: playedStage,
         difficulty: playedDifficulty
+    }
+}
+
+export const startNextLevel = () => {
+    return {
+        type: actionTypes.START_NEXT_LEVEL
     }
 }
 

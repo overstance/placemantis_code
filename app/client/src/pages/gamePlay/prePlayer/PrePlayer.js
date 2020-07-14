@@ -263,13 +263,13 @@ const PrePlayer = props => {
             </g>
             <g className="Preplayer_Map_target" fill="none" strokeWidth="4" strokeMiterlimit="10">
                 <circle stroke="#78B300" cx="964.214" cy="450.172" r="125.657"/>
-                <path stroke="#FF1A00" stroke-linecap="round" d="M964.214 418.758v62.829"/>
-                <path stroke="#FF1A00" stroke-linecap="round" d="M932.8 450.172h62.829"/>
+                <path stroke="#FF1A00" strokeLinecap="round" d="M964.214 418.758v62.829"/>
+                <path stroke="#FF1A00" strokeLinecap="round" d="M932.8 450.172h62.829"/>
             </g>
             <g className="Preplayer_Map_target" fill="none" strokeWidth="4" strokeMiterlimit="10">
                 <circle stroke="#78B300" cx="507.783" cy="450.172" r="204.472"/>
-                <path stroke="#FF1A00" stroke-linecap="round" d="M507.783 399.054V501.29"/>
-                <path stroke="#FF1A00" stroke-linecap="round" d="M456.665 450.172h102.236"/>
+                <path stroke="#FF1A00" strokeLinecap="round" d="M507.783 399.054V501.29"/>
+                <path stroke="#FF1A00" strokeLinecap="round" d="M456.665 450.172h102.236"/>
             </g>
             <path className="Preplayer_Map_scanner" fill="none" stroke="#ACFF00" strokeWidth="4" strokeLinecap="round" strokeMiterlimit="10" d="M25 120V25h95M25 757.295V855h95m1762.004 0H1975v-97.705M1975 120V25h-92.996"/>
         </svg>

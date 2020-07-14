@@ -122,8 +122,12 @@
             display: flex;
             flex-flow: row nowrap;
 
-            > * {
-                flex: 0 0 50%;
+            h3 {
+                flex: 0 0 30%;
+            }
+
+            span {
+                flex: 0 0 70%;
             }
         }
 
@@ -151,12 +155,19 @@
         h3 {
             margin: 0;
             color: $light-purple;
-            @include font-b48
+            @include font-m48;
+            padding: $frame-24;
+            box-sizing: border-box;
+
         }
 
         span {
             @include font-r36;
-            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @include font-r48;
+            color: $green
         }
     }
 }
@@ -175,8 +186,8 @@
 
         h2 {
             margin: 0;
-            background: $green;
-            color: $dark-blue;
+            background: $dark-purple;
+            color: $green;
             @include font-m60;
             display: flex;
             justify-content: center;
@@ -185,7 +196,7 @@
         }
 
         .gameOverDialogueMissionOver {
-            background: $purple;
+            color: $red;
         }
     }
 
@@ -306,6 +317,190 @@
             
 
             .gameOverDialogueButtonsWrapper {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                align-items: center;
+                padding: $frame-12;
+                @extend %dialogueSection;
+                height: 100%;
+
+                > div {
+                    flex: 0 0 32.5%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
+    }
+}
+
+.levelOverDialogue {
+    @extend %dialogueBasics;
+    background: $dark-blue;
+    border: $frame-6 solid $light-blue; 
+    display: flex;
+    flex-flow: column nowrap;
+    padding: $frame-24;
+
+    .levelOverDialogueHead {
+        flex: 0 0 20%;
+        max-height: 18.75vh;
+
+        h2 {
+            margin: 0;
+            background: $dark-purple;
+            color: $green;
+            @include font-m60;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @include by-parent;
+        }
+
+        .levelOverDialogueMissionOver {
+            color: $red;
+        }
+    }
+
+    .levelOverDialogueBody {
+        flex: 0 0 80%;
+        display: flex;
+        flex-flow: column nowrap;
+        max-height: 56.25vh;
+
+        > div {
+            max-height: 20vh;
+        }
+
+        .levelOverDialogueMissionInfo {
+            flex: 0 0 33.3%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: $frame-12;
+            box-sizing: border-box;
+            
+            > h3 {
+                flex: 0 0 59.375%;
+                @include font-m48;
+                color: $light-purple;
+                @extend %dialogueSection;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // box-sizing: border-box;
+                margin: 0;
+            }
+
+            .levelOverDialogueRoundInfo {
+                flex: 0 0 39.375%;
+                flex-flow: column;
+                padding: $frame-6;
+                @extend %dialogueSection;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                // box-sizing: border-box;
+
+                h4 {
+                    @extend %dialogueSectionHeader;
+                }
+
+                > div {
+                    flex: 0 0 60%;
+                    @include font-r48;
+                    display: flex;
+                    width: 100%;
+
+                    h5 {
+                        margin: 0;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        color: $purple;
+                    }
+
+                    div {
+                        flex: 0 1 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        @include font-r48;
+                        color: $purple;
+
+                        .levelOverDialogueCompleted {
+                            color: $green;
+                        }
+                    }
+                }
+            }
+        }
+
+        .levelOverDialogueScores {
+            flex: 0 0 33.3%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: $frame-12;
+            box-sizing: border-box;
+
+            > div {
+                flex: 0 0 32.5%;
+                display: flex;
+                flex-flow: column;
+                padding: $frame-6;
+                // box-sizing: border-box;
+                @extend %dialogueSection;
+                height: 100%;
+            }
+
+            h4 {
+                @extend %dialogueSectionHeader;
+            }
+
+            .levelOverDialogueScore {
+                flex: 0 0 60%;
+                @include font-r48;
+                color: $green;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .levelOverDialogueRange {
+                flex: 0 1 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                @include font-r48;
+                color: $purple;
+
+                .levelOverDialogueCompleted {
+                    color: $green;
+                }
+
+                span {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+
+        .levelOverDialogueButtons {
+            flex: 0 0 33.3%;
+            padding-top: $frame-12;
+            box-sizing: border-box;
+            
+
+            .levelOverDialogueButtonsWrapper {
                 display: flex;
                 flex-flow: row nowrap;
                 justify-content: space-between;

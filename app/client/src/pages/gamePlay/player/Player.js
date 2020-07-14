@@ -110,6 +110,8 @@ class Player extends Component {
     componentDidMount() {
         if (this.props.gameType === 'Single') {
             this.initializeSingleGame();
+        } else if (this.props.gameType === 'Multilevel') {
+            this.initializeMultilevelStage();
         }
     }
 
@@ -124,12 +126,24 @@ class Player extends Component {
         } else if (prevProps.screenTrackerActive === true && this.props.screenTrackerActive === false) {
             this.setState({ gamePaused: false });
         } else if (prevState.gameOver === false && this.state.gameOver === true) {
-            console.log('Running Game Over Routine');
-            let reason = "Game Over"
+           
+            let reason;
 
-            if (this.state.nextRound === this.state.totalRounds) {
-                reason = "Stage Completed"
+            if (this.props.gameType === "Multilevel") {
+                if (this.state.nextRound === this.state.totalRounds) {
+                    reason = 'Level Completed'
+                } else {
+                    reason = 'Level Over'
+                }
+            } else if (this.props.gameType === "Single") {
+                if (this.state.nextRound === this.state.totalRounds) {
+                    reason = 'Mission Completed'
+                } else {
+                    reason = 'Mission Over'
+                }
             }
+
+            console.log('Running Game Over Routine', reason);
 
             this.setState({
                 isRoundInterval: true, 
@@ -333,6 +347,43 @@ class Player extends Component {
         console.log('initialized single game', placeDomID/* , options, optionsShuffled */);
     }
 
+    initializeMultilevelStage = () => {
+        const stageName = this.props.levelStage;
+        const places = Places.filter(place =>
+            place.stages.indexOf(stageName) > -1
+        );
+        const placesShuffled = shuffleArray(places);
+        const otherPlaces = Places.filter(place => place.stages.indexOf(stageName) === -1).slice(0, 4);
+
+        console.log(places, otherPlaces, "multilevel  stage initialized: ", stageName);
+
+        const allPlaces = placesShuffled.concat(otherPlaces);
+        const round = this.state.nextRound + 1;
+        const place = placesShuffled[0];
+        const placeDomID = place.domID;
+        const featuredFiltered = allPlaces.filter(place => place.domID !== placeDomID);
+        const options = featuredFiltered.slice(0, 3);
+        options.push(place);
+        const optionsShuffled = shuffleArray(options);
+
+        this.setState({
+            totalRounds: placesShuffled.length,
+            nextRound: round,
+
+            allPlaces: allPlaces,
+            stagePlaces: placesShuffled,
+            nextPlace: place,
+            featuredPlaces: featuredFiltered,
+            nextPlaceName: placeDomID,
+
+            roundOptions: optionsShuffled,
+            showTimerPanelSelect: true,
+            showTimerPanelTimer: true,
+
+            restartMission: false
+        })
+    }
+
     initializeSingleGameRestart = () => {
         this.setState({
             totalRounds: 0,
@@ -405,7 +456,77 @@ class Player extends Component {
     roundIntervalEnds = () => {
         // console.log('round interval ends');
         if (this.state.gameOver === true) {
-            this.props.onSingleGameOver(this.state.totalRounds, this.state.rightChoiceCount, this.state.totalScore, this.state.gameEndReport, this.props.gameStage, this.props.difficulty);
+            if (this.props.gameType === 'Single') {
+                this.props.onSingleGameOver(
+                    this.state.totalRounds,
+                    this.state.rightChoiceCount,
+                    this.state.totalScore, 
+                    this.state.gameEndReport, 
+                    this.props.gameStage, 
+                    this.props.difficulty
+                );
+            } else if (this.props.gameType === 'Multilevel') {
+
+                if (this.props.level === this.props.shuffledStages.length) {
+                    let totalRoundsPlayed = this.props.totalMultilevelRounds + this.state.totalRounds;
+                    let completedRounds = this.props.completedMultilevelRounds + this.state.nextRound;
+                    let levelScore = this.state.totalScore;
+                    let totalScore = this.props.totalScore + this.state.totalScore;
+                    
+                    this.props.onMultilevelGameOver(
+                        
+                        totalRoundsPlayed,
+                        levelScore,
+                        completedRounds,
+                        totalScore, 
+                        this.state.gameEndReport,
+                        this.props.difficulty
+                    );
+                } else {
+                    let levelRounds = this.state.totalRounds;
+                    let completedLevelRounds = this.state.nextRound;
+                    let totalRoundsPlayed = this.props.totalMultilevelRounds + this.state.totalRounds;
+                    let completedRounds = this.props.completedMultilevelRounds + this.state.nextRound;
+                    let levelScore = this.state.totalScore;
+                    let totalScore = this.props.totalScore + this.state.totalScore;
+                   
+                    let lifeCount = 0;
+
+                    if (this.state.hasLive1) {
+                        lifeCount = lifeCount + 1
+                    }
+
+                    if (this.state.hasLive2) {
+                        lifeCount = lifeCount + 1
+                    }
+
+                    if (this.state.hasLive3) {
+                        lifeCount = lifeCount + 1
+                    }
+
+                    if (this.state.hasLive4) {
+                        lifeCount = lifeCount + 1
+                    }
+
+                    console.log('rounds played: ', this.props.totalMultilevelRounds, ' + ', this.state.totalRounds, ' = ', totalRoundsPlayed );
+                    console.log('total rounds: ', this.props.completedMultilevelRounds, ' + ', this.state.nextRound, ' = ', completedRounds );
+                    console.log('total score: ', this.props.totalScore, ' + ', this.state.totalScore, ' = ', totalScore );
+                    console.log('life count: ', lifeCount);
+
+
+                    this.props.onLevelOver(
+                        levelRounds,
+                        completedLevelRounds,
+                        lifeCount,
+                        totalRoundsPlayed,
+                        levelScore,
+                        completedRounds,
+                        totalScore
+                    );
+                }
+                
+            }
+            
         } else {
             this.setState({ isRoundInterval: false, roundOverReason: null});
             this.props.onPlayerRoundOver();
@@ -513,7 +634,11 @@ class Player extends Component {
     }
 
     placeOptionClicked = (domID) => {
-        if (domID === this.state.clickedOption || this.state.isRoundInterval) {
+
+        let isInWrongChoices = this.state.wrongRoundChoices.find(place => place === domID);
+        console.log(isInWrongChoices);
+
+        if (domID === this.state.clickedOption || this.state.isRoundInterval || isInWrongChoices) {
             return;
         } else {
             if (domID === this.state.nextPlaceName) {
@@ -653,7 +778,7 @@ class Player extends Component {
 
         let playerStage;
 
-        if (this.props.gameStage === 'Southern Africa') {
+        if (this.props.gameStage === 'Southern Africa' || this.props.levelStage === 'Southern Africa') {
             playerStage = 
             <SouthernAfrica 
                 nextPlace={this.state.nextPlaceName}
@@ -661,7 +786,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'Central and South Asia') {
+        } else if (this.props.gameStage === 'Central and South Asia' || this.props.levelStage === 'Central and South Asia') {
             playerStage = 
             <CSAsia 
                 nextPlace={this.state.nextPlaceName}
@@ -669,7 +794,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'Southern Europe') {
+        } else if (this.props.gameStage === 'Southern Europe' || this.props.levelStage === 'Southern Europe') {
             playerStage = 
             <SouthernEurope 
                 nextPlace={this.state.nextPlaceName}
@@ -677,7 +802,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'The Caribbean Islands') {
+        } else if (this.props.gameStage === 'The Caribbean Islands' || this.props.levelStage === 'The Caribbean Islands') {
             playerStage = 
             <Caribbean 
                 nextPlace={this.state.nextPlaceName}
@@ -685,7 +810,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'West and Central Africa') {
+        } else if (this.props.gameStage === 'West and Central Africa' || this.props.levelStage === 'West and Central Africa') {
             playerStage = 
             <WCAfrica 
                 nextPlace={this.state.nextPlaceName}
@@ -693,7 +818,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'East Africa and Middle East Asia') {
+        } else if (this.props.gameStage === 'East Africa and Middle East Asia' || this.props.levelStage === 'East Africa and Middle East Asia') {
             playerStage = 
             <EAfricaMEAsia 
                 nextPlace={this.state.nextPlaceName}
@@ -701,7 +826,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'Southeast Asia and Oceania') {
+        } else if (this.props.gameStage === 'Southeast Asia and Oceania' || this.props.levelStage === 'Southeast Asia and Oceania') {
             playerStage = 
             <SEAsiaOceania 
                 nextPlace={this.state.nextPlaceName}
@@ -709,7 +834,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'West Indies and West Africa') {
+        } else if (this.props.gameStage === 'West Indies and West Africa' || this.props.levelStage === 'West Indies and West Africa') {
             playerStage = 
             <WIndiesWAfrica 
                 nextPlace={this.state.nextPlaceName}
@@ -717,7 +842,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'Africa') {
+        } else if (this.props.gameStage === 'Africa' || this.props.levelStage === 'Africa') {
             playerStage = 
             <Africa 
                 nextPlace={this.state.nextPlaceName}
@@ -725,7 +850,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'Asia') {
+        } else if (this.props.gameStage === 'Asia' || this.props.levelStage === 'Asia') {
             playerStage = 
             <Asia 
                 nextPlace={this.state.nextPlaceName}
@@ -733,7 +858,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'Europe') {
+        } else if (this.props.gameStage === 'Europe' || this.props.levelStage === 'Europe') {
             playerStage = 
             <Europe 
                 nextPlace={this.state.nextPlaceName}
@@ -741,7 +866,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'North America') {
+        } else if (this.props.gameStage === 'North America' || this.props.levelStage === 'North America') {
             playerStage = 
             <NorthAmerica 
                 nextPlace={this.state.nextPlaceName}
@@ -749,7 +874,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'Oceania') {
+        } else if (this.props.gameStage === 'Oceania' || this.props.levelStage === 'Oceania') {
             playerStage = 
             <Oceania 
                 nextPlace={this.state.nextPlaceName}
@@ -757,7 +882,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'South America') {
+        } else if (this.props.gameStage === 'South America' || this.props.levelStage === 'South America') {
             playerStage = 
             <SouthAmerica 
                 nextPlace={this.state.nextPlaceName}
@@ -765,7 +890,7 @@ class Player extends Component {
                 nextRound={this.state.nextRound}
                 restartMission={this.state.restartMission}
             />
-        } else if (this.props.gameStage === 'World') {
+        } else if (this.props.gameStage === 'World' || this.props.levelStage === 'World') {
             playerStage = 
             <World 
                 nextPlace={this.state.nextPlaceName}
@@ -854,10 +979,12 @@ class Player extends Component {
                                 { this.state.isRoundInterval ?
                                   <div>
                                       { this.state.roundOverReason === "Good Choice" ||
-                                        this.state.roundOverReason === "Stage Completed" ? 
+                                        this.state.roundOverReason === "Level Completed" ||
+                                        this.state.roundOverReason === "Mission Completed" ? 
                                         <h4>{this.state.roundOverReason}</h4> : null}
                                       { this.state.roundOverReason === "Time Up" ||
-                                        this.state.roundOverReason === "Game Over" ? 
+                                        this.state.roundOverReason === "Level Over" ||
+                                        this.state.roundOverReason === "Mission Over" ? 
                                         <h3>{this.state.roundOverReason}</h3> : null}
                                       <Timer 
                                             seconds={this.state.roundIntervalSeconds}
@@ -881,8 +1008,8 @@ class Player extends Component {
                 </div>
                 <div className={styles.particulars}>
                     <div className={styles.stageId}>
-                        {this.props.gameType === 'Single' ? <span>{this.props.gameStage}</span> : null}
-                        {this.props.gameType === 'Multilevel' ? <span>{this.props.levelStage}</span> : null}
+                        {this.props.gameType === 'Single' ? <div>{this.props.gameStage}</div> : null}
+                        {this.props.gameType === 'Multilevel' ? <div><span>{'Level: ' + this.props.level}</span>{this.props.levelStage}</div> : null}
                     </div>
                     <div className={styles.score}>
                         <div>
@@ -957,9 +1084,15 @@ const mapStateToProps = state => {
         timerAlmostUp: state.game.timerAlmostUp,
 
         levelStage: state.game.levelStage,
-        startNextLevel: state.game.startNextLevel,
+        // startNextLevel: state.game.startNextLevel,
         level: state.game.level,
         levelScore: state.game.levelScore,
+
+        totalScore: state.game.totalGameScore,
+        totalMultilevelRounds: state.game.totalMultilevelRounds,
+        completedMultilevelRounds: state.game.completedMultilevelRounds,
+
+        shuffledStages: state.game.shuffledStages,
 
         screenTrackerActive: state.game.screenTrackerActive,
 
@@ -972,8 +1105,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onPlayerRoundOver: () => dispatch(actions.playerRoundOver()),
-        // onLevelOver: () => dispatch(actions.levelOver()),
-        // onMultilevelGameOver: () => dispatch(actions.multilevelGameOver()),
+        onLevelOver: (levelRounds, completedLevelRounds, lifeCount, totalRounds, levelScore, rightCount, totalScore) => dispatch(actions.levelOver(levelRounds, completedLevelRounds, lifeCount, totalRounds, levelScore, rightCount, totalScore)),
+        onMultilevelGameOver: (totalRounds, levelScore, rightCount, totalScore, gameEndReport, playedDifficulty) => dispatch(actions.multilevelGameOver(totalRounds, levelScore, rightCount, totalScore, gameEndReport, playedDifficulty)),
         onSingleGameOver: (totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty) => dispatch(actions.singleGameOver(totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty))
     }
 }

@@ -1,13 +1,13 @@
 import React/* , {useEffect} */ from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions/index';
+import {numberWithCommas} from '../../../../utilities/utilities';
 import '../moderator.scss';
 import Button from '../../../../components/common/buttons/DialogueButton';
 import {withRouter} from 'react-router-dom';
 
 const GameOver = props => {
 
-    let heading;
     let totalRounds;
     let completedRounds;
     let stageName;
@@ -17,27 +17,19 @@ const GameOver = props => {
         totalRounds = props.totalStageRounds;
         completedRounds = props.stageRoundsCompleted;
 
-        if (totalRounds === completedRounds) {
-            heading = "Mission Completed"
-        } else {
-            heading = "Mission Over"
-        }
-
     } else if (props.playedType === 'Multilevel') {
         stageName = "Multilevel Mission";
         totalRounds = props.totalMultilevelRounds;
         completedRounds = props.completedMultilevelRounds;
-
-        if (totalRounds === completedRounds) {
-            heading = "Mission Completed"
-        } else {
-            heading = "Mission Over"
-        }
     }
 
     const onPlayAgain = () => {
         // console.log('play again');
-        props.onRestartLastMission();
+        if (props.gameData.type === 'Single') {
+            props.onRestartLastMission();
+        } else if (props.gameData.type === 'Multilevel') {
+            props.onRestartMultilevelMission();
+        }
     }
 
     const onExit = () => {
@@ -45,12 +37,16 @@ const GameOver = props => {
         props.history.push('/');
     }
 
+    let missionScore = numberWithCommas(props.totalGameScore)
+
     return(
         <div className="gameOverDialogue">
             <div className="gameOverDialogueHead">
-                {/* {heading === 'Mission Completed' ? <h2>{heading}</h2> : null} */}
-                {/* {heading === 'Mission Over' ? <h2 className="gameOverDialogueMissionOver">{heading}</h2> : null} */}
-                <h2>{heading}</h2>
+                { totalRounds === completedRounds ? 
+                    <h2>Mission Completed</h2> 
+                    : 
+                    <h2 className='gameOverDialogueMissionOver'>Mission Over</h2>
+                }
             </div>
             <div className="gameOverDialogueBody">
                 <div className="gameOverDialogueMissionInfo">
@@ -74,10 +70,10 @@ const GameOver = props => {
                 <div className="gameOverDialogueScores">
                     <div>
                         <h4>
-                            This Score
+                            {props.gameType === 'Single' ? "This Score" : 'Total Score'}
                         </h4>
                         <span>
-                            {props.totalGameScore}
+                            {missionScore}
                         </span>
                     </div>
                     <div>
@@ -166,6 +162,7 @@ const mapDispatchToProps = dispatch => {
     return {
         // onPostGameScore: () => dispatch(actions.postGameScore()),
         onRestartLastMission: () => dispatch(actions.restartLastMission()),
+        onRestartMultilevelMission: () => dispatch(actions.restartMultilevelMission())
     }
 }
 

@@ -87,7 +87,7 @@ class Timer extends Component {
             this.props.onPlayerRoundTimerEnd();
         }
         else if (this.props.timerType === 'levels' && this.props.dispatchOnEnd) {
-            this.props.onLevelsDailogueTimerEnd();
+            this.props.onLevelsDailogueTimerEnd(this.props.level, this.props.stage);
         } else if (this.props.timerType === 'felicitator' && this.props.dispatchOnEnd) {
             // this.props.onFelicitatorTimerEnd();
         } else if (this.props.timerType === 'roundIntervalTimer') {
@@ -130,7 +130,7 @@ const mapDispatchToProps = dispatch => {
         onSingleTypeTimerEnd: () => dispatch(actions.singleTypeTimerEnd()),
         onMultilevelTypeTimerEnd: () => dispatch(actions.multilevelTypeTimerEnd()), 
         onPlayerRoundTimerEnd: () => dispatch(actions.playerRoundTimerEnd()),
-        onLevelsDailogueTimerEnd: () => dispatch(actions.levelsDailogueTimerEnd()),
+        onLevelsDailogueTimerEnd: (level, stage) => dispatch(actions.levelsDailogueTimerEnd(level, stage)),
         onRoundTimerAlmostUp: () => dispatch(actions.roundTimerAlmostUp()),
         onPrePlayerTimerEnd: () => dispatch(actions.prePlayerTimerEnd()),
         // onFelicitatorTimerEnd: () => dispatch(actions.felicitatorTimerEnd()),

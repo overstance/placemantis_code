@@ -59,6 +59,14 @@ class GamePlay extends Component {
     }
 
     render() {
+
+        let prePlayerStage;
+
+        if (this.props.gameData.type === "Multilevel") {
+            prePlayerStage = this.props.levelStage;
+        } else {
+            prePlayerStage = this.props.gameData.stage;
+        }
         return(
             /* <div className={styles.gamePlay}>
               <img src={`/images/flags/${data.name + '.svg'}`} alt="flag"/>
@@ -81,7 +89,7 @@ class GamePlay extends Component {
                 { this.props.showPlayer ?
                     <div className={styles.player}>
                         { this.state.prePlayerOn ?
-                            <PrePlayer stage={this.props.gameData.stage}/>
+                            <PrePlayer stage={prePlayerStage}/>
                             :
                             <Player />
                         }
