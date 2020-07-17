@@ -8,6 +8,7 @@ import HintBoard from '../player/stage/HintBoard';
 import RankBoard from '../player/stage/RankBoard';
 import TimerPanel from './activity/TimerPanel';
 import RoundsPanel from './activity/RoundsPanel';
+import IntervalBoard from './activity/IntervalBoard';
 import Option from './activity/Option';
 import * as actions from '../../../store/actions/index';
 import Timer from '../Timer';
@@ -68,6 +69,17 @@ class Player extends Component {
         rightUserOption: false,
         clickedOption: null,
 
+        bonusPointPerRightCount: 500,
+        rightCountForBonusPoints: 0,
+        displayedBonusPoint: 0,
+        rightCountForBonusPointsMaxSimple: 5,
+        rightCountForBonusPointsMaxHard: 6,
+        rightCountForBonusLive: 0,
+        rightCountForBonusLiveMaxSimple: 9,
+        rightCountForBonusLiveMaxHard: 10,
+        showBonusPoint: false,
+        showBonusLive: false,
+
         showHints: false,
         showUserRanking: false,
         showTimerPanelSelect: false,
@@ -111,7 +123,43 @@ class Player extends Component {
         if (this.props.gameType === 'Single') {
             this.initializeSingleGame();
         } else if (this.props.gameType === 'Multilevel') {
-            this.initializeMultilevelStage();
+            if (this.props.difficulty === 'Hard') {
+
+                let live4 = true;
+                let live3 = true;
+                let live2 = true;
+                let live1 = true;
+
+                let lifeCount = this.props.lifeCount;
+
+                if (lifeCount === 3) {
+                    live4 = false;
+                    live3 = true;
+                    live2 = true;
+                    live1 = true;
+                } else if (lifeCount === 2) {
+                    live4 = false;
+                    live3 = false;
+                    live2 = true;
+                    live1 = true;
+                } else if (lifeCount === 1) {
+                    live4 = false;
+                    live3 = false;
+                    live2 = false;
+                    live1 = true;
+                }
+
+                this.setState({ 
+                    hasLive1: live1,
+                    hasLive2: live2,
+                    hasLive3: live3,
+                    hasLive4: live4
+                }, () => {
+                    this.initializeMultilevelStage();
+                })
+            } else {
+                this.initializeMultilevelStage();
+            }   
         }
     }
 
@@ -134,6 +182,10 @@ class Player extends Component {
                     reason = 'Level Completed'
                 } else {
                     reason = 'Level Over'
+                }
+
+                if ((this.props.level === this.props.shuffledStages.length) || (this.props.difficulty === 'Hard' && this.state.hasLive1 === false)) {
+                    reason = "Mission Over"
                 }
             } else if (this.props.gameType === "Single") {
                 if (this.state.nextRound === this.state.totalRounds) {
@@ -166,6 +218,71 @@ class Player extends Component {
             let newTotalScore = this.state.totalScore + newRoundScore;
             let displayScore = this.state.displayedScorePerRound;
 
+            let pointRightCount = this.state.rightCountForBonusPoints;
+            let liveRightCount = this.state.rightCountForBonusLive;
+            // let newScore = this.state.totalScore;
+            let showBonusLive = this.state.showBonusLive;
+            let showBonusPoint = this.state.showBonusPoint;
+            let live4 = this.state.hasLive4;
+            let live3 = this.state.hasLive3;
+            let live2 = this.state.hasLive2;
+            let bonusPoint;
+
+            if (this.props.difficulty === 'Simple') {
+                pointRightCount =  pointRightCount + 1;
+                liveRightCount =  liveRightCount + 1;
+                if (pointRightCount < this.state.rightCountForBonusPointsMaxSimple) {
+                    showBonusPoint = false;
+                } else if (pointRightCount === this.state.rightCountForBonusPointsMaxSimple) {
+                    bonusPoint = pointRightCount * this.state.bonusPointPerRightCount;
+                    pointRightCount =  0;
+                    newTotalScore = this.state.totalScore + bonusPoint;
+                    showBonusPoint = true;
+                }
+
+                if (liveRightCount < this.state.rightCountForBonusLiveMaxSimple) {
+                    showBonusLive = false;
+                } else if (liveRightCount === this.state.rightCountForBonusLiveMaxSimple) {
+                    liveRightCount =  0;
+                    showBonusLive = true;
+
+                    if (this.state.hasLive4 === false) {
+                        live4 = true;
+                    } else if (this.state.hasLive3 === false) {
+                        live3 = true;
+                    } else if (this.state.hasLive2 === false) {
+                        live2 = true;
+                    }
+                }    
+            } else if (this.props.difficulty === 'Hard') {
+                pointRightCount =  pointRightCount + 1;
+                liveRightCount =  liveRightCount + 1;
+
+                if (pointRightCount < this.state.rightCountForBonusPointsMaxHard) {                   
+                    showBonusPoint = false;
+                } else if (pointRightCount === this.state.rightCountForBonusPointsMaxHard) {
+                    bonusPoint = pointRightCount * this.state.bonusPointPerRightCount;
+                    pointRightCount =  0;
+                    newTotalScore = this.state.totalScore + bonusPoint;
+                    showBonusPoint = true;
+                }
+
+                if (liveRightCount < this.state.rightCountForBonusLiveMaxHard) {                 
+                    showBonusPoint = false;
+                } else if (liveRightCount === this.state.rightCountForBonusLiveMaxHard) {
+                    liveRightCount =  0;
+                    showBonusLive = true;
+
+                    if (this.state.hasLive4 === false) {
+                        live4 = true;
+                    } else if (this.state.hasLive3 === false) {
+                        live3 = true;
+                    } else if (this.state.hasLive2 === false) {
+                        live2 = true;
+                    }
+                }    
+            }
+
 
             this.setState({ 
                 rightChoiceCount: newRightChoiceCount,
@@ -177,7 +294,17 @@ class Player extends Component {
                 isRoundInterval: true,
                 showTimerPanelSelect: false, 
                 showTimerPanelTimer: false,
-                roundOverReason: "Good Choice"
+                roundOverReason: "Good Choice",
+
+                rightCountForBonusPoints: pointRightCount,
+                rightCountForBonusLive: liveRightCount,
+                displayedBonusPoint: bonusPoint,
+                // totalScore: newScore,
+                showBonusLive: showBonusLive,
+                showBonusPoint: showBonusPoint,
+                hasLive4: live4,
+                hasLive3: live3,
+                hasLive2: live2
             });
             
         } else if (prevProps.roundTimerElapsed === false && this.props.roundTimerElapsed === true && this.state.gameOver === false)   {
@@ -224,6 +351,10 @@ class Player extends Component {
                     hasLive3: live3,
                     hasLive4: live4,
                     // gameOver: isGameOver,
+                    rightCountForBonusPoints: 0,
+                    rightCountForBonusLive: 0,
+                    showBonusLive: false,
+                    showBonusPoint: false,
                     isRoundInterval: true,
                     showTimerPanelSelect: false, 
                     showTimerPanelTimer: false,
@@ -261,6 +392,10 @@ class Player extends Component {
                     hasLive3: live3,
                     hasLive4: live4,
                     // gameOver: isGameOver,
+                    rightCountForBonusPoints: 0,
+                    rightCountForBonusLive: 0,
+                    showBonusLive: false,
+                    showBonusPoint: false,
                     isRoundInterval: true,
                     showTimerPanelSelect: false, 
                     showTimerPanelTimer: false,
@@ -298,7 +433,10 @@ class Player extends Component {
                     hasLive3: live3,
                     hasLive4: live4,
                     // gameOver: isGameOver, 
-                    
+                    rightCountForBonusPoints: 0,
+                    rightCountForBonusLive: 0,
+                    showBonusLive: false,
+                    showBonusPoint: false,
                     isRoundInterval: true,
                     showTimerPanelSelect: false, 
                     showTimerPanelTimer: false,
@@ -459,7 +597,7 @@ class Player extends Component {
             if (this.props.gameType === 'Single') {
                 this.props.onSingleGameOver(
                     this.state.totalRounds,
-                    this.state.rightChoiceCount,
+                    this.state.nextRound,
                     this.state.totalScore, 
                     this.state.gameEndReport, 
                     this.props.gameStage, 
@@ -467,14 +605,27 @@ class Player extends Component {
                 );
             } else if (this.props.gameType === 'Multilevel') {
 
-                if (this.props.level === this.props.shuffledStages.length) {
+                if ((this.props.level === this.props.shuffledStages.length) || (this.props.difficulty === 'Hard' && this.state.hasLive1 === false)) {
                     let totalRoundsPlayed = this.props.totalMultilevelRounds + this.state.totalRounds;
                     let completedRounds = this.props.completedMultilevelRounds + this.state.nextRound;
                     let levelScore = this.state.totalScore;
                     let totalScore = this.props.totalScore + this.state.totalScore;
+
+                    if (this.props.difficulty === 'Hard' && this.state.hasLive1 === false) {
+                        let allPlaces = Places;
+                        let allStages = this.props.shuffledStages;
+                        let allRoundsCount = 0;
+
+                        for (var i = 0; i < allStages.length; i++) {
+                            let stageName = allStages[i];
+                            let roundCount = allPlaces.filter(place => place.stages.indexOf(stageName) > -1).length;
+                            allRoundsCount = allRoundsCount + roundCount;
+                        }
+
+                        totalRoundsPlayed = allRoundsCount;
+                    }
                     
-                    this.props.onMultilevelGameOver(
-                        
+                    this.props.onMultilevelGameOver(                  
                         totalRoundsPlayed,
                         levelScore,
                         completedRounds,
@@ -508,8 +659,8 @@ class Player extends Component {
                         lifeCount = lifeCount + 1
                     }
 
-                    console.log('rounds played: ', this.props.totalMultilevelRounds, ' + ', this.state.totalRounds, ' = ', totalRoundsPlayed );
-                    console.log('total rounds: ', this.props.completedMultilevelRounds, ' + ', this.state.nextRound, ' = ', completedRounds );
+                    console.log('total rounds: ', this.props.totalMultilevelRounds, ' + ', this.state.totalRounds, ' = ', totalRoundsPlayed );
+                    console.log('total rounds completed: ', this.props.completedMultilevelRounds, ' + ', this.state.nextRound, ' = ', completedRounds );
                     console.log('total score: ', this.props.totalScore, ' + ', this.state.totalScore, ' = ', totalScore );
                     console.log('life count: ', lifeCount);
 
@@ -528,7 +679,10 @@ class Player extends Component {
             }
             
         } else {
-            this.setState({ isRoundInterval: false, roundOverReason: null});
+            this.setState({ 
+                isRoundInterval: false, 
+                roundOverReason: null,               
+            });
             this.props.onPlayerRoundOver();
             this.initializeNextRound();
         }
@@ -569,9 +723,8 @@ class Player extends Component {
 
                 showHints: false,
                 showUserRanking: false,
-
-                // roundScore: 0,
-
+                showBonusLive: false,
+                showBonusPoint: false,
                 showTimerPanelSelect: true,
                 showTimerPanelTimer: true,
             });
@@ -642,11 +795,12 @@ class Player extends Component {
             return;
         } else {
             if (domID === this.state.nextPlaceName) {
+                
                 this.setState({
                     rightRoundChoice: domID, 
                     rightUserOption: true, 
                     clickedOption: domID,
-                    isRoundScoreLoss: false
+                    isRoundScoreLoss: false,
                 });
 
                 // console.log(domID);
@@ -693,6 +847,10 @@ class Player extends Component {
                         hasLive2: live2,
                         hasLive3: live3,
                         hasLive4: live4,
+                        rightCountForBonusPoints: 0,
+                        rightCountForBonusLive: 0,
+                        showBonusLive: false,
+                        showBonusPoint: false,
                         // gameOver: isGameOver,
                         wrongRoundChoices: wrongChoices, 
                         rightUserOption: false, 
@@ -727,6 +885,10 @@ class Player extends Component {
                         hasLive2: live2,
                         hasLive3: live3,
                         hasLive4: live4,
+                        rightCountForBonusPoints: 0,
+                        rightCountForBonusLive: 0,
+                        showBonusLive: false,
+                        showBonusPoint: false,
                         // gameOver: isGameOver,
                         wrongRoundChoices: wrongChoices, 
                         rightUserOption: false, 
@@ -762,6 +924,10 @@ class Player extends Component {
                         hasLive2: live2,
                         hasLive3: live3,
                         hasLive4: live4,
+                        rightCountForBonusPoints: 0,
+                        rightCountForBonusLive: 0,
+                        showBonusLive: false,
+                        showBonusPoint: false,
                         // gameOver:isGameOver,
                         wrongRoundChoices: wrongChoices, 
                         rightUserOption: false, 
@@ -977,21 +1143,22 @@ class Player extends Component {
                             </div>
                             <div className={styles.playerRoundIntervalBoard}>
                                 { this.state.isRoundInterval ?
-                                  <div>
-                                      { this.state.roundOverReason === "Good Choice" ||
-                                        this.state.roundOverReason === "Level Completed" ||
-                                        this.state.roundOverReason === "Mission Completed" ? 
-                                        <h4>{this.state.roundOverReason}</h4> : null}
-                                      { this.state.roundOverReason === "Time Up" ||
-                                        this.state.roundOverReason === "Level Over" ||
-                                        this.state.roundOverReason === "Mission Over" ? 
-                                        <h3>{this.state.roundOverReason}</h3> : null}
-                                      <Timer 
-                                            seconds={this.state.roundIntervalSeconds}
-                                            onRoundIntervalTimerEnds={this.roundIntervalEnds}
-                                            timerType='roundIntervalTimer'
+                                    <>
+                                        <IntervalBoard 
+                                            roundOverReason={this.state.roundOverReason}
+                                            showBonusPoint={this.state.showBonusPoint}
+                                            showBonusLive={this.state.showBonusLive}
+                                            displayedBonusPoint={this.state.displayedBonusPoint}
                                         />
-                                    </div>
+                                        <div className={styles.intervalBoardTime}>
+                                            <Timer 
+                                                    seconds={this.state.roundIntervalSeconds}
+                                                    onRoundIntervalTimerEnds={this.roundIntervalEnds}
+                                                    timerType='roundIntervalTimer'
+                                                    invisible
+                                            />
+                                        </div>
+                                    </>
                                     :
                                     null
                                 }
@@ -1087,6 +1254,7 @@ const mapStateToProps = state => {
         // startNextLevel: state.game.startNextLevel,
         level: state.game.level,
         levelScore: state.game.levelScore,
+        lifeCount: state.game.lifeCount,
 
         totalScore: state.game.totalGameScore,
         totalMultilevelRounds: state.game.totalMultilevelRounds,
@@ -1105,9 +1273,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onPlayerRoundOver: () => dispatch(actions.playerRoundOver()),
-        onLevelOver: (levelRounds, completedLevelRounds, lifeCount, totalRounds, levelScore, rightCount, totalScore) => dispatch(actions.levelOver(levelRounds, completedLevelRounds, lifeCount, totalRounds, levelScore, rightCount, totalScore)),
-        onMultilevelGameOver: (totalRounds, levelScore, rightCount, totalScore, gameEndReport, playedDifficulty) => dispatch(actions.multilevelGameOver(totalRounds, levelScore, rightCount, totalScore, gameEndReport, playedDifficulty)),
-        onSingleGameOver: (totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty) => dispatch(actions.singleGameOver(totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty))
+        onLevelOver: (levelRounds, completedLevelRounds, lifeCount, totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore) => dispatch(actions.levelOver(levelRounds, completedLevelRounds, lifeCount, totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore)),
+        onMultilevelGameOver: (totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore, gameEndReport, playedDifficulty) => dispatch(actions.multilevelGameOver(totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore, gameEndReport, playedDifficulty)),
+        onSingleGameOver: (totalRounds, completedRounds, totalScore, gameEndReport, playedStage, playedDifficulty) => dispatch(actions.singleGameOver(totalRounds, completedRounds, totalScore, gameEndReport, playedStage, playedDifficulty))
     }
 }
 

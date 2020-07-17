@@ -45,7 +45,7 @@ const initialState = {
     completedMultilevelRounds: 0,
     levelRounds: 0,
     completedLevelRounds: 0,
-    lifeCount: 0,
+    lifeCount: 4,
     
     shuffledStages: [],
 
@@ -160,8 +160,8 @@ const levelOver = (state, action) => {
         roundTimerElapsed: false,
         timerAlmostUp: false,
         showPlayer: false,
-        totalMultilevelRounds: action.totalStageRounds,
-        completedMultilevelRounds: action.completedStageRounds,
+        totalMultilevelRounds: action.totalRoundsPlayed,
+        completedMultilevelRounds: action.totalRoundsCompleted,
         levelScore: action.levelScore,
         totalGameScore: action.totalScore,
         gameStatus: 'On',
@@ -190,8 +190,8 @@ const multilevelGameOver = (state, action) => {
         timerAlmostUp: false,
         showPlayer: false,
         singleGameActive: false,
-        totalMultilevelRounds: action.totalStageRounds,
-        completedMultilevelRounds: action.completedStageRounds,
+        totalMultilevelRounds: action.totalRoundsPlayed,
+        completedMultilevelRounds: action.totalRoundsCompleted,
         levelScore: action.levelScore,
         totalGameScore: action.totalScore,
         gameStatus: 'Off',
@@ -299,21 +299,9 @@ const restartLastMission = (state, action) => {
         roundTimerElapsed: false,
         timerAlmostUp: false,
 
-        level: 0,
-        levelScore: 0,
-        levelStage: null,
-        totalMultilevelRounds: 0,
-        completedMultilevelRounds: 0,
-        levelRounds: 0,
-        completedLevelRounds: 0,
-        lifeCount: 0,
-
         showModerator: false,
         showFelicitator: false,
         showPlayer: true,
-
-        /* restartMissionAfterGameOver: true,
-        gameData: action.gameData */
     }
 }
 
@@ -339,12 +327,15 @@ const restartMultilevelMission = (state, action) => {
         roundTimerElapsed: false,
         timerAlmostUp: false,
         
-        startNextLevel: false,
+        
         level: 0,
         levelScore: 0,
         levelStage: null,
         totalMultilevelRounds: 0,
         completedMultilevelRounds: 0,
+        levelRounds: 0,
+        completedLevelRounds: 0,
+        lifeCount: 0,
 
         showModerator: true,
         showGameLevelsDialogue: true,
@@ -366,8 +357,6 @@ const reducer = (state = initialState, action) => {
             return multilevelTypeTimerEnd(state, action);
         case actionTypes.RESET_GAME_STATE:
             return resetGameState(state, action);
-        /* case actionTypes.SET_GAME_LEVEL:
-            return setGameLevel(state, action); */
         case actionTypes.LEVELS_DIALOGUE_TIMER_END:
             return levelsDialogueTimerEnd(state, action);
         case actionTypes.PLAYER_ROUND_TIMER_END:

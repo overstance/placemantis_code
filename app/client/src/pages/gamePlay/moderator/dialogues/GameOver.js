@@ -1,10 +1,12 @@
-import React/* , {useEffect} */ from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import {numberWithCommas} from '../../../../utilities/utilities';
+import {scaleElement} from '../../../../anime/scale';
 import '../moderator.scss';
 import Button from '../../../../components/common/buttons/DialogueButton';
 import {withRouter} from 'react-router-dom';
+
 
 const GameOver = props => {
 
@@ -23,6 +25,38 @@ const GameOver = props => {
         completedRounds = props.completedMultilevelRounds;
     }
 
+    let totalScore = props.totalGameScore;
+    let missionScore = numberWithCommas(totalScore);
+    let unbonusedStageScore = totalRounds * 1000;
+
+
+
+    useEffect(() => {
+
+        let scaleProp = {
+            animatedClass: '.gameOverDialogue',
+            scaleFactor: [0.75, 1],
+            transformOrigin: '50% 50%'
+        }
+ 
+        scaleElement(scaleProp);
+
+        if (completedRounds <= 0.5 * totalRounds) {
+            const elem = document.querySelector('.gameOverDialogueCompletedRounds');
+            elem.style.color = '#ff1a00';
+        } 
+    
+        if (totalScore <= 0.5 * unbonusedStageScore) {
+            const elem = document.querySelector('.gameOverMissionScore');
+            elem.style.color = '#ff1a00';
+        }
+
+        if ((completedRounds <= 0.5 * totalRounds) || (totalScore <= 0.5 * unbonusedStageScore)) {
+            const elem = document.querySelector('.gameOverDialogueTitle');
+            elem.style.color = '#ff1a00';
+        } 
+    });
+
     const onPlayAgain = () => {
         // console.log('play again');
         if (props.gameData.type === 'Single') {
@@ -37,16 +71,16 @@ const GameOver = props => {
         props.history.push('/');
     }
 
-    let missionScore = numberWithCommas(props.totalGameScore)
-
     return(
         <div className="gameOverDialogue">
             <div className="gameOverDialogueHead">
-                { totalRounds === completedRounds ? 
-                    <h2>Mission Completed</h2> 
-                    : 
-                    <h2 className='gameOverDialogueMissionOver'>Mission Over</h2>
-                }
+                <h2 className="gameOverDialogueTitle">
+                    { totalRounds === completedRounds ? 
+                        "Mission Completed" 
+                        : 
+                        "Mission Over"
+                    }
+                </h2> 
             </div>
             <div className="gameOverDialogueBody">
                 <div className="gameOverDialogueMissionInfo">
@@ -55,7 +89,7 @@ const GameOver = props => {
                     </h3>
                     <div className="gameOverDialogueRoundInfo">
                         <h4>
-                           Completed
+                           Attempted
                         </h4>
                         <div>
                             <h5>
@@ -72,7 +106,7 @@ const GameOver = props => {
                         <h4>
                             {props.gameType === 'Single' ? "This Score" : 'Total Score'}
                         </h4>
-                        <span>
+                        <span className="gameOverMissionScore">
                             {missionScore}
                         </span>
                     </div>

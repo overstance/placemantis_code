@@ -1,7 +1,8 @@
-import React/* , {useEffect} */ from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../../../store/actions/index';
 import {numberWithCommas} from '../../../../utilities/utilities';
+import {scaleElement} from '../../../../anime/scale';
 import '../moderator.scss';
 import Button from '../../../../components/common/buttons/DialogueButton';
 import {withRouter} from 'react-router-dom';
@@ -10,8 +11,42 @@ const LevelOver = props => {
     
     let totalRounds = props.levelRounds;
     let completedRounds = props.completedLevelRounds;
+    let score = props.levelScore;
     let levels = props.levelStages.length;
     let level = props.level;
+    let levelScore = numberWithCommas(score);
+    let unbonusedStageScore = totalRounds * 1000;
+
+    useEffect(() => {
+
+        let scaleProp = {
+            animatedClass: '.levelOverDialogue',
+            scaleFactor: [0.75, 1],
+            transformOrigin: '50% 50%'
+        }
+ 
+        scaleElement(scaleProp);
+
+        if (completedRounds <= 0.5 * totalRounds) {
+            const elem = document.querySelector('.levelOverDialogueCompletedRounds');
+            elem.style.color = '#ff1a00';
+        } 
+    
+        if (score <= 0.5 * unbonusedStageScore) {
+            const elem = document.querySelector('.levelOverDialogueScore');
+            elem.style.color = '#ff1a00';
+        }
+
+        if (props.lifeCount <= 2) {
+            const elem = document.querySelector('.levelOverDialogueLifeCount');
+            elem.style.color = '#ff1a00';
+        }
+
+        if ((completedRounds <= 0.5 * totalRounds) || (score <= 0.5 * unbonusedStageScore) || (props.lifeCount <= 2)) {
+            const elem = document.querySelector('.levelOverDialogueTitle');
+            elem.style.color = '#ff1a00';
+        }
+    });
 
     const onProceed = () => {
         props.onStartNextLevel();
@@ -22,18 +57,16 @@ const LevelOver = props => {
         props.history.push('/');
     }
 
-    let levelScore = numberWithCommas(props.levelScore);
-
-    
-
     return(
         <div className="levelOverDialogue">
             <div className="levelOverDialogueHead">
-                { totalRounds === completedRounds ? 
-                    <h2>Level Completed</h2> 
-                    : 
-                    <h2 className='levelOverDialogueMissionOver'>Level Over</h2>
-                }
+                <h2 className="levelOverDialogueTitle">
+                    { totalRounds === completedRounds ? 
+                        "Level Completed" 
+                        : 
+                        "Level Over"
+                    }
+                </h2> 
             </div>
             <div className="levelOverDialogueBody">
                 <div className="levelOverDialogueMissionInfo">
@@ -42,14 +75,14 @@ const LevelOver = props => {
                     </h3>
                     <div className="levelOverDialogueRoundInfo">
                         <h4>
-                           Completed
+                           Attempted
                         </h4>
                         <div>
                             <h5>
                                 Rounds:
                             </h5>
                             <div>
-                                <span className="levelOverDialogueCompleted">{completedRounds}</span><span>{'/' + totalRounds}</span>
+                                <span className="levelOverDialogueCompletedRounds">{completedRounds}</span><span>{'/' + totalRounds}</span>
                             </div>
                         </div>
                     </div>
@@ -68,7 +101,7 @@ const LevelOver = props => {
                             Level
                         </h4>
                         <div className="levelOverDialogueRange">
-                            <span className="levelOverDialogueCompleted">{level}</span><span>{'/' + levels}</span>
+                            <span className="levelOverDialogueCompletedLevels">{level}</span><span>{'/' + levels}</span>
                         </div>
                     </div>
                     <div>
@@ -76,7 +109,7 @@ const LevelOver = props => {
                             Lives
                         </h4>
                         <div className="levelOverDialogueRange">
-                            <span className="levelOverDialogueCompleted">{props.lifeCount}</span><span>{'/4'}</span>
+                            <span className="levelOverDialogueLifeCount">{props.lifeCount}</span><span>{'/4'}</span>
                         </div>
                     </div>
                 </div>

@@ -44,17 +44,13 @@
                 flex: 0 0 12%;
                 display: flex;
                 flex-flow: row nowrap;
-                padding: $frame-24;
-                box-sizing: border-box;
-                background: $dark-purple;
 
                 > div {
                     flex: 0 0 50%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    background: $dark-purple;
-
+                    
                     button {
                         padding: 0;
                         border: none;
@@ -63,6 +59,8 @@
                         justify-content: center;
                         align-items: center;
                         cursor: pointer;
+                        background: $dark-purple;
+                        @include by-parent;
                     }
 
                     svg {
@@ -133,34 +131,11 @@
                 display: flex;
                 justify-content: center;
                 align-items: flex-end;
+                overflow-y: hidden;
 
-                div {
-                    background: $purple;
-                    display: flex;
-                    flex-flow: column;
-                    padding: $frame-12 $frame-24;
-                    border: $frame-6 solid $blue2;
-                    
-
-                    h4 {
-                        margin: 0;
-                        padding: 0;
-                        color: $green;
-                        @include font-r36;
-                        line-height: 1;
-                    }
-
-                    h3 {
-                        margin: 0;
-                        padding: 0;
-                        color: $red;@include font-b36;
-                        line-height: 1;
-                    }
-
-                    span {
-                        opacity: 0;
-                        height: 0;
-                    }
+                .intervalBoardTime {
+                    height: 0;
+                    width: 0;
                 }
             }
         }

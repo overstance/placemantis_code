@@ -109,7 +109,10 @@ class Timer extends Component {
 
         let remaining;
 
-        if ((this.props.seconds && this.props.minutes) || this.props.minutes) {
+        if (this.props.invisible) {
+            remaining = 
+            <span></span>
+        } else if ((this.props.seconds && this.props.minutes) || this.props.minutes) {
             remaining = 
             <span>{this.state.minutes + "m: " + this.state.seconds + "s"}</span>
         } else if (this.props.seconds) {

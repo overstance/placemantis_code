@@ -1,8 +1,20 @@
-import React/* , {useEffect} */ from 'react';
+import React, {useEffect} from 'react';
 import './dialogue.scss';
 import Button from '../../../../components/common/buttons/DialogueButton';
+import {scaleElement} from '../../../../anime/scale';
 
 const Dialogue = props => {
+
+    useEffect(() => {
+
+        let scaleProp = {
+            animatedClass: '.playerDialogueModal',
+            scaleFactor: [0.75, 1],
+            transformOrigin: '50% 50%'
+        }
+ 
+        scaleElement(scaleProp);
+    });
 
     let options;
     let heading;

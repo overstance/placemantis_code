@@ -194,10 +194,6 @@
             align-items: center;
             @include by-parent;
         }
-
-        .gameOverDialogueMissionOver {
-            color: $red;
-        }
     }
 
     .gameOverDialogueBody {
@@ -345,6 +341,12 @@
     flex-flow: column nowrap;
     padding: $frame-24;
 
+    .levelOverDialogueCompletedRounds,
+    .levelOverDialogueCompletedLevels,
+    .levelOverDialogueLifeCount {
+        color: $green;
+    }
+
     .levelOverDialogueHead {
         flex: 0 0 20%;
         max-height: 18.75vh;
@@ -358,10 +360,6 @@
             justify-content: center;
             align-items: center;
             @include by-parent;
-        }
-
-        .levelOverDialogueMissionOver {
-            color: $red;
         }
     }
 
@@ -433,10 +431,6 @@
                         align-items: center;
                         @include font-r48;
                         color: $purple;
-
-                        .levelOverDialogueCompleted {
-                            color: $green;
-                        }
                     }
                 }
             }
@@ -481,10 +475,6 @@
                 align-items: center;
                 @include font-r48;
                 color: $purple;
-
-                .levelOverDialogueCompleted {
-                    color: $green;
-                }
 
                 span {
                     display: flex;

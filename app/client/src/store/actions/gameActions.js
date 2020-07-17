@@ -106,12 +106,12 @@ export const playerRoundOver = () => {
     }
 }
 
-export const levelOver = (levelRounds, completedLevelRounds, lifeCount, totalRounds, levelScore, rightCount, totalScore) => {
+export const levelOver = (levelRounds, completedLevelRounds, lifeCount, totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore) => {
     return {
         type: actionTypes.LEVEL_OVER,
-        totalStageRounds: totalRounds,
+        totalRoundsPlayed: totalRoundsPlayed,
         levelScore: levelScore,
-        completedStageRounds: rightCount,
+        totalRoundsCompleted: totalRoundsCompleted,
         totalScore: totalScore,
         levelRounds: levelRounds,
         completedLevelRounds: completedLevelRounds,
@@ -119,23 +119,23 @@ export const levelOver = (levelRounds, completedLevelRounds, lifeCount, totalRou
     }
 }
 
-export const multilevelGameOver = (totalRounds, levelScore, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty) => {
+export const multilevelGameOver = (totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore, gameEndReport, playedStage, playedDifficulty) => {
     return {
         type: actionTypes.MULTILEVEL_GAME_OVER,
-        totalStageRounds: totalRounds,
+        totalRoundsPlayed: totalRoundsPlayed,
         levelScore: levelScore,
-        completedStageRounds: rightCount,
+        totalRoundsCompleted: totalRoundsCompleted,
         totalScore: totalScore,
         report: gameEndReport,
         difficulty: playedDifficulty
     }
 }
 
-export const singleGameOver = (totalRounds, rightCount, totalScore, gameEndReport, playedStage, playedDifficulty) => {
+export const singleGameOver = (totalRounds, completedRounds, totalScore, gameEndReport, playedStage, playedDifficulty) => {
     return {
         type: actionTypes.SINGLE_GAME_OVER,
         totalStageRounds: totalRounds,
-        completedStageRounds: rightCount,
+        completedStageRounds: completedRounds,
         totalScore: totalScore,
         report: gameEndReport,
         stage: playedStage,

@@ -302,3 +302,94 @@
         }
     }
 }
+
+.playerIntervalBoard {
+    width: 20vw;
+    // max-height: 50%;
+    box-sizing: border-box;
+
+    // display: flex;
+    // flex-flow: column;
+    .playerIntervalBoardBubbles {
+        height: 5vh;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+
+        svg {
+            width: 8.5vw;
+        }
+
+        .playerIntervalBoardBubblesDots {
+            fill: $green;
+        }
+    }
+
+    .playerIntervalBoardMessage {
+        background: $purple;
+        border: $frame-6 solid $dark-green;
+        
+        .playerIntervalBoardMain {
+            display: flex;
+            flex-flow: row nowrap;
+
+            .playerIntervalBoardReason {
+                margin: 0;
+                flex: 0 0 70%;
+                color: $green;
+                @include font-b36;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .playerIntervalBoardMantis {
+                flex: 0 0 30%;
+                background: $dark-purple;
+                padding: $frame-12;
+                box-sizing: border-box;
+                display: flex;
+
+
+                svg {
+                    @include by-parent;
+                }
+            }
+        }
+
+        .playerIntervalBoardBonus {
+            display: flex;
+            flex-flow: row nowrap;
+            border-top: $frame-6 solid $dark-green;
+
+            h5 {
+                margin: 0;
+                background: $blue2;
+                color: $green;
+                @include font-b36;
+                padding: $frame-6;
+                display: flex;
+                align-items: center;
+                color: $light-purple;
+            }
+
+            span {
+                flex: 0 1 100%;
+                background: $blue1;
+                color: $green;
+                @include font-r36;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: $frame-6;
+
+                svg {
+                    width: 5vh;
+                    height: 5vh;
+                }
+            }
+        }
+
+    }
+
+}

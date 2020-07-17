@@ -8,10 +8,6 @@ import Player from './player/Player';
 import PrePlayer from './prePlayer/PrePlayer';
 import Timer from './Timer';
 
-/* const data = {
-    name: "Australia"
-} */
-
 class GamePlay extends Component {
 
     state = {
