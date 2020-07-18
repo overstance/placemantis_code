@@ -9,6 +9,7 @@ import RankBoard from '../player/stage/RankBoard';
 import TimerPanel from './activity/TimerPanel';
 import RoundsPanel from './activity/RoundsPanel';
 import IntervalBoard from './activity/IntervalBoard';
+import BonusMeter from './activity/BonusMeter';
 import Option from './activity/Option';
 import * as actions from '../../../store/actions/index';
 import Timer from '../Timer';
@@ -69,14 +70,19 @@ class Player extends Component {
         rightUserOption: false,
         clickedOption: null,
 
-        bonusPointPerRightCount: 500,
+        bonusPointPerRightCount: 125,
         rightCountForBonusPoints: 0,
         displayedBonusPoint: 0,
-        rightCountForBonusPointsMaxSimple: 5,
-        rightCountForBonusPointsMaxHard: 6,
+        rightCountForBonusPointsMaxSimple: 6,
+        rightCountForBonusPointsMaxHard: 8,
         rightCountForBonusLive: 0,
-        rightCountForBonusLiveMaxSimple: 9,
-        rightCountForBonusLiveMaxHard: 10,
+        rightCountForBonusLiveMaxSimple: 10,
+        rightCountForBonusLiveMaxHard: 12,
+        bonusPointPerRightCountHard: 250,
+        rightCountForBonusPointsWorldMaxSimple: 10,
+        rightCountForBonusPointsWorldMaxHard: 14,
+        rightCountForBonusLiveWorldMaxSimple: 16,
+        rightCountForBonusLiveWorldMaxHard: 20,
         showBonusPoint: false,
         showBonusLive: false,
 
@@ -97,9 +103,9 @@ class Player extends Component {
         displayedRoundScore: "0",
         isRoundScoreLoss: false,
 
-        simpleSecondsPerRound: 15,
-        hardSecondsPerRound: 10,
-        roundTimerWarningSecond: 5,
+        simpleSecondsPerRound: 12,
+        hardSecondsPerRound: 8,
+        roundTimerWarningSecond: 4,
 
         roundOverReason: null,
         isRoundInterval: false,
@@ -115,22 +121,67 @@ class Player extends Component {
         showRestartGame: false,
         restartMission: false,
 
+        showBonusMeter: true,
+
         gameEndReport: null,
         gameOver: false,
     }
 
     componentDidMount() {
         if (this.props.gameType === 'Single') {
-            this.initializeSingleGame();
+            let bonus = this.state.bonusPointPerRightCount;
+            let pointMaxSimple = this.state.rightCountForBonusPointsMaxSimple;
+            let pointMaxHard = this.state.rightCountForBonusPointsMaxHard;
+            let liveMaxSimple = this.state.rightCountForBonusLiveMaxSimple;
+            let liveMaxHard = this.state.rightCountForBonusLiveMaxHard;
+
+            if (this.props.difficulty === 'Hard' ) {
+                bonus = this.state.bonusPointPerRightCountHard;
+            }
+
+            if (this.props.gameStage === 'World' || this.props.levelStage === 'World') {
+                pointMaxSimple = this.state.rightCountForBonusPointsWorldMaxSimple;
+                pointMaxHard = this.state.rightCountForBonusPointsWorldMaxHard;
+                liveMaxSimple = this.state.rightCountForBonusLiveWorldMaxSimple;
+                liveMaxHard = this.state.rightCountForBonusLiveWorldMaxHard;
+            }
+            
+
+            this.setState({
+                bonusPointPerRightCount: bonus,
+                rightCountForBonusPointsMaxSimple: pointMaxSimple,
+                rightCountForBonusPointsMaxHard: pointMaxHard,
+                rightCountForBonusLiveMaxSimple: liveMaxSimple,
+                rightCountForBonusLiveMaxHard: liveMaxHard,
+            }, () => {
+                this.initializeSingleGame();
+            })
+            
         } else if (this.props.gameType === 'Multilevel') {
             if (this.props.difficulty === 'Hard') {
+
+                let bonus = this.state.bonusPointPerRightCount;
+                let pointMaxSimple = this.state.rightCountForBonusPointsMaxSimple;
+                let pointMaxHard = this.state.rightCountForBonusPointsMaxHard;
+                let liveMaxSimple = this.state.rightCountForBonusLiveMaxSimple;
+                let liveMaxHard = this.state.rightCountForBonusLiveMaxHard;
 
                 let live4 = true;
                 let live3 = true;
                 let live2 = true;
                 let live1 = true;
-
                 let lifeCount = this.props.lifeCount;
+
+                if (this.props.difficulty === 'Hard' ) {
+                    bonus = this.state.bonusPointPerRightCountHard;
+                }
+
+                if (this.props.gameStage === 'World' || this.props.levelStage === 'World') {
+                    pointMaxSimple = this.state.rightCountForBonusPointsWorldMaxSimple;
+                    pointMaxHard = this.state.rightCountForBonusPointsWorldMaxHard;
+                    liveMaxSimple = this.state.rightCountForBonusLiveWorldMaxSimple;
+                    liveMaxHard = this.state.rightCountForBonusLiveWorldMaxHard;
+                }
 
                 if (lifeCount === 3) {
                     live4 = false;
@@ -150,6 +201,11 @@ class Player extends Component {
                 }
 
                 this.setState({ 
+                    bonusPointPerRightCount: bonus,
+                    rightCountForBonusPointsMaxSimple: pointMaxSimple,
+                    rightCountForBonusPointsMaxHard: pointMaxHard,
+                    rightCountForBonusLiveMaxSimple: liveMaxSimple,
+                    rightCountForBonusLiveMaxHard: liveMaxHard,
                     hasLive1: live1,
                     hasLive2: live2,
                     hasLive3: live3,
@@ -158,7 +214,33 @@ class Player extends Component {
                     this.initializeMultilevelStage();
                 })
             } else {
-                this.initializeMultilevelStage();
+
+                let bonus = this.state.bonusPointPerRightCount;
+                let pointMaxSimple = this.state.rightCountForBonusPointsMaxSimple;
+                let pointMaxHard = this.state.rightCountForBonusPointsMaxHard;
+                let liveMaxSimple = this.state.rightCountForBonusLiveMaxSimple;
+                let liveMaxHard = this.state.rightCountForBonusLiveMaxHard;
+
+                if (this.props.difficulty === 'Hard' ) {
+                    bonus = this.state.bonusPointPerRightCountHard;
+                }
+
+                if (this.props.gameStage === 'World' || this.props.levelStage === 'World') {
+                    pointMaxSimple = this.state.rightCountForBonusPointsWorldMaxSimple;
+                    pointMaxHard = this.state.rightCountForBonusPointsWorldMaxHard;
+                    liveMaxSimple = this.state.rightCountForBonusLiveWorldMaxSimple;
+                    liveMaxHard = this.state.rightCountForBonusLiveWorldMaxHard;
+                }
+
+                this.setState({
+                    bonusPointPerRightCount: bonus,
+                    rightCountForBonusPointsMaxSimple: pointMaxSimple,
+                    rightCountForBonusPointsMaxHard: pointMaxHard,
+                    rightCountForBonusLiveMaxSimple: liveMaxSimple,
+                    rightCountForBonusLiveMaxHard: liveMaxHard,
+                }, () => {
+                    this.initializeMultilevelStage();
+                })    
             }   
         }
     }
@@ -198,7 +280,8 @@ class Player extends Component {
             console.log('Running Game Over Routine', reason);
 
             this.setState({
-                isRoundInterval: true, 
+                isRoundInterval: true,
+                showBonusMeter: false, 
                 roundOverReason: reason
             });
         } else if (prevState.hasLive1 === true && this.state.hasLive1 === false) {
@@ -246,12 +329,16 @@ class Player extends Component {
                     liveRightCount =  0;
                     showBonusLive = true;
 
-                    if (this.state.hasLive4 === false) {
+                    if (this.state.hasLive4 === true) {
+                        showBonusLive = false;
+                    } else if (this.state.hasLive4 === false && this.state.hasLive3 === true) {
                         live4 = true;
-                    } else if (this.state.hasLive3 === false) {
+                    } else if (this.state.hasLive3 === false && this.state.hasLive2 === true) {
                         live3 = true;
-                    } else if (this.state.hasLive2 === false) {
+                    } else if (this.state.hasLive2 === false && this.state.hasLive1 === true) {
                         live2 = true;
+                    } else {
+                        showBonusLive = false
                     }
                 }    
             } else if (this.props.difficulty === 'Hard') {
@@ -273,12 +360,16 @@ class Player extends Component {
                     liveRightCount =  0;
                     showBonusLive = true;
 
-                    if (this.state.hasLive4 === false) {
+                    if (this.state.hasLive4 === true) {
+                        showBonusLive = false;
+                    } else if (this.state.hasLive4 === false && this.state.hasLive3 === true) {
                         live4 = true;
-                    } else if (this.state.hasLive3 === false) {
+                    } else if (this.state.hasLive3 === false && this.state.hasLive2 === true) {
                         live3 = true;
-                    } else if (this.state.hasLive2 === false) {
+                    } else if (this.state.hasLive2 === false && this.state.hasLive1 === true) {
                         live2 = true;
+                    } else {
+                        showBonusLive = false
                     }
                 }    
             }
@@ -292,6 +383,7 @@ class Player extends Component {
                 isRoundScoreLoss: false,
 
                 isRoundInterval: true,
+                showBonusMeter: false,
                 showTimerPanelSelect: false, 
                 showTimerPanelTimer: false,
                 roundOverReason: "Good Choice",
@@ -356,6 +448,7 @@ class Player extends Component {
                     showBonusLive: false,
                     showBonusPoint: false,
                     isRoundInterval: true,
+                    showBonusMeter: false,
                     showTimerPanelSelect: false, 
                     showTimerPanelTimer: false,
                     roundOverReason: "Time Up"
@@ -397,6 +490,7 @@ class Player extends Component {
                     showBonusLive: false,
                     showBonusPoint: false,
                     isRoundInterval: true,
+                    showBonusMeter: false,
                     showTimerPanelSelect: false, 
                     showTimerPanelTimer: false,
                     roundOverReason: "Time Up"
@@ -438,6 +532,7 @@ class Player extends Component {
                     showBonusLive: false,
                     showBonusPoint: false,
                     isRoundInterval: true,
+                    showBonusMeter: false,
                     showTimerPanelSelect: false, 
                     showTimerPanelTimer: false,
                     roundOverReason: "Time Up"
@@ -681,7 +776,8 @@ class Player extends Component {
         } else {
             this.setState({ 
                 isRoundInterval: false, 
-                roundOverReason: null,               
+                roundOverReason: null,
+                showBonusMeter: true               
             });
             this.props.onPlayerRoundOver();
             this.initializeNextRound();
@@ -1159,6 +1255,19 @@ class Player extends Component {
                                             />
                                         </div>
                                     </>
+                                    :
+                                    null
+                                }
+                                { this.state.showBonusMeter ?
+                                    <BonusMeter 
+                                        pointCount={this.state.rightCountForBonusPoints}
+                                        pointCountMaxSimple={this.state.rightCountForBonusPointsMaxSimple}
+                                        pointCountMaxHard={this.state.rightCountForBonusPointsMaxHard}
+                                        liveCount={this.state.rightCountForBonusLive}
+                                        liveCountMaxSimple={this.state.rightCountForBonusLiveMaxSimple}
+                                        liveCountMaxHard={this.state.rightCountForBonusLiveMaxHard}
+                                        difficulty={this.props.difficulty}
+                                    />
                                     :
                                     null
                                 }

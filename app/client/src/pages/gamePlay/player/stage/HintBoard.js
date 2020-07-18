@@ -41,6 +41,8 @@ const HintBoard = props => {
         placeName = "Russia"
     } else if (placeName === "Svalbard_and_Jan_Mayen_Islands") {
         placeName = 'Norway'
+    } else if (placeName === "French_Guiana") {
+        placeName = 'France'
     }
 
 

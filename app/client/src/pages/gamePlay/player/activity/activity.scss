@@ -393,3 +393,80 @@
     }
 
 }
+
+.playerBonusMeter {
+    // width: 70%;
+    display: flex;
+    flex-flow: row nowrap;
+    // padding: $frame-6;
+    // border: $frame-6 solid $dark-green;
+    // height: 6vh;
+
+    .playerBonusMeterLabel {
+        // padding: $frame-12;
+        @include font-m30;
+        padding: $frame-6;
+        // padding-left: $frame-6;
+        background: $dark-purple;
+        color: $light-blue;
+        border-right: $frame-3 solid $light-purple;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+    }
+
+    .playerBonusMeterParts {
+        flex: 0 1 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        background: $dark-purple;
+        padding: $frame-6;
+
+        .playerBonusMeterParameter {
+            display: flex;
+            align-items: center;
+            padding-right: $frame-12;
+            padding-left: $frame-12;
+
+            .playerBonusMeterPartLabel {
+                // padding: $frame-12;
+                @include font-m30;
+                color: $light-purple;
+                padding-right: $frame-6;
+            }
+
+            .playerBonusMeterPartsMain {
+                flex: 0 1 100%;
+                display: flex;
+        
+                h3, h4, span {
+                    // background: $purple;
+                    color: $light-blue;
+                    // padding: $frame-12;
+                    @include font-r36;
+                    margin: 0;
+                    // height: 6vh;
+                    // width: 6vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+        
+                h4, span {
+                    color: $purple;
+                    @include font-m36;
+                }
+        
+                span {
+                    // width: $frame-3;
+                    // margin-left: 1vh;
+                    // margin-right: 1vh;
+                    // width: 1vh;
+                    color: $purple;
+                    // background: none;
+                }
+            }
+        }
+    }
+
+}
