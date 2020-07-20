@@ -29,7 +29,7 @@ class GamePlay extends Component {
         stagesShuffled.push('World');
 
         if (this.props.gameData.type === null) {
-            console.log(this.props.gameData);
+            // console.log(this.props.gameData);
             this.props.history.push('/');
         }
 

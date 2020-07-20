@@ -16,7 +16,7 @@ const IntervalBoard = props => {
             easing: 'linear'
         }
 
-        console.log(positionProp)
+        // console.log(positionProp)
 
         positionY(positionProp);
 

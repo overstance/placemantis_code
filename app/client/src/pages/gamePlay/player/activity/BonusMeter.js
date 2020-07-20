@@ -13,7 +13,7 @@ const BonusMeter = props => {
     useEffect(() => {
         if (currentPointCount === 0) {
             let elem = document.querySelector('.playerBonusMeterRoundCount')
-            elem.style.color = '#ff1a00';
+            elem.style.color = '#8032ff';
         } else if (currentPointCount > 0) {
             let elem = document.querySelector('.playerBonusMeterRoundCount')
             elem.style.color = '#252cff';
@@ -21,7 +21,7 @@ const BonusMeter = props => {
 
         if (currentLiveCount === 0) {
             let elem = document.querySelector('.playerBonusMeterLiveCount')
-            elem.style.color = '#ff1a00';
+            elem.style.color = '#8032ff';
         } else if (currentLiveCount > 0) {
             let elem = document.querySelector('.playerBonusMeterLiveCount')
             elem.style.color = '#252cff';
@@ -31,7 +31,7 @@ const BonusMeter = props => {
    return(
        <div className ='playerBonusMeter'>
            <div className ='playerBonusMeterLabel'>
-            Bonus-Meter
+            Bonus Meter
            </div>
            <div className ='playerBonusMeterParts'>
                 <div className ='playerBonusMeterParameter'>

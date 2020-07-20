@@ -33,6 +33,12 @@ import SouthAmerica from './stages/SouthAmerica';
 import World from './stages/World';
 
 class Player extends Component {
+
+    constructor(props) {
+        super(props);
+        this.placeOptionClicked = this.placeOptionClicked.bind(this);
+    }
+
     state = {
         totalRounds: 0,
         nextRound: 0,
@@ -277,25 +283,28 @@ class Player extends Component {
                 }
             }
 
-            console.log('Running Game Over Routine', reason);
+            // console.log('Running Game Over Routine', reason);
 
             this.setState({
                 isRoundInterval: true,
                 showBonusMeter: false, 
+                showBonusPoint: false,
+                showBonusLive: false,
                 roundOverReason: reason
             });
         } else if (prevState.hasLive1 === true && this.state.hasLive1 === false) {
-            console.log('Running last life Spent');
+            // console.log('Running last life Spent');
             this.setState({
                 gameOver: true,
+                showBonusMeter: false,
                 showTimerPanelTimer: false,
                 showTimerPanelSelect: false
             });
 
         } else if (prevState.rightUserOption === false && this.state.rightUserOption === true && this.state.gameOver === false) {
 
-            console.log('Running Right Option Routine');
-
+            // console.log('Running Right Option Routine, total score:', this.state.totalScore, );
+        
             let newRightChoiceCount = this.state.rightChoiceCount + 1;
             let newRoundScore = this.state.scorePerRound;
             let newTotalScore = this.state.totalScore + newRoundScore;
@@ -303,7 +312,6 @@ class Player extends Component {
 
             let pointRightCount = this.state.rightCountForBonusPoints;
             let liveRightCount = this.state.rightCountForBonusLive;
-            // let newScore = this.state.totalScore;
             let showBonusLive = this.state.showBonusLive;
             let showBonusPoint = this.state.showBonusPoint;
             let live4 = this.state.hasLive4;
@@ -319,7 +327,7 @@ class Player extends Component {
                 } else if (pointRightCount === this.state.rightCountForBonusPointsMaxSimple) {
                     bonusPoint = pointRightCount * this.state.bonusPointPerRightCount;
                     pointRightCount =  0;
-                    newTotalScore = this.state.totalScore + bonusPoint;
+                    newTotalScore = newTotalScore + bonusPoint;
                     showBonusPoint = true;
                 }
 
@@ -347,15 +355,18 @@ class Player extends Component {
 
                 if (pointRightCount < this.state.rightCountForBonusPointsMaxHard) {                   
                     showBonusPoint = false;
+                    // console.log("no bonus, ", this.pointRightCount, this.state.rightCountForBonusPointsMaxHard)
                 } else if (pointRightCount === this.state.rightCountForBonusPointsMaxHard) {
                     bonusPoint = pointRightCount * this.state.bonusPointPerRightCount;
                     pointRightCount =  0;
-                    newTotalScore = this.state.totalScore + bonusPoint;
+                    newTotalScore = newTotalScore + bonusPoint;
                     showBonusPoint = true;
+
+                    // console.log("bonus added, ", pointRightCount, bonusPoint, this.state.totalScore, newTotalScore, showBonusPoint);
                 }
 
                 if (liveRightCount < this.state.rightCountForBonusLiveMaxHard) {                 
-                    showBonusPoint = false;
+                    showBonusLive = false;
                 } else if (liveRightCount === this.state.rightCountForBonusLiveMaxHard) {
                     liveRightCount =  0;
                     showBonusLive = true;
@@ -373,7 +384,6 @@ class Player extends Component {
                     }
                 }    
             }
-
 
             this.setState({ 
                 rightChoiceCount: newRightChoiceCount,
@@ -398,7 +408,9 @@ class Player extends Component {
                 hasLive3: live3,
                 hasLive2: live2
             });
-            
+            // console.log('new total score: ', newTotalScore, "bonus: ", bonusPoint);
+            /* // console.log('this round score:', this.state.totalScore, "round" + prevState.nextRound); */
+
         } else if (prevProps.roundTimerElapsed === false && this.props.roundTimerElapsed === true && this.state.gameOver === false)   {
             
             let totalScore = this.state.totalScore;
@@ -415,7 +427,7 @@ class Player extends Component {
 
             if (this.state.rightChoiceCount === 0 && totalScore === 0 ) {
 
-                console.log('Running Time Elapse Routine -- rightChoiceCount == 0, totalScore == 0');  
+                // console.log('Running Time Elapse Routine -- rightChoiceCount == 0, totalScore == 0');  
 
                 let live4 = this.state.hasLive4;
                 let live3 = this.state.hasLive3;
@@ -451,12 +463,13 @@ class Player extends Component {
                     showBonusMeter: false,
                     showTimerPanelSelect: false, 
                     showTimerPanelTimer: false,
+                    // showHints: false,
                     roundOverReason: "Time Up"
                 });
 
             } else if (this.state.rightChoiceCount >= 1 && newTotalScore > 0 ) {
 
-                console.log('Running Time Elapse Routine -- rightChoiceCount >= 1, totalScore > 0');
+                // console.log('Running Time Elapse Routine -- rightChoiceCount >= 1, totalScore > 0');
 
                 let live4 = this.state.hasLive4;
                 let live3 = this.state.hasLive3;
@@ -498,15 +511,15 @@ class Player extends Component {
 
             } else if (this.state.rightChoiceCount >= 1 && newTotalScore <= 0) {   
                 
-                console.log('Running Time Elapse Routine -- right choice count >= 1, total score <= 0');
+                // console.log('Running Time Elapse Routine -- right choice count >= 1, total score <= 0');
 
-                let live4 = this.state.hasLive4;
-                let live3 = this.state.hasLive3;
-                let live2 = this.state.hasLive2;
-                let live1 = this.state.hasLive1;
+                let live4 = false;
+                let live3 = false;
+                let live2 = false;
+                let live1 = false;
                 // let isGameOver = this.state.gameOver;
 
-                if (this.state.hasLive4) {
+                /* if (this.state.hasLive4) {
                     live4 = false
                 } else if (this.state.hasLive3) {
                     live3 = false
@@ -515,7 +528,7 @@ class Player extends Component {
                 } else if (this.state.hasLive1) {
                     live1 = false;
                     // isGameOver = true;
-                }
+                } */
 
                 this.setState({ 
                     roundScore: scoreLoss,
@@ -549,7 +562,7 @@ class Player extends Component {
         const placesShuffled = shuffleArray(places);
         const otherPlaces = Places.filter(place => place.stages.indexOf(stageName) === -1).slice(0, 4);
 
-        console.log(places, otherPlaces, "single game initialized", stageName);
+        // console.log(places, otherPlaces, "single game initialized", stageName);
 
         const allPlaces = placesShuffled.concat(otherPlaces);
         const round = this.state.nextRound + 1;
@@ -577,7 +590,8 @@ class Player extends Component {
             restartMission: false
         })
         
-        console.log('initialized single game', placeDomID/* , options, optionsShuffled */);
+        // console.log('On next round score:', this.state.totalScore, "round: " + this.state.nextRound);
+        console.log('initialized single game', placeDomID);
     }
 
     initializeMultilevelStage = () => {
@@ -587,8 +601,6 @@ class Player extends Component {
         );
         const placesShuffled = shuffleArray(places);
         const otherPlaces = Places.filter(place => place.stages.indexOf(stageName) === -1).slice(0, 4);
-
-        console.log(places, otherPlaces, "multilevel  stage initialized: ", stageName);
 
         const allPlaces = placesShuffled.concat(otherPlaces);
         const round = this.state.nextRound + 1;
@@ -614,10 +626,32 @@ class Player extends Component {
             showTimerPanelTimer: true,
 
             restartMission: false
-        })
+        });
+
+        console.log("multilevel  stage initialized: ", placeDomID);
     }
 
+    
+
     initializeSingleGameRestart = () => {
+
+        let bonus = this.state.bonusPointPerRightCount;
+        let pointMaxSimple = this.state.rightCountForBonusPointsMaxSimple;
+        let pointMaxHard = this.state.rightCountForBonusPointsMaxHard;
+        let liveMaxSimple = this.state.rightCountForBonusLiveMaxSimple;
+        let liveMaxHard = this.state.rightCountForBonusLiveMaxHard;
+
+        if (this.props.difficulty === 'Hard' ) {
+            bonus = this.state.bonusPointPerRightCountHard;
+        }
+
+        if (this.props.gameStage === 'World' || this.props.levelStage === 'World') {
+            pointMaxSimple = this.state.rightCountForBonusPointsWorldMaxSimple;
+            pointMaxHard = this.state.rightCountForBonusPointsWorldMaxHard;
+            liveMaxSimple = this.state.rightCountForBonusLiveWorldMaxSimple;
+            liveMaxHard = this.state.rightCountForBonusLiveWorldMaxHard;
+        }
+        
         this.setState({
             totalRounds: 0,
             nextRound: 0,
@@ -655,6 +689,17 @@ class Player extends Component {
             rightUserOption: false,
             clickedOption: null,
 
+            bonusPointPerRightCount: bonus,
+            rightCountForBonusPoints: 0,
+            displayedBonusPoint: 0,
+            rightCountForBonusPointsMaxSimple: pointMaxSimple,
+            rightCountForBonusPointsMaxHard: pointMaxHard,
+            rightCountForBonusLive: 0,
+            rightCountForBonusLiveMaxSimple: liveMaxSimple,
+            rightCountForBonusLiveMaxHard: liveMaxHard,
+            showBonusPoint: false,
+            showBonusLive: false,
+
             showHints: false,
             showUserRanking: false,
             showTimerPanelSelect: false,
@@ -663,26 +708,37 @@ class Player extends Component {
             totalScore: 0,
             roundScore: 0,
             levelScore: 0,
+            scorePerRound: 1000,
+            displayedScorePerRound: "+1000",
+            simpleWrongChoiceLoss: 500,
+            simpleDisplayedWrongChoiceLoss: "-500",
+            hardWrongChoiceLoss: 1000,
+            hardDisplayedWrongChoiceLoss: "-1,000",
+            displayedRoundScore: "0",
             isRoundScoreLoss: false,
+
+            simpleSecondsPerRound: 12,
+            hardSecondsPerRound: 8,
+            roundTimerWarningSecond: 4,
 
             roundOverReason: null,
             isRoundInterval: false,
+            roundIntervalSeconds: 2,
 
             hasLive1: true,
             hasLive2: true,
             hasLive3: true,
             hasLive4: true,
 
-            gameEndReport: null,
-            gameOver: false,
-
             gamePaused: false,
-
-            // new states below
             showCancelGame: false,
             showRestartGame: false,
+            restartMission: true,
 
-            restartMission: true
+            showBonusMeter: true,
+
+            gameEndReport: null,
+            gameOver: false
         }, () => {this.initializeSingleGame()});
     }
 
@@ -754,10 +810,10 @@ class Player extends Component {
                         lifeCount = lifeCount + 1
                     }
 
-                    console.log('total rounds: ', this.props.totalMultilevelRounds, ' + ', this.state.totalRounds, ' = ', totalRoundsPlayed );
-                    console.log('total rounds completed: ', this.props.completedMultilevelRounds, ' + ', this.state.nextRound, ' = ', completedRounds );
-                    console.log('total score: ', this.props.totalScore, ' + ', this.state.totalScore, ' = ', totalScore );
-                    console.log('life count: ', lifeCount);
+                    // console.log('total rounds: ', this.props.totalMultilevelRounds, ' + ', this.state.totalRounds, ' = ', totalRoundsPlayed );
+                    // console.log('total rounds completed: ', this.props.completedMultilevelRounds, ' + ', this.state.nextRound, ' = ', completedRounds );
+                    // console.log('total score: ', this.props.totalScore, ' + ', this.state.totalScore, ' = ', totalScore );
+                    // console.log('life count: ', lifeCount);
 
 
                     this.props.onLevelOver(
@@ -824,8 +880,8 @@ class Player extends Component {
                 showTimerPanelSelect: true,
                 showTimerPanelTimer: true,
             });
-
-            console.log('next round target', placeDomID/* , options */);
+            // console.log('next round score:', this.state.totalScore, "round: " + this.state.nextRound);
+            console.log('next round target', placeDomID);
         }
     }
 
@@ -885,7 +941,7 @@ class Player extends Component {
     placeOptionClicked = (domID) => {
 
         let isInWrongChoices = this.state.wrongRoundChoices.find(place => place === domID);
-        console.log(isInWrongChoices);
+        // console.log(isInWrongChoices);
 
         if (domID === this.state.clickedOption || this.state.isRoundInterval || isInWrongChoices) {
             return;
@@ -916,7 +972,7 @@ class Player extends Component {
                 }
 
                 if (this.state.rightChoiceCount === 0 && totalScore === 0 ) {
-                    console.log('Run WrongChoice Routine -- rightChoiceCount == 0, totalScore == 0');
+                    // console.log('Run WrongChoice Routine -- rightChoiceCount == 0, totalScore == 0');
 
                     let live4 = this.state.hasLive4;
                     let live3 = this.state.hasLive3;
@@ -954,7 +1010,7 @@ class Player extends Component {
                     });
 
                 } else if (this.state.rightChoiceCount >= 1 && newTotalScore > 0) {
-                    console.log('Run WrongChoice Routine -- rightChoiceCount >= 1, totalScore > 0');
+                    // console.log('Run WrongChoice Routine -- rightChoiceCount >= 1, totalScore > 0');
                     let live4 = this.state.hasLive4;
                     let live3 = this.state.hasLive3;
                     let live2 = this.state.hasLive2;
@@ -992,15 +1048,14 @@ class Player extends Component {
                     });
                 } else if (this.state.rightChoiceCount >= 1 && newTotalScore <= 0) {
 
-                    console.log('Run WrongChoice Routine -- rightChoiceCount >= 1, totalScore <= 0');
+                    console.log('Run WrongChoice Routine -- rightChoiceCount >= 1, newtotalScore <= 0', totalScore, newTotalScore);
 
-                    let live4 = this.state.hasLive4;
-                    let live3 = this.state.hasLive3;
-                    let live2 = this.state.hasLive2;
-                    let live1 = this.state.hasLive1;
-                    // let isGameOver = this.state.gameOver;
-
-                    if (this.state.hasLive4 === true) {
+                    let live4 = false;
+                    let live3 = false;
+                    let live2 = false;
+                    let live1 = false;
+                    
+                    /* if (this.state.hasLive4 === true) {
                         live4 = false
                     } else if (this.state.hasLive3 === true) {
                         live3 = false
@@ -1008,8 +1063,7 @@ class Player extends Component {
                         live2 = false
                     } else if (this.state.hasLive1 === true) {
                         live1 = false;
-                        // isGameOver = true;
-                    }
+                    } */
 
                     this.setState({
                         roundScore: scoreLoss,
@@ -1024,14 +1078,11 @@ class Player extends Component {
                         rightCountForBonusLive: 0,
                         showBonusLive: false,
                         showBonusPoint: false,
-                        // gameOver:isGameOver,
                         wrongRoundChoices: wrongChoices, 
                         rightUserOption: false, 
                         clickedOption: domID
                     });
                 }
-
-                // console.log(domID);
             }
         }
     }
@@ -1284,8 +1335,8 @@ class Player extends Component {
                 </div>
                 <div className={styles.particulars}>
                     <div className={styles.stageId}>
-                        {this.props.gameType === 'Single' ? <div>{this.props.gameStage}</div> : null}
-                        {this.props.gameType === 'Multilevel' ? <div><span>{'Level: ' + this.props.level}</span>{this.props.levelStage}</div> : null}
+                            {this.props.gameType === 'Single' ? <div>{this.props.gameStage}<h5>{"[" + this.props.difficulty + "]"}</h5></div> : null}
+                        {this.props.gameType === 'Multilevel' ? <div><span>{'Level: ' + this.props.level}</span>{this.props.levelStage}<h5>{"[" + this.props.difficulty + "]"}</h5></div> : null}
                     </div>
                     <div className={styles.score}>
                         <div>

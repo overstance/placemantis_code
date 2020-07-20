@@ -119,7 +119,7 @@ export const levelOver = (levelRounds, completedLevelRounds, lifeCount, totalRou
     }
 }
 
-export const multilevelGameOver = (totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore, gameEndReport, playedStage, playedDifficulty) => {
+export const multilevelGameOver = (totalRoundsPlayed, levelScore, totalRoundsCompleted, totalScore, gameEndReport, playedDifficulty) => {
     return {
         type: actionTypes.MULTILEVEL_GAME_OVER,
         totalRoundsPlayed: totalRoundsPlayed,

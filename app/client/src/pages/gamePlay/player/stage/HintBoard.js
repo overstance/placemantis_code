@@ -1,35 +1,88 @@
-import React, {useEffect} from 'react';
-import {shuffleArray} from '../../../../utilities/utilities';
+import React, {useEffect, useState} from 'react';
+import {shuffleArray, usePreviousValue} from '../../../../utilities/utilities';
 import {simpleRotate} from '../../../../anime/rotate';
 import './stage.scss';
 
 const HintBoard = props => {
 
+    const [shuffledNonImageHints, setShuffledNonImageHints] = useState(/* [{type: '', value: ''}, {type: '', value: ''}, {type: '', value: ''}] */[]);
+
+    let place = props.place;
+    let placeName = place.domID;
+    let previousPlaceName = usePreviousValue(placeName);
+
     useEffect(() => {
+        console.log(previousPlaceName, placeName);
+        
+        if (placeName !== '' && previousPlaceName !== placeName) {
+            let nonImageHints = [];
+            if (place.capital !== "") {
+                nonImageHints.push({type: "Capital:", value : place.capital})
+            }
+        
+            if (place.currency !== "") {
+                nonImageHints.push({type: "Currency:", value: place.currency})
+            }
+        
+            if (place.commonLanguages.length >= 1) {
+                let temp = shuffleArray(place.commonLanguages);
+                let commonLanguage = temp[0];
+                nonImageHints.push({type: "Common Language:", value: commonLanguage})
+            }
+        
+            if (place.geographicFeatures.elevation !== "") {
+                nonImageHints.push({type: "Elevation:", value: place.geographicFeatures.elevation})
+            }
+        
+            if (place.geographicFeatures.forest !== "") {
+                nonImageHints.push({type: "Forest:", value: place.geographicFeatures.forest})
+            }
+        
+            if (place.geographicFeatures.desert !== "") {
+                nonImageHints.push({type: "Desert:", value: place.geographicFeatures.desert})
+            }
+        
+            if (place.geographicFeatures.waters !== "") {
+                nonImageHints.push({type: "Water:", value: place.geographicFeatures.waters})
+            }
+        
+            if (place.callingCode !== "") {
+                nonImageHints.push({type: "Calling Code:", value: place.callingCode})
+            }
+        
+            if (place.touristAttractions.length >= 1) {
+                let temp = shuffleArray(place.touristAttractions);
+                let touristAttraction = temp[0];
+                nonImageHints.push({type: "Tourist Attraction:", value: touristAttraction})
+            }
+        
+            setShuffledNonImageHints(shuffleArray(nonImageHints));
+            console.log(nonImageHints);
+        }
+
         if (props.showHints === true) {
             let rotateProps = {
                 animatedClass: '.hintBoardHeaderArrow',
                 rotate: [0, 180],
                 transformOrigin: '50% 50%'
             }
-
+    
             simpleRotate(rotateProps);
         }
-
+    
         if (props.showHints === false) {
             let rotateProps = {
                 animatedClass: '.hintBoardHeaderArrow',
                 rotate: [180, 0],
                 transformOrigin: '50% 50%'
             }
-
+    
             simpleRotate(rotateProps);
         }
 
-    }, [props.showHints]);
+        return() => {}
 
-    let place = props.place;
-    let placeName = place.domID;
+    }, [place, previousPlaceName, placeName, props.showHints]);
 
     if (placeName === "East_Thrace_Turkey") {
         placeName = "Turkey"
@@ -50,160 +103,142 @@ const HintBoard = props => {
     let hint2 = null;
     let hint3 = null;
 
-    if (place.flag && place.emblem) {
-        hint1 = 
-        <div className='hintType1'>
-            <div>
-                Flag:
-            </div>
-            <div>
-                <img src={`/images/flags/${placeName + '.svg'}`} alt="flag"/>
-            </div>
-        </div>
+    if (shuffledNonImageHints.length >= 3) {
+        let nonImageHintsShuffled = shuffledNonImageHints;
+        let firstHint = nonImageHintsShuffled[0];
+        let secondHint = nonImageHintsShuffled[1];
+        let thirdHint = nonImageHintsShuffled[2];
 
-        hint2 = 
-        <div className='hintType1'>
-            <div>
-                Emblem:
-            </div>
-            <div>
-                <img src={`/images/emblems/${placeName + '.svg'}`} alt="emblem"/>
-            </div>
-        </div>
+        if (props.difficulty === 'Simple') {
+            if (place.flag && place.emblem) {
+                hint1 = 
+                <div className='hintType1'>
+                    <div>
+                        Flag:
+                    </div>
+                    <div>
+                        <img src={`/images/flags/${placeName + '.svg'}`} alt="flag"/>
+                    </div>
+                </div>
         
-    } else if (place.flag && place.emblem === false) {
-        hint1 = 
-        <div className='hintType1'>
-            <div>
-                Flag:
-            </div>
-            <div>
-                <img src={`/images/flags/${placeName + '.svg'}`} alt="flag"/>
-            </div>
-        </div>
+                hint2 = 
+                <div className='hintType1'>
+                    <div>
+                        Emblem:
+                    </div>
+                    <div>
+                        <img src={`/images/emblems/${placeName + '.svg'}`} alt="emblem"/>
+                    </div>
+                </div>
+                
+            } else if (place.flag && place.emblem === false) {
 
-        if (place.currency) {
+                hint1 = 
+                <div className='hintType1'>
+                    <div>
+                        Flag:
+                    </div>
+                    <div>
+                        <img src={`/images/flags/${placeName + '.svg'}`} alt="flag"/>
+                    </div>
+                </div>
+        
+                hint2 = 
+                <div className='hintType2'>
+                    <div>
+                        {secondHint.type}
+                    </div>
+                    <span>
+                        {secondHint.value}
+                    </span>
+                </div>
+
+            } else if (place.flag === false && place.emblem) {
+                
+                hint1 = 
+                <div className='hintType1'>
+                    <div>
+                        Emblem:
+                    </div>
+                    <div>
+                        <img src={`/images/emblems/${placeName + '.svg'}`} alt="flag"/>
+                    </div>
+                </div>
+        
+                hint2 = 
+                <div className='hintType2'>
+                    <div>
+                        {secondHint.type}
+                    </div>
+                    <span>
+                        {secondHint.value}
+                    </span>
+                </div>
+            } else if (place.flag === false && place.emblem === false) {
+               
+                hint1 = 
+                <div className='hintType2'>
+                    <div>
+                        {firstHint.type}
+                    </div>
+                    <span>
+                        {firstHint.value}
+                    </span>
+                </div>
+
+                hint2 = 
+                <div className='hintType2'>
+                    <div>
+                        {secondHint.type}
+                    </div>
+                    <span>
+                        {secondHint.value}
+                    </span>
+                </div>
+            }
+
+            hint3 =
+            <div className='hintType2'>
+                <div>
+                    {thirdHint.type}
+                </div>
+                <span>
+                    {thirdHint.value}
+                </span>
+            </div>
+        } else if (props.difficulty === 'Hard') {
+            
+            hint1 = 
+            <div className='hintType2'>
+                <div>
+                    {firstHint.type}
+                </div>
+                <span>
+                    {firstHint.value}
+                </span>
+            </div>
+
             hint2 = 
             <div className='hintType2'>
                 <div>
-                    Currency:
+                    {secondHint.type}
                 </div>
                 <span>
-                    {place.currency}
+                    {secondHint.value}
                 </span>
             </div>
-        } else if (place.commonLanguages.length >= 1) {
-            let languages = shuffleArray(place.commonLanguages);
 
-            hint2 =
+            /* hint3 =
             <div className='hintType2'>
                 <div>
-                    Language:
+                    {thirdHint.type}
                 </div>
                 <span>
-                    {languages[0]}
+                    {thirdHint.value}
                 </span>
-            </div>
+            </div> */
+
         }
-    } else if (place.flag === false && place.emblem) {
-        hint1 = 
-        <div className='hintType1'>
-            <div>
-                Flag:
-            </div>
-            <div>
-                <img src={`/images/emblems/${placeName + '.svg'}`} alt="flag"/>
-            </div>
-        </div>
-
-        if (place.currency) {
-            hint2 = 
-            <div className='hintType2'>
-                <div>
-                    Currency:
-                </div>
-                <span>
-                    {place.currency}
-                </span>
-            </div>
-        } else if (place.commonLanguages.length >= 1) {
-            let languages = shuffleArray(place.commonLanguages);
-
-            hint2 =
-            <div className='hintType2'>
-                <div>
-                    Language:
-                </div>
-                <span>
-                    {languages[0]}
-                </span>
-            </div>
-        }
-    }
-
-    if (place.geographicFeatures.elevation !== '') {
-        hint3 =
-        <div className='hintType2'>
-            <div>
-                Elevation:
-            </div>
-            <span>
-                {place.geographicFeatures.elevation}
-            </span>
-        </div>
-    } else if (place.geographicFeatures.forest !== '') {
-        hint3 =
-        <div className='hintType2'>
-            <div>
-                Forest:
-            </div>
-            <span>
-                {place.geographicFeatures.forest}
-            </span>
-        </div>
-    } else if (place.geographicFeatures.desert !== '') {
-        hint3 =
-        <div className='hintType2'>
-            <div>
-                Desert:
-            </div>
-            <span>
-                {place.geographicFeatures.desert}
-            </span>
-        </div>
-    } else if (place.geographicFeatures.waters !== '') {
-        hint3 =
-        <div className='hintType2'>
-            <div>
-                Waters:
-            </div>
-            <span>
-                {place.geographicFeatures.waters}
-            </span>
-        </div>
-    } else if (place.callingCode !== '') {
-        hint3 =
-        <div className='hintType2'>
-            <div>
-                Calling Code:
-            </div>
-            <span>
-                {place.callingCode}
-            </span>
-        </div>
-    } else if (place.touristAttractions.length > 1) {
-
-        let attractions = shuffleArray(place.touristAttractions);
-
-        hint3 =
-        <div className='hintType2'>
-            <div>
-                Attractions:
-            </div>
-            <span>
-                {attractions[0]}
-            </span>
-        </div>
     }
 
     return(
@@ -220,20 +255,12 @@ const HintBoard = props => {
             </div>
             { props.showHints ?
                 <div className='stageHintBoardHints'>
-                    { props.difficulty === 'Simple' ?
-                        <div>
-                            {hint1}
-                        </div>
-                        :
-                        null
-                    }
-                    { props.difficulty === 'Simple' ?
-                        <div>
-                            {hint2}
-                        </div>
-                        :
-                        null
-                    }
+                    <div>
+                        {hint1}
+                    </div>
+                    <div>
+                        {hint2}
+                    </div>
                     <div>
                         {hint3}
                     </div>

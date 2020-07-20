@@ -84,9 +84,20 @@ const GameOver = props => {
             </div>
             <div className="gameOverDialogueBody">
                 <div className="gameOverDialogueMissionInfo">
-                    <h3>
-                        {stageName}
-                    </h3>
+                    <div className="gameOverDialogueStage">
+                        <h3>
+                            <span>
+                                <span>{stageName}</span>
+                                <span className="gameOverDialogueDifficulty">
+                                    {"[" + props.playedDifficulty + "]"}
+                                </span>
+                            </span>
+                        </h3>
+                        {props.isAuthenticated ? 
+                            null : 
+                            <h4>Register to post score</h4>
+                        }
+                    </div>
                     <div className="gameOverDialogueRoundInfo">
                         <h4>
                            Attempted
@@ -115,7 +126,7 @@ const GameOver = props => {
                             Your Best
                         </h4>
                         <span>
-                            {props.isAuthenticated ? props.gameTypeUserBest : "Register To Post Score"}
+                            {props.isAuthenticated ? props.gameTypeUserBest : "N/A"}
                         </span>
                     </div>
                     <div>
