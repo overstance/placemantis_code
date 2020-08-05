@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './homeSelect.scss';
-import SelectHeader from './SelectHeader';
+import SelectHeader from '../../../components/common/pageHeader/Header';
 import {staggerPositionParts} from '../../../anime/position';
 
 const Select = props => {

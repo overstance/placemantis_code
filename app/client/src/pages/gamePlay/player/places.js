@@ -5,7 +5,6 @@ export const Places = [
     capital: "Praia",
     flag: true,
     emblem: true,
-    // currency: "Cape Verdean Escudo(CVE)",
     currency: "Escudo(CVE)",
     territory: false,
     sovereignState: null,
@@ -441,7 +440,7 @@ export const Places = [
     continent: "Africa",
     stages: ["World", "Africa", "West and Central Africa"],
     callingCode: "+240",
-    touristAttractions: ["Basilica of the Immaculate Conception"]
+    touristAttractions: []
   },
   {
     name: "Gabon",

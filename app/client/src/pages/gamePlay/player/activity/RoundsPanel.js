@@ -1,14 +1,7 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './activity.scss';
-// import Timer from '../../Timer';
-// import {positionX} from '../../../../anime/position';
 
 const TimerPanel = props => {
-
-    useEffect(() => {
-
-    }, []);
-
     return(
         <div className='activityRoundsPanel'>
             <div className='roundsPanelLives'>

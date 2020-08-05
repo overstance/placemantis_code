@@ -1,6 +1,4 @@
-import React, {useEffect/* , useState */} from 'react';
-import {connect} from 'react-redux';
-// import * as actions from '../../../../store/actions/index';
+import React, {useEffect} from 'react';
 import Timer from '../../Timer';
 import {positionX} from '../../../../anime/position';
 import {stringUnderscoreForSpace} from '../../../../utilities/utilities';
@@ -56,17 +54,4 @@ const Levels = props => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        level: state.game.level,
-        shuffledStages: state.game.shuffledStages
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        // onSetGameLevel: (levelNumber, levelStage) => dispatch(actions.setGameLevel(levelNumber, levelStage))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Levels);
+export default Levels;

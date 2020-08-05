@@ -1,0 +1,29 @@
+@import '../../variables.scss';
+
+.register {
+    @include by-parent;
+    background: $dark-blue;
+    display: flex;
+    flex-flow: column;
+}
+
+.header {
+    flex: 0 0 25%;
+    max-height: 25vh;
+}
+
+.formsWrapper {
+    flex: 0 0 75%;
+    max-height: 75vh;
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    width: 55vw;
+    height: 50vh;
+    border: $frame-6 solid $light-blue;
+    margin-top: $frame-24;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}

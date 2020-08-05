@@ -1,0 +1,86 @@
+@import '../../../variables.scss';
+
+.formInput {
+    // @include by-parent;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+
+    .formInputLabel {
+        display: block;
+        @include font-m48;
+        color: $light-purple;
+        padding-bottom: $frame-12;
+
+        span {
+            @include font-r36;
+            color: $green;
+        }
+    }
+
+    .formInputLabelError {
+        display: block;
+        @include font-r48;
+        color: $red;
+        padding-bottom: $frame-12;
+    }
+
+    .formInputAndCounter {
+        // flex: 0 1 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        // background: $blue2;
+        padding: $frame-12;
+        border: $frame-3 solid $purple;
+        margin-bottom: $frame-36;
+
+        .formInputMain {
+            // flex: 0 0 90%; 
+            flex: 0 1 100%; 
+            background: $blue2; 
+            @include font-r48;
+            border: none;
+            padding: 0;
+            outline: none;
+            color: $green;
+            padding: $frame-12;
+            box-sizing: border-box;
+        }
+
+        .formInputCounter {
+            // flex: 0 0 10%;
+            width: 10%;
+            background: $dark-purple;
+            border: $frame-3 solid $green;
+            color: $green;
+            box-sizing: border-box;
+            @include font-r36;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+    }
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    $light-blue;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    $light-blue;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    $light-blue;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    $light-blue;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    $light-blue;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    $light-blue;
+}

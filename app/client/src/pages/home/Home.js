@@ -323,8 +323,8 @@ const Home = props => {
     )  
 }
 
-// savedMission, isAuthenticated, audioOn, and avatarType:
-// will be coming in from global states below
+// savedMission, isAuthenticated, and avatarType:
+// will be coming in from auth global states below
 const mapStateToProps = state => {
     return {
         gameData: state.game.gameData

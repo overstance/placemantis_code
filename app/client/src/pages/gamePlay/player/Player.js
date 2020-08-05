@@ -3,7 +3,7 @@ import styles from './player.module.scss';
 import {Places} from './places';
 import {shuffleArray, numberWithCommas/* , numberWithSpaces */} from '../../../utilities/utilities';
 import {connect} from 'react-redux';
-import Avatar from '../../../components/common/Avatar';
+import Avatar from '../../../components/common/avatar/Avatar';
 import HintBoard from '../player/stage/HintBoard';
 import RankBoard from '../player/stage/RankBoard';
 import TimerPanel from './activity/TimerPanel';
@@ -630,8 +630,6 @@ class Player extends Component {
 
         console.log("multilevel  stage initialized: ", placeDomID);
     }
-
-    
 
     initializeSingleGameRestart = () => {
 
@@ -1267,7 +1265,6 @@ class Player extends Component {
                                     }
                                 </div>
                             </div>
-                            {/* <div></div> */}
                             <div className={styles.rightTools}>
                                 <div/>
                                 <div> 
@@ -1405,28 +1402,22 @@ const mapStateToProps = state => {
     return {
         gameType: state.game.gameData.type,
         gameStage: state.game.gameData.stage,
-        difficulty: state.game.gameData.difficulty,
-        
+        difficulty: state.game.gameData.difficulty, 
         roundTimerElapsed: state.game.roundTimerElapsed,
         timerAlmostUp: state.game.timerAlmostUp,
-
         levelStage: state.game.levelStage,
-        // startNextLevel: state.game.startNextLevel,
         level: state.game.level,
         levelScore: state.game.levelScore,
         lifeCount: state.game.lifeCount,
-
         totalScore: state.game.totalGameScore,
         totalMultilevelRounds: state.game.totalMultilevelRounds,
         completedMultilevelRounds: state.game.completedMultilevelRounds,
-
         shuffledStages: state.game.shuffledStages,
-
         screenTrackerActive: state.game.screenTrackerActive,
-
-        // userRank will come from auth state
-        userRank: "Place Marshal",
+        // below states coming from auth global state
         isAuthenticated: false,
+        user: null,
+        userRank: "Place Marshal",
     }
 }
 

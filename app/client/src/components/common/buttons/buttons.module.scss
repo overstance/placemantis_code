@@ -17,9 +17,17 @@
     @extend %buttonBasic;
     background: $light-blue;
 
-    &:hover {
+    /* &:hover {
         background: $dark-purple;
-    }
+    } */
+}
+
+.buttonDisabled {
+    @extend %buttonBasic;
+    background: $light-blue;
+    color: $dark-purple;
+    border: $frame-3 solid $dark-purple;
+    background: none;
 }
 
 .DialogueWarningButton {

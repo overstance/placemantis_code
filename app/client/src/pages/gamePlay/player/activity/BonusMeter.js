@@ -1,12 +1,8 @@
 import React, {useEffect} from 'react';
 import './activity.scss';
-// import {usePreviousValue} from '../../../../utilities/utilities';
-// import {positionY} from '../../../../anime/position';
 
 const BonusMeter = props => {
 
-    /* const previousPointCount = usePreviousValue(props.pointCount);
-    const previousLifeCount = usePreviousValue(props.liveCount); */
     const currentPointCount = props.pointCount;
     const currentLiveCount = props.liveCount;
 
@@ -27,7 +23,7 @@ const BonusMeter = props => {
             elem.style.color = '#252cff';
         }
 
-    }, [/* previousPointCount, previousLifeCount,  */currentPointCount, currentLiveCount])
+    }, [currentPointCount, currentLiveCount])
    return(
        <div className ='playerBonusMeter'>
            <div className ='playerBonusMeterLabel'>

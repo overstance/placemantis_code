@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './homeSelect.scss';
-import SelectHeader from './SelectHeader';
+import SelectHeader from '../../../components/common/pageHeader/Header';
 import {scaleElement} from '../../../anime/scale';
 
 const SelectType = props => {

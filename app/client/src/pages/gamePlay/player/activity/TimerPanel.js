@@ -5,9 +5,6 @@ import {positionX} from '../../../../anime/position';
 import {usePreviousValue} from '../../../../utilities/utilities';
 
 const TimerPanel = props => {
-
-    // const previousTimeElapsed = usePreviousValue(props.timerElapsed);
-    // const previousTimeAlmostUp = usePreviousValue(props.timerAlmostUp);
     const previouslyPaused = usePreviousValue(props.gamePaused);
 
     useEffect(() => {
@@ -15,11 +12,9 @@ const TimerPanel = props => {
         if (props.timerElapsed || props.timerAlmostUp) {
             const elem = document.querySelector('.activityTimerPanelTimer');
             elem.style.color = '#ff1a00';
-            // console.log('change timer to red')
         } else if (props.timerElapsed ===  false || props.timerAlmostUp === false) {
             const elem = document.querySelector('.activityTimerPanelTimer');
             elem.style.color = '#d2ff77';
-            // console.log('change timer to back to green')
         } 
         
         if (previouslyPaused === true && props.gamePaused === false) {

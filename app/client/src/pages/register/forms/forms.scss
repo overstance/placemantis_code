@@ -1,0 +1,29 @@
+@import '../../../variables.scss';
+
+
+.registerPartForm {
+    @include by-parent;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: $frame-36;
+    box-sizing: border-box;
+
+    .registerPartFormButtons {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        button {
+            width: 30%;
+        }
+
+        span {
+            display: inline-block;
+            width: $frame-24;
+        }
+    }
+}

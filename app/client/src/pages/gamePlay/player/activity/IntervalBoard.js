@@ -14,12 +14,8 @@ const IntervalBoard = props => {
             translateY: [viewHeight, 0],
             duration: 500,
             easing: 'linear'
-        }
-
-        // console.log(positionProp)
-
+        }  
         positionY(positionProp);
-
 
         if (reason === "Time Up") {
             const elem1 = document.querySelector('.playerIntervalBoardReason');

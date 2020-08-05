@@ -1,50 +1,5 @@
 @import '../../../variables.scss';
 
-.selectHeader {
-    display: flex;
-    flex-flow: row nowrap;
-    @include by-parent;
-    align-items: center;
-
-    > div {
-        padding: $frame-48;
-        box-sizing: border-box;
-        display: flex;
-    }
-
-    .selectHeaderGoBack {
-        flex: 0 0 11.25%;
-    } 
-
-    .selectHeaderGoBack button {
-        border: none;
-        padding: 0;
-        background: none;
-        cursor: pointer;
-    }
-
-    .selectHeaderGoBack svg {
-        width: 100%;
-        vertical-align: middle;
-        max-height: 25vh;
-    }
-
-    .selectHeaderHeading {
-        flex: 0 0 88.75%;
-        position: relative;
-        /* max-height: 25vh; */
-        justify-content: center;
-        align-items: center;
-
-        svg {
-            width: 100%;
-            position: absolute;
-            max-height: 25vh;
-            // vertical-align: middle;
-        }
-    }
-}
-
 .homeSelectType {
     display: flex;
     flex-flow: column;

@@ -64,10 +64,6 @@ class GamePlay extends Component {
             prePlayerStage = this.props.gameData.stage;
         }
         return(
-            /* <div className={styles.gamePlay}>
-              <img src={`/images/flags/${data.name + '.svg'}`} alt="flag"/>
-              {props.gameData ? <div>{this.props.gameData.type}</div> : null}
-            </div> */
             <div className={styles.gamePlay}>
                 { this.props.showModerator ?
                     <div className={styles.moderator}>
@@ -125,14 +121,10 @@ const mapStateToProps = state => {
 
         prePlayerTimerEnded: state.game.prePlayerTimerEnded,
 
-        /* showGameType: state.game.showGameTypeDialogue,
-        showLevels: state.game.showGameLevelsDialogue,
-        showRestartMission: state.game.showRestartMissionDialogue,
-        showEndMission: state.game.showEndMissionDialogue,
-        showGameOver: state.game.showGameOverDialogue, */
-
-        level: state.game.level,
-        levelStage: state.game.levelStage
+        levelStage: state.game.levelStage,
+        // below from global auth state
+        // isAuthenticated: false,
+        // user: null
     }
 }
 

@@ -4,7 +4,7 @@ import * as actions from '../../../../store/actions/index';
 import {numberWithCommas} from '../../../../utilities/utilities';
 import {scaleElement} from '../../../../anime/scale';
 import '../moderator.scss';
-import Button from '../../../../components/common/buttons/DialogueButton';
+import DialogueButton from '../../../../components/common/buttons/Button';
 import {withRouter} from 'react-router-dom';
 
 
@@ -115,7 +115,7 @@ const GameOver = props => {
                 <div className="gameOverDialogueScores">
                     <div>
                         <h4>
-                            {props.gameType === 'Single' ? "This Score" : 'Total Score'}
+                            {props.gameData.type === 'Single' ? "This Score" : 'Total Score'}
                         </h4>
                         <span className="gameOverMissionScore">
                             {missionScore}
@@ -140,32 +140,32 @@ const GameOver = props => {
                 </div>
                 <div className="gameOverDialogueButtons">
                     <div className="gameOverDialogueButtonsWrapper">
-                        { props.isAuthenticated || props.postGameScoreSuccess === false ?
-                            <div>
-                                <Button
-                                    // buttonClicked={props.OnPostGameScore}
-                                    hasSideEffect
-                                    sideEffectLoading={props.postGameScoreLoading}
-                                >
-                                    Post Score
-                                </Button>
-                            </div>
-                            :
-                            null
-                        }
                         <div>
-                                <Button
-                                    buttonClicked={onPlayAgain}
-                                >
-                                    Play Again
-                                </Button>
+                            <DialogueButton
+                                // buttonClicked={props.OnPostGameScore}
+                                sideEffectLoading={props.postGameScoreLoading}
+                                sideEffectSuccess={props.postGameScoreSuccess}
+                                sideEffectFail={props.postGameScoreFail}
+                                isAuthenticated={props.isAuthenticated}
+                                type="Post Score"
+                                thisScore={props.totalScore}
+                                userBestScore={props.gameTypeUserBest}
+                                category="dailogues"
+                            />
                         </div>
                         <div>
-                                <Button
+                                <DialogueButton
+                                    buttonClicked={onPlayAgain}
+                                    type="Play Again"
+                                    category="dailogues"
+                                />
+                        </div>
+                        <div>
+                                <DialogueButton
                                     buttonClicked={onExit}
-                                >
-                                    Exit
-                                </Button>
+                                    type="Exit"
+                                    category="dailogues"
+                                />
                         </div>
                     </div>
                 </div>
@@ -176,31 +176,7 @@ const GameOver = props => {
 }
 
 const mapStateToProps = state => {
-    return {
-        gameData: state.game.gameData,
-        totalStageRounds: state.game.totalStageRounds,
-        stageRoundsCompleted: state.game.stageRoundsCompleted,
-        totalGameScore: state.game.totalGameScore,
-        gameStatus: state.game.gameStatus,
-
-        level: state.game.level,
-        levelScore: state.game.levelScore,
-        levelStage: state.game.levelStage,
-        totalMultilevelRounds: state.game.totalMultilevelRounds,
-        completedMultilevelRounds: state.game.completedMultilevelRounds,
-
-        playedType: state.game.playedType,
-        playedStage: state.game.playedStage,
-        playedDifficulty: state.game.playedDifficulty,
-        gameOver: state.game.gameOver,
-        // coming from auth state
-        isAuthenticated: true,
-        // coming from scores state
-        gameTypeUserBest: 0,
-        gameTypeOverallBest: 16000,
-        postGameScoreSuccess: false,
-        postGameScoreLoading: false
-    }
+    return {}
 }
 
 const mapDispatchToProps = dispatch => {

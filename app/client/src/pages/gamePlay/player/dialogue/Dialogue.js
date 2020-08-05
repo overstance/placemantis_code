@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './dialogue.scss';
-import Button from '../../../../components/common/buttons/DialogueButton';
+import DialogueButton from '../../../../components/common/buttons/Button';
 import {scaleElement} from '../../../../anime/scale';
 
 const Dialogue = props => {
@@ -28,10 +28,18 @@ const Dialogue = props => {
         options =
         <div className="playerDialogueModalOptions">
             <div>
-                <Button buttonClicked={props.onAbortCancelMission}>No</Button>   
+                <DialogueButton
+                    category="dailogues" 
+                    buttonClicked={props.onAbortCancelMission} 
+                    type="No"
+                />   
             </div>
             <div>
-                <Button buttonClicked={props.onConfirmCancelMission}>Yes</Button>                          
+                <DialogueButton
+                    category="dailogues" 
+                    buttonClicked={props.onConfirmCancelMission} 
+                    type="Yes"
+                />                          
             </div>
         </div>
     } else if (props.restartMission) {
@@ -41,10 +49,18 @@ const Dialogue = props => {
         options =
         <div className="playerDialogueModalOptions">
             <div>
-                <Button buttonClicked={props.onAbortRestartMission}>No</Button>
+                <DialogueButton
+                    category="dailogues" 
+                    buttonClicked={props.onAbortRestartMission} 
+                    type="No"
+                />
             </div>
             <div>
-                <Button buttonClicked={props.onConfirmRestartMission}>Yes</Button>                          
+                <DialogueButton
+                    category="dailogues" 
+                    buttonClicked={props.onConfirmRestartMission} 
+                    type="Yes"
+                />                          
             </div>
         </div>
     }

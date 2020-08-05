@@ -4,6 +4,7 @@ import './App.scss';
 import Layout from './components/common/layout/Layout';
 const Home = lazy(() => import('./pages/home/Home'));
 const GamePlay = lazy(() => import('./pages/gamePlay/GamePlay'));
+const Register = lazy(() => import('./pages/register/Register'));
 
 const RouteLoading = 'Page Loading...';
 
@@ -17,14 +18,6 @@ const Profile = () => {
   return(
     <div>
       Profile Page Shows Here
-    </div>
-  )
-}
-
-const Register = () => {
-  return(
-    <div>
-      Register Page Shows Here
     </div>
   )
 }

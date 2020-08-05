@@ -4,7 +4,7 @@ import * as actions from '../../../../store/actions/index';
 import {numberWithCommas} from '../../../../utilities/utilities';
 import {scaleElement} from '../../../../anime/scale';
 import '../moderator.scss';
-import Button from '../../../../components/common/buttons/DialogueButton';
+import DialogueButton from '../../../../components/common/buttons/Button';
 import {withRouter} from 'react-router-dom';
 
 const LevelOver = props => {
@@ -70,9 +70,13 @@ const LevelOver = props => {
             </div>
             <div className="levelOverDialogueBody">
                 <div className="levelOverDialogueMissionInfo">
-                    <h3>
-                        {props.levelStage}
-                    </h3>
+                    <div className="levelOverDialogueStage">
+                        <h3>{props.levelStage}</h3>
+                        {props.isAuthenticated ? 
+                            null : 
+                            <h4>Register to save and exit</h4>
+                        }
+                    </div>
                     <div className="levelOverDialogueRoundInfo">
                         <h4>
                            Attempted
@@ -115,32 +119,30 @@ const LevelOver = props => {
                 </div>
                 <div className="levelOverDialogueButtons">
                     <div className="levelOverDialogueButtonsWrapper">
-                        { props.isAuthenticated || props.postGameScoreSuccess === false ?                            
-                            <div>
-                                <Button
-                                    // buttonClicked={onSaveAndExit}
-                                    hasSideEffect
-                                    sideEffectLoading={props.saveAndExitLoading}
-                                >
-                                    Save and Exit
-                                </Button>
-                            </div>
-                            :
-                            null
-                        }
                         <div>
-                            <Button
-                                buttonClicked={onProceed}
-                            >
-                                Proceed
-                            </Button>
+                            <DialogueButton
+                                category="dailogues"
+                                // buttonClicked={onSaveAndExit}
+                                sideEffectLoading={props.saveAndExitLoading}
+                                sideEffectSuccess={props.saveAndExitSuccess}
+                                sideEffectFail={props.saveAndExitFail}
+                                isAuthenticated={props.isAuthenticated}
+                                type="Save and Exit"
+                            />
                         </div>
                         <div>
-                            <Button
+                            <DialogueButton
+                                category="dailogues"
+                                buttonClicked={onProceed}
+                                type="Proceed"
+                            />
+                        </div>
+                        <div>
+                            <DialogueButton
+                                category="dailogues"
                                 buttonClicked={onExit}
-                            >
-                                Exit
-                            </Button>
+                                type="Exit"
+                            />
                         </div>
                     </div>
                 </div>
@@ -151,41 +153,12 @@ const LevelOver = props => {
 }
 
 const mapStateToProps = state => {
-    return {
-        gameData: state.game.gameData,
-        totalStageRounds: state.game.totalStageRounds,
-        stageRoundsCompleted: state.game.stageRoundsCompleted,
-        totalGameScore: state.game.totalGameScore,
-        gameStatus: state.game.gameStatus,
-
-        level: state.game.level,
-        levelScore: state.game.levelScore,
-        levelStage: state.game.levelStage,
-        totalMultilevelRounds: state.game.totalMultilevelRounds,
-        completedMultilevelRounds: state.game.completedMultilevelRounds,
-        levelRounds: state.game.levelRounds,
-        completedLevelRounds: state.game.completedLevelRounds,
-        lifeCount: state.game.lifeCount,
-
-        playedType: state.game.playedType,
-        playedStage: state.game.playedStage,
-        playedDifficulty: state.game.playedDifficulty,
-        levelOver: state.game.levelOver,
-        // coming from auth state
-        isAuthenticated: true,
-        // coming from scores state
-        gameTypeUserBest: 0,
-        gameTypeOverallBest: 16000,
-        postGameScoreSuccess: false,
-        saveAndExitLoading: false,
-
-        levelStages: state.game.shuffledStages,
-    }
+    return {}
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        // onPostGameScore: () => dispatch(actions.postGameScore()),
+        // onSaveAndExit: () => dispatch(actions.saveAndExitMission()),
         onStartNextLevel: () => dispatch(actions.startNextLevel()),
     }
 }

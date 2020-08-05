@@ -4,7 +4,7 @@ import {OSD} from '../../../anime/timelines/osd';
 import {SDSDPPP} from '../../../anime/timelines/sdsdppp';
 import {positionY} from '../../../anime/position';
 import {Link} from 'react-router-dom';
-import Avatar from '../../../components/common/Avatar';
+import Avatar from '../../../components/common/avatar/Avatar';
 
 
 const HomeMain = props => {

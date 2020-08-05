@@ -261,9 +261,12 @@ const HintBoard = props => {
                     <div>
                         {hint2}
                     </div>
-                    <div>
-                        {hint3}
-                    </div>
+                    { props.difficulty === "Hard" ?
+                        null :
+                        <div>
+                            {hint3}
+                        </div>
+                    }
                 </div>
                 :
                 null

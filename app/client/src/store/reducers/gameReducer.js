@@ -15,7 +15,6 @@ const initialState = {
 
     showGameTypeDialogue: false,
     showGameLevelsDialogue: false,
-    showRestartMissionDialogue: false,
     showLevelOverDialogue: false,
     showGameOverDialogue: false,
    
@@ -223,7 +222,6 @@ const resetGameState = (state, action) => {
     
         showGameTypeDialogue: false,
         showGameLevelsDialogue: false,
-        showRestartMissionDialogue: false,
         showLevelOverDialogue: false,
         showGameOverDialogue: false,
        
