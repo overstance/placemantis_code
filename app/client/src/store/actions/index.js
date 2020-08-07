@@ -19,6 +19,12 @@ export {
     multilevelGameOver,
     restartLastMission,
     restartMultilevelMission,
-    startNextLevel
-
+    startNextLevel,
 } from './gameActions';
+
+export {
+    userAvatarSelected,
+    checkUsernameAvailabilty,
+    registerUser,
+    resetRegisterPage,
+} from './authActions';

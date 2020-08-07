@@ -1,21 +1,30 @@
 @import '../../../variables.scss';
 
+%headerBasic {
+    width: 100%;
+    flex: 0 0 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    @include font-m48;
+    color: $light-purple;
+    border-bottom: $frame-6 solid $light-blue;
+    box-sizing: border-box;
+}
+
 .avatarGrid {
     display: flex;
     flex-flow: column nowrap;
     @include by-parent;
 
     .avatarGridHeader {
-        width: 100%;
-        flex: 0 0 20%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        @include font-m48;
-        color: $light-purple;
-        border-bottom: $frame-6 solid $light-blue;
-        box-sizing: border-box;
+        @extend %headerBasic;
+    }
+
+    .avatarGridHeaderInvalid {
+        @extend %headerBasic;
+        color: $red;
     }
 
     .avatarGridMain {
@@ -28,8 +37,10 @@
         .avatarGridAvatars {
             display: flex;
             flex-flow: row wrap;
-            background: $purple;
+            background: $light-purple;
             flex: 0 0 70%;
+            border-right: calc(0.15625vw) solid $light-blue;
+            box-sizing: border-box;
 
             .avatarButton {
                 color: $green;
@@ -41,8 +52,11 @@
                 align-items: center;
                 cursor: pointer;
                 flex: 0 0 25%;
+                margin: 0;
+                border: $frame-3 solid $light-blue;
                 box-sizing: border-box;
                 position: relative;
+                // outline: none;
     
                 .avatarSelectionMarker {
                     @include by-parent;

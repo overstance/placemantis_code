@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import classes from './register.module.scss';
 import './forms/forms.scss';
-import Header from '../../components/common/pageHeader/Header';
+import PageHeader from '../../components/common/header/PageHeader';
 import AvatarGrid from '../../components/common/avatar/AvatarGrid';
+import PostAjaxDailogue from '../../components/common/dialogues/PostAjaxDialogue';
 import RegisterForm from './forms/RegisterForm';
 import {connect} from 'react-redux';
 import {checkValidity} from '../../utilities/utilities';
+import * as actions from '../../store/actions/index';
 
 class Register extends Component {
-
     state = {   
         showForm: true, 
         showDialogue: false,
@@ -40,36 +41,37 @@ class Register extends Component {
         rePassword: '',
         avatarType: '',
 
-        loading: false,
-        success: false,
-        fail: false,
+        checkUsernameLoading: false,
+        checkUsernameSuccess: false,
+        checkUsernameFail: false,
 
-        fillComplete: false
+        formPartDirection: "Next"
     }
 
     componentDidUpdate(prevProps, prevState) {
-        /* if (prevState.valid === true && this.state.valid === false) {
-            if (this.state.showUsername) {
-                if (this.state.brokenRule === 'minLength') {
-                    this.setState({fillError: "Enter Username with" + this.state.minLength + "or more characters" })
-                }
+        if (prevProps.userSelectedAvatar === null && this.props.userSelectedAvatar) {
+            if (this.state.showAvatar && this.state.valid === false) {
+                this.setState({ valid: true});
             }
-        } else if (prevState.valid === false && this.state.valid === true) {
-            if (this.props.showUsername) {
-                this.setState({fillError: null})
-            }
-        } */
-    }
+        }
 
+        if (prevProps.userSelectedAvatar !== this.props.userSelectedAvatar) {
+            let label = this.props.userSelectedAvatar + " chosen";
+            this.setState({ label: label })
+        }
 
-    goBackSelected = () => {
-        this.props.history.push('/');
-    }
+        if (prevProps.checkUsernameLoading === false && this.props.checkUsernameLoading) {
+            this.setState({
+                checkUsernameLoading: true, 
+                checkUsernameSuccess: false,
+                checkUsernameFail: false,
 
-    submitPartForm = (event) => {
-        event.preventDefault();
-        if (this.state.showUsername) {
-            if (this.state.username !== '' && this.state.username.length >= this.state.minLength) {
+                label: "Checking Availability..."
+            })
+        }
+
+        if (this.props.checkUsernameLoading === false && (prevProps.checkUsernameSuccess === false && this.props.checkUsernameSuccess) ) {
+            if (this.props.checkUsernameSuccessMessage === 'Username Available') {
                 this.setState({ 
                     showUsername: false, 
                     showEmail: true,
@@ -83,7 +85,51 @@ class Register extends Component {
                     valid: true,
                     hasValueCount: false,
                     hasPrevious: true,
-                })
+                    formPartDirection: "Next",
+
+                    checkUsernameLoading: false,
+                    checkUsernameSuccess: false,
+                    checkUsernameFail: false
+                });
+            } else if (this.props.checkUsernameSuccessMessage === 'Username Unavailable') {
+                this.setState({
+                    checkUsernameLoading: false,
+                    checkUsernameSuccess: false,
+                    checkUsernameFail: false,
+
+                    fillError: "Username Taken, Try Another!",
+                    valid: false
+                });
+            }
+        }
+
+        if (this.props.checkUsernameLoading === false && this.props.checkUsernameFail) {
+            this.setState({
+                checkUsernameLoading: false,
+                checkUsernameSuccess: false,
+                checkUsernameFail: false,
+                checkUsernameFailReason: '',
+
+                fillError: "Username Check Failed, Try Again!",
+                valid: true
+            });
+        }
+
+    }
+
+    componentWillUnmount() {
+        this.props.onResetRegisterPage();
+    }
+
+    goBackSelected = () => {
+        this.props.history.push('/');
+    }
+
+    submitPartForm = (event) => {
+        event.preventDefault();
+        if (this.state.showUsername) {
+            if (this.state.username !== '' && this.state.username.length >= this.state.minLength) {
+                this.props.onCheckUsernameAvailabilty(this.state.username);
             } else {
                 this.setState({ valid: false});
             }
@@ -101,7 +147,8 @@ class Register extends Component {
                     
                     valid: true,
                     hasValueCount: false,
-                    hasPrevious: true
+                    hasPrevious: true,
+                    formPartDirection: "Next"
                 })
             } else {
                 this.setState({ valid: false});
@@ -115,12 +162,13 @@ class Register extends Component {
                     formLabel: 'Repeat Password',
                     labelSpan: null,
                     formType: 'password',
-                    formPlaceholder: 'password',
+                    formPlaceholder: 'password again',
                     fillError: null,
                     
                     valid: true,
                     hasValueCount: false,
                     hasPrevious: true,
+                    formPartDirection: "Next"
                 })
             } else {
                 this.setState({ valid: false});
@@ -134,7 +182,8 @@ class Register extends Component {
                     this.setState({ 
                         showRePassword: false, 
                         showAvatar: true,
-                        label: 'Choose an Icon'
+                        label: 'Choose an Icon',
+                        valid: true,
                     })
                 } else {
                     this.setState({ 
@@ -167,6 +216,7 @@ class Register extends Component {
                 valueCount: valueCount,
                 startCountRule: true,
                 hasPrevious: false,
+                formPartDirection: "Previous"
             })
         } else if (this.state.showPassword) {
             this.setState({ 
@@ -182,6 +232,7 @@ class Register extends Component {
                 valid: true,
                 hasValueCount: false,
                 hasPrevious: true,
+                formPartDirection: "Previous"
             })
         } else if (this.state.showRePassword) {
             
@@ -189,15 +240,18 @@ class Register extends Component {
                 showPassword: true, 
                 showRePassword: false,
 
+                rePassword: '',
+
                 formLabel: 'Enter Password',
                 labelSpan: '(6 or more char.)',
                 formType: 'password',
-                formPlaceholder: 'password',
+                formPlaceholder: 'password again',
                 fillError: null,
                 
                 valid: true,
                 hasValueCount: false,
                 hasPrevious: true,
+                formPartDirection: "Previous"
             })
         } else if (this.state.showAvatar) {
             this.setState({ 
@@ -213,6 +267,7 @@ class Register extends Component {
                 valid: true,
                 hasValueCount: false,
                 hasPrevious: true,
+                formPartDirection: "Previous"
             })
         }
     }
@@ -220,6 +275,39 @@ class Register extends Component {
     submitFormAll = (event) => {
         event.preventDefault();
         console.log('submit form all');
+        if (this.props.userSelectedAvatar && this.props.userSelectedAvatar !== '') {
+            let userData = {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password,
+                avatarType: this.props.userSelectedAvatar
+            }
+
+            this.setState({
+                showForm: false,
+                showDialogue: true
+            })
+
+            this.props.onRegisterUser(userData);
+        } else {
+            this.setState({
+                valid: false
+            })
+        }
+    }
+
+    submitFormAllAgain = () => {
+        let userData = {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            avatarType: this.props.userSelectedAvatar
+        }
+        this.props.onRegisterUser(userData);
+    }
+
+    goToLogin = () => {
+        this.props.history.push('/login')
     }
 
     inputFieldChanged = (event) => {      
@@ -315,6 +403,8 @@ class Register extends Component {
                 sideEffectSuccess={this.props.registrationSuccess}
                 sideEffectFail={this.props.registrationFail}
                 label={this.state.label}
+                valid={this.state.valid}
+                hasPreviousButton={true}
             />
         } else {
 
@@ -345,37 +435,17 @@ class Register extends Component {
                 fillError={this.state.fillError}
                 valid={this.state.valid}
                 hasPrevious={this.state.hasPrevious}
-                sideEffectLoading={this.state.loading}
-                sideEffectSuccess={this.state.success}
-                sideEffectFail={this.state.fail}
+                sideEffectLoading={this.state.checkUsernameLoading}
+                sideEffectSuccess={this.state.checkUsernameSuccess}
+                sideEffectFail={this.state.checkUsernameFail}
+                direction={this.state.formPartDirection}
             />
-        } /* else if (this.state.showEmail) {
-            formpart = 
-            <RegisterForm 
-                submitPartForm={this.submitPartForm}
-                showPreviousFormPart={this.showPreviousFormPart}
-                type={this.state.formType}
-                value={this.state.email}
-                placeholder={this.state.formPlaceholder}
-                changed={this.inputFieldChanged}
-                label={this.state.formLabel}
-                labelSpan={this.state.labelSpan}
-                valueCount={this.state.valueCount}
-
-                fillError={this.state.fillError}
-                valid={this.state.valid}
-                hasPrevious={this.state.hasPrevious}
-
-                sideEffectLoading={this.state.loading}
-                sideEffectSuccess={this.state.success}
-                sideEffectFail={this.state.fail}
-            />
-        } */
+        }
 
         return(
             <div className={classes.register}>
                 <div className={classes.header}>
-                    <Header goBack={this.goBackSelected}>
+                    <PageHeader goBack={this.goBackSelected}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1608 174">
                         <path opacity=".8" fill="#D3FF78" d="M931.174 68.385c-1.48 6.44.813 12.352 2.924 18.333 2.882 8.453 5.641 17.011 9.844 24.926 5.427 10.517 18.882 28.513 32.141 16.581 12.672-11.401-1.531-28.572-9.962-37.266-6.083-6.271-12.995-11.637-19.65-17.272-1.729-1.46-13.966-10.776-15.297-5.302z"/>
                         <path fill="#5A24B3" d="M973.531 111.306c7.006 9.129-7.155 19.995-14.159 10.863-7.007-9.13 7.153-19.994 14.159-10.863z"/>
@@ -522,12 +592,28 @@ class Register extends Component {
                         <path opacity=".8" fill="#D3FF78" d="M453.638 68.73c-.925 6.544-5.187 11.238-9.299 16.068-5.72 6.858-11.362 13.859-18.122 19.743-8.836 7.873-27.847 19.853-35.949 3.962-7.743-15.186 11.67-26.125 22.655-31.221 7.926-3.676 16.302-6.208 24.535-9.084 2.136-.745 16.901-5.054 16.18.532z"/>
                         <path fill="#5A24B3" d="M409.203 108.881c-9.131 7.004-19.996-7.155-10.864-14.159 9.13-7.006 19.995 7.152 10.864 14.159-3.91 3 3.911-3 0 0z"/>
                         </svg>
-                    </Header>
+                    </PageHeader>
                 </div>
                 <div className={classes.formsWrapper}>
                     <div className={classes.form}>
                         {this.state.showForm ? formpart : null}
-                        {this.state.showDialogue ? "Dialogue" : null}
+                        {this.state.showDialogue ? 
+                            <PostAjaxDailogue 
+                                loading={this.props.registrationLoading}
+                                fail={this.props.registrationFail}
+                                success={this.props.registrationSuccess}
+                                hasSecondSuccessButton={false}
+                                hasSecondFailButton={false}
+                                successType1='Login'
+                                successButton1Clicked={this.goToLogin}
+                                successHeading="Registration Successful"
+                                failHeading={"Registration Failed: " + this.props.registrationFailReason}
+                                failType1='Try Again'
+                                failButton1Clicked={this.submitFormAllAgain}
+                            /> 
+                            : 
+                            null
+                        }
                     </div>
                 </div>
             </div>
@@ -537,20 +623,26 @@ class Register extends Component {
 
 const mapStateToProps = state => {
     return {
-        userSelectedAvatar: "Monica",
+        userSelectedAvatar: state.auth.userSelectedAvatar,
 
-        checkUsernameLoading: false,
-        checkUsernameSuccess: false,
-        checkUsernameFail: false,
+        checkUsernameLoading: state.auth.checkUsernameLoading,
+        checkUsernameSuccess: state.auth.checkUsernameSuccess,
+        checkUsernameSuccessMessage: state.auth.checkUsernameSuccessMessage, 
+        checkUsernameFail: state.auth.checkUsernameFail,
 
-        registrationLoading: false,
-        registrationSuccess: false,
-        registrationFail: false,
+        registrationLoading: state.auth.registrationLoading,
+        registrationSuccess: state.auth.registrationSuccess,
+        registrationFail: state.auth.registrationFail,
+        registrationFailReason: state.auth.registrationFailReason
     }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        onCheckUsernameAvailabilty: (username) => dispatch(actions.checkUsernameAvailabilty(username)),
+        onRegisterUser: (userData) => dispatch(actions.registerUser(userData)),
+        onResetRegisterPage: () => dispatch(actions.resetRegisterPage())
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

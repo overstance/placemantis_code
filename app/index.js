@@ -1,9 +1,13 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const seedPlaces = require('./dbSeed/places');
+// const seedPlaces = require('./dbSeed/places');
+const authRoutes = require('./routes/auth');
+const passport = require('passport');
+require('./models/User');
+require('./passport/passport');
 
 const app = express();
 
@@ -22,14 +26,10 @@ app.use(
   })
 );
 
-app.get('/home', (req, res) => {
-  res.send('Welcome to Placemantis');
-});
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/seed_places', (req, res) => {
-  // seedPlaces();
-  res.send('Testing database connection');
-});
+authRoutes(app);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));

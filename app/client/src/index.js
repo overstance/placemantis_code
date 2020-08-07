@@ -8,12 +8,14 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import gameReducer from './store/reducers/gameReducer';
+import authReducer from './store/reducers/authReducer';
 
 const composeEnhancers = 
 window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
-  game: gameReducer
+  game: gameReducer,
+  auth: authReducer
 });
 
 
