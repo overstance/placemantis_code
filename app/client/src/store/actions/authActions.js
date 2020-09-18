@@ -43,6 +43,8 @@ export const checkUsernameAvailabilty = (username) => async dispatch => {
     }
 }
 
+// REGISTER USER
+
 const registerUserStart = () => {
     return {
         type: actionTypes.REGISTER_USER_START
@@ -78,5 +80,63 @@ export const registerUser = (userData) => async dispatch => {
 export const resetRegisterPage = () => {
     return {
         type: actionTypes.RESET_REGISTER_PAGE
+    }
+}
+
+// LOGIN/CONFIRM/RESET USER
+
+const loginUserStart = () => {
+    return {
+        type: actionTypes.LOGIN_USER_START
+    }
+}
+
+const loginUserSuccess = (successMessage) => {
+    return {
+        type: actionTypes.LOGIN_USER_SUCCESS,
+        successMessage: successMessage
+    }
+}
+
+const loginUserFail = (error) => {
+    return {
+        type: actionTypes.LOGIN_USER_FAIL,
+        error: error
+    }
+}
+
+export const loginUser = (formGroup, username, email, password) => async dispatch => {
+    dispatch(loginUserStart());
+
+    if (formGroup === 'login') {
+        const res = await axios.post('/api/login_user', {username: username, password: password})
+
+        if (res.data === 'Login Successful') {
+            dispatch(loginUserSuccess(res.data))
+        } else if (res.data.error) {
+            dispatch(loginUserFail(res.data.error))
+        }
+    } else if (formGroup === 'confirm') {
+        const res = await axios.post('/api/confirm_user', {username: username, email: email})
+
+        if (res.data === 'User Confirmed') {
+            dispatch(loginUserSuccess(res.data))
+        } else if (res.data.error) {
+            dispatch(loginUserFail(res.data.error))
+        }
+    } else if (formGroup === 'reset') {
+        const res = await axios.post('/api/reset_user', {username: username, password: password})
+
+        if (res.data === 'User Password Reset') {
+            dispatch(loginUserSuccess(res.data))
+        } else if (res.data.error) {
+            dispatch(loginUserFail(res.data.error))
+        }
+    }
+}
+
+export const resetLoginPage = () => {
+    return {
+        type: actionTypes.RESET_LOGIN_PAGE
     }
 }

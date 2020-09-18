@@ -8,7 +8,7 @@ const userSchema = new Schema({
   email: String,
   password: String,
   avatarType: String,
-  Rank: {
+  rank: {
     type: String,
     default: 'N/A'
   },
@@ -18,56 +18,109 @@ const userSchema = new Schema({
   },
   savedMission: Object,
   bestScoreAfrica: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreOceania: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreEurope: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreNorthAmerica: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreAsia: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreSouthAmerica: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreSouthernEurope: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreSCAsia: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreWCAfrica: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreCaribbean: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreIndiesAfrica: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreAsiaOceania: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   },
   bestScoreAfricaAsia: {
-    type: Number,
-    default: 0
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
+  },
+  bestScoreWorld: {
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
+  },
+  bestScoreMultilevel: {
+    type: Object,
+    default: {
+      simple: 0,
+      hard: 0
+    }
   }
 });
 

@@ -5,15 +5,15 @@ import Button from '../../../components/common/buttons/Button';
 import {positionX} from "../../../anime/position";
 import { usePreviousValue } from "../../../utilities/utilities";
 
+const LoginForm = props => {
 
-const RegisterForm = props => {
     const previousPlaceholder = usePreviousValue(props.placeholder)
 
     useEffect(() => {
         if (previousPlaceholder !== props.placeholder) {
             if (props.direction === 'Next') {
                 const positionProp = {
-                    animatedClass: ".registerPartForm",
+                    animatedClass: ".loginForm",
                     translateX: ['100%', "0%"],
                     duration: 300,
                     easing: "cubicBezier(.5, .05, .1, .3)"
@@ -22,7 +22,7 @@ const RegisterForm = props => {
                 positionX(positionProp);
             } else if (props.direction === 'Previous') {
                 const positionProp = {
-                    animatedClass: ".registerPartForm",
+                    animatedClass: ".loginForm",
                     translateX: ['-100%', "0%"],
                     duration: 300,
                     easing: "cubicBezier(.5, .05, .1, .3)"
@@ -34,9 +34,15 @@ const RegisterForm = props => {
 
     }, [props.placeholder, previousPlaceholder, props.direction])
 
+    let firstButtonType = "Next";
+
+    if (props.isLastPart) {
+        firstButtonType = "Submit"
+    }
+
     return(
         <form
-            className='registerPartForm'
+            className='loginForm'
         >
             <Input
                 type={props.type}
@@ -50,14 +56,11 @@ const RegisterForm = props => {
                 valueCount={props.valueCount}
                 valid={props.valid}
             />
-            <div className='registerPartFormButtons'>
+            <div className='loginFormButtons'>
                 { props.hasPrevious ?
                     <>
                         <Button
                             category="forms"
-                            sideEffectLoading={props.sideEffectLoading}
-                            sideEffectSuccess={props.sideEffectSuccess}
-                            sideEffectFail={props.sideEffectFail}
                             type="Previous"
                             buttonClicked={props.showPreviousFormPart}
                         />
@@ -71,13 +74,28 @@ const RegisterForm = props => {
                     sideEffectLoading={props.sideEffectLoading}
                     sideEffectSuccess={props.sideEffectSuccess}
                     sideEffectFail={props.sideEffectFail}
-                    type="Next"
+                    type={firstButtonType}
                     inputValid={props.valid}
                     buttonClicked={props.submitPartForm}
                 />
             </div>
+            {props.formGroup === 'login' ?
+                <div 
+                    className='formFootOption'
+                    onClick={props.forgotPasswordClicked}
+                >
+                    Forgot Password?
+                </div>
+                : 
+                <div 
+                    className='formFootOption'
+                    onClick={props.backToLoginClicked}
+                >
+                    Back to Login?
+                </div>
+            }
         </form>
     )
 }
 
-export default RegisterForm;
+export default LoginForm;

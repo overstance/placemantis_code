@@ -5,9 +5,9 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 // const seedPlaces = require('./dbSeed/places');
 const authRoutes = require('./routes/auth');
-const passport = require('passport');
-require('./models/User');
-require('./passport/passport');
+// const passport = require('passport');
+// require('./models/User');
+// require('./passport/passport');
 
 const app = express();
 
@@ -26,8 +26,8 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 authRoutes(app);
 

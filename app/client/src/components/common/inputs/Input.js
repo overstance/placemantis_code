@@ -33,7 +33,9 @@ const Input = (props) => {
             {props.fillError ?
                 <label className='formInputLabelError'>{props.fillError}</label>
                 :
-                <label className='formInputLabel'>{props.label}<span>{props.labelSpan}</span></label>              
+                <label className='formInputLabel'>
+                    {props.label}<span>{props.labelSpan}</span>
+                </label>           
             }
             <div className='formInputAndCounter'>
                 <input

@@ -27,4 +27,6 @@ export {
     checkUsernameAvailabilty,
     registerUser,
     resetRegisterPage,
+    loginUser,
+    resetLoginPage
 } from './authActions';

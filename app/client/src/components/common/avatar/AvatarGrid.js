@@ -85,5 +85,4 @@ const mapDispatchToProps = dispatch => {
         onUserAvatarSelected: (avatarName) => dispatch(actions.userAvatarSelected(avatarName))
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(AvatarGrid);

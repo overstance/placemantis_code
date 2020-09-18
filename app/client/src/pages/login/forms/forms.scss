@@ -1,0 +1,42 @@
+@import '../../../variables.scss';
+
+
+.loginForm {
+    @include by-parent;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: $frame-36;
+    box-sizing: border-box;
+
+    .loginFormButtons {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        button {
+            width: 30%;
+
+            span {
+                width: 100%;
+                display: inline-block;
+            }
+        }
+
+        span {
+            display: inline-block;
+            width: $frame-24;
+        }
+    }
+
+    .formFootOption {
+        color: $light-blue;
+        text-decoration: underline;
+        cursor: pointer;
+        @include font-m36;
+        padding-top: $frame-12;
+    }
+}

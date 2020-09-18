@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const User = require('../models/User');
 
 module.exports = (app) => {
@@ -19,9 +18,6 @@ module.exports = (app) => {
         } else {
           res.send({ error: 'unknown error' });
         }
-        passport.authenticate('local')(req, res, () => {
-          return res.json(req.user);
-        });
       }
     );
   });

@@ -12,6 +12,13 @@ const initialState = {
     registrationSuccess: false,
     registrationFail: false,
     registrationFailReason: '',
+
+    loginLoading: false,
+    loginSuccess: false,
+    loginFail: false,
+
+    loginSuccessMessage: null,
+    loginFailMessage: null
 }
 
 const checkUsernameAvailabilityStart = (state, action) => {
@@ -44,6 +51,14 @@ const checkUsernameAvailabilityFail = (state, action) => {
     }
 }
 
+const setUserAvatarSelection = (state, action) => {
+    return {
+        ...state,
+        userSelectedAvatar: action.avatarName
+    }
+}
+
+// REGISTER USER
 
 const registerUserStart = (state, action) => {
     return {
@@ -75,13 +90,6 @@ const registerUserFail = (state, action) => {
     }
 }
 
-const setUserAvatarSelection = (state, action) => {
-    return {
-        ...state,
-        userSelectedAvatar: action.avatarName
-    }
-}
-
 const resetRegisterPage = (state, action) => {
     return {
         ...state,
@@ -96,6 +104,56 @@ const resetRegisterPage = (state, action) => {
         registrationSuccess: false,
         registrationFail: false,
         registrationFailReason: '',
+    }
+}
+
+// LOGIN/CONFIRM/RESET USER
+
+const loginUserStart = (state, action) => {
+    return {
+        ...state,
+        loginLoading: true,
+        loginSuccess: false,
+        loginFail: false,
+
+        loginSuccessMessage: null,
+        loginFailMessage: null
+    }
+}
+
+const loginUserSuccess = (state, action) => {
+    return {
+        ...state,
+        loginLoading: false,
+        loginSuccess: true,
+        loginFail: false,
+
+        loginSuccessMessage: action.successMessage,
+        loginFailMessage: null
+    }
+}
+
+const loginUserFail = (state, action) => {
+    return {
+        ...state,
+        loginLoading: false,
+        loginSuccess: false,
+        loginFail: true,
+
+        loginSuccessMessage: null,
+        loginFailMessage: action.error
+    }
+}
+
+const resetLoginPage = (state, action) => {
+    return {
+        ...state,
+        loginLoading: false,
+        loginSuccess: false,
+        loginFail: false,
+
+        loginSuccessMessage: null,
+        loginFailMessage: null
     }
 }
 
@@ -117,7 +175,15 @@ const reducer = (state=initialState, action) => {
             return registerUserFail(state, action);
         case actionTypes.RESET_REGISTER_PAGE: 
             return resetRegisterPage(state, action);
-
+        case actionTypes.LOGIN_USER_START:
+            return loginUserStart(state, action);
+        case actionTypes.LOGIN_USER_SUCCESS:
+            return loginUserSuccess(state, action);
+        case actionTypes.LOGIN_USER_FAIL:
+            return loginUserFail(state, action);
+        case actionTypes.RESET_LOGIN_PAGE:
+            return resetLoginPage(state, action);
+        
         default: return state;
     }
 }

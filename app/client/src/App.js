@@ -5,6 +5,7 @@ import Layout from './components/common/layout/Layout';
 const Home = lazy(() => import('./pages/home/Home'));
 const GamePlay = lazy(() => import('./pages/gamePlay/GamePlay'));
 const Register = lazy(() => import('./pages/register/Register'));
+const Login = lazy(() => import('./pages/login/Login'));
 
 const RouteLoading = 'Page Loading...';
 
@@ -18,14 +19,6 @@ const Profile = () => {
   return(
     <div>
       Profile Page Shows Here
-    </div>
-  )
-}
-
-const Login = () => {
-  return(
-    <div>
-      Login Page Shows Here
     </div>
   )
 }
